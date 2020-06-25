@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<vocabulary>
+
+  <term>
+   <name>Pink</name>
+   <parent></parent>
+  </term>
+  <term>
+   <name>Red</name>
+   <parent></parent>
+  </term>
+  <term>
+   <name>Dark Orange</name>
+   <parent></parent>
+  </term>  
+  <term>
+   <name>Black</name>
+   <parent></parent>
+  </term>  
+  <term>
+   <name>White</name>
+   <parent></parent>
+  </term> 
+
+</vocabulary>
