@@ -49,7 +49,11 @@ class BasicTestCaseTest extends BrowserTestBase {
 
     // Confirm that the front page contains the standard text.
 <<<<<<< HEAD
+<<<<<<< HEAD
     $this->assertText('Testing Module');
+=======
+    $this->assertText('Fuctional Testing Module');
+>>>>>>> testing
   }
 
 }
