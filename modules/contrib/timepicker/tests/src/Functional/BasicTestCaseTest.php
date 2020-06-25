@@ -48,7 +48,14 @@ class BasicTestCaseTest extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
 
     // Confirm that the front page contains the standard text.
+<<<<<<< HEAD
     $this->assertText('Testing Module');
   }
 
 }
+=======
+    $this->assertText('Fuctional Testing Module');
+  }
+
+}
+>>>>>>> 7f068df8b14c617919844a2d64f28e3f709e52d2
