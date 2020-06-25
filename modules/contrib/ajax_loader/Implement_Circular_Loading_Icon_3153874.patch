@@ -1,0 +1,26 @@
+diff --git a/modules/contrib/ajax_loader/css/circle-loading.css b/modules/contrib/ajax_loader/css/circle-loading.css
+index a402232..0ebf48e 100644
+--- a/modules/contrib/ajax_loader/css/circle-loading.css
++++ b/modules/contrib/ajax_loader/css/circle-loading.css
+@@ -4,4 +4,5 @@
+   display: block;
+   margin: 0 auto;
+   width: 100%;
+   height: 100%;
+   background: url('/drupal/modules/contrib/ajax_loader/images/throbber.gif') no-repeat 0px;
++
+ }
+\ No newline at end of file
+diff --git a/modules/contrib/ajax_loader/implement_circular_loading_icon_3153874_13714521.patch b/modules/contrib/ajax_loader/implement_circular_loading_icon_3153874_13714521.patch
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/modules/contrib/ajax_loader/src/Plugin/ajax_loader/ThrobberCircleLoading.php b/modules/contrib/ajax_loader/src/Plugin/ajax_loader/ThrobberCircleLoading.php
+index 8ed75b8..12e0b5f 100644
+--- a/modules/contrib/ajax_loader/src/Plugin/ajax_loader/ThrobberCircleLoading.php
++++ b/modules/contrib/ajax_loader/src/Plugin/ajax_loader/ThrobberCircleLoading.php
+@@ -33,5 +33,4 @@ protected function setMarkup() {
+   protected function setCssFile() {
+     return $this->path . '/css/circle-loading.css';
+   }
+-
+ }
