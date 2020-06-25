@@ -48,7 +48,7 @@ class BasicTestCaseTest extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
 
     // Confirm that the front page contains the standard text.
-    $this->assertText('Welcome to Drupal 8');
+    $this->assertText('Testing Module');
   }
 
 }
