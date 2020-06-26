@@ -36,7 +36,8 @@ libraries-override:
   system/base:
     css:
       component:
-        css/components/autocomplete-loading.module.css: css/dist/components/autocomplete-loading.module.css
+        css/components/ajax-progress.module.css: css/dist/components/ajax-progress.module.css
+        # css/components/autocomplete-loading.module.css: css/dist/components/autocomplete-loading.module.css
   core/drupal.checkbox: false
   core/drupal.vertical-tabs:
     css:
