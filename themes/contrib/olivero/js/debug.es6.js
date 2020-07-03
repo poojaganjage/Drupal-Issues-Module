@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Debug.
+ */
+
 (() => {
   function toggleLogo(isChecked) {
     const headerInner = document.querySelector('.site-branding__inner');

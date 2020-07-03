@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Second Level Navigation.
+ */
+
 (() => {
   const { isDesktopNav } = drupalSettings.olivero;
   const secondLevelNavMenus = document.querySelectorAll(

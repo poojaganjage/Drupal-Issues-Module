@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Tabs.
+ */
+
 (Drupal => {
   function init(el) {
     const tabs = el.querySelector('.tabs');

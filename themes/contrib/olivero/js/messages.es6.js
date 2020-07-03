@@ -2,6 +2,7 @@
  * @file
  * Messages.
  */
+
 (Drupal => {
   const messages = document.querySelectorAll('.messages');
 

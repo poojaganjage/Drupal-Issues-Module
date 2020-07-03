@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Scripts.
+ */
+
 /* eslint-disable no-inner-declarations */
 (() => {
   window.drupalSettings = window.drupalSettings || {};

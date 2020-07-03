@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Search.
+ */
+
 (() => {
   const searchWideButton = document.querySelector('.header-nav__search-button');
   const searchWideWrapper = document.querySelector('.search-wide__wrapper');

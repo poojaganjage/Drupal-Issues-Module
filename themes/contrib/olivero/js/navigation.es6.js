@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Navigation.
+ */
+
 (() => {
   const { isDesktopNav } = drupalSettings.olivero;
 
