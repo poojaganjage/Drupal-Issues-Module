@@ -1,8 +1,19 @@
 <?php
 
 /**
- * @file
  * Describe hooks provided by the autologout module.
+ *
+ * @category Module
+ *
+ * @package Contrib
+ *
+ * @author Display Name <username@example.com>
+ *
+ * @license www.google.com ABC
+ *
+ * @version "GIT: <1001>"
+ *
+ * @link www.google.com
  */
 
 /**
@@ -18,18 +29,19 @@
  *   Return FALSE (or nothing) if you want to leave the autologout
  *   process alone.
  */
-function hook_autologout_prevent() {
-  // Don't include autologout JS checks on ajax callbacks.
-  $path_args = explode('/', current_path());
-  $blacklist = [
+function Hook_Autologout_prevent()
+{
+    // Don't include autologout JS checks on ajax callbacks.
+    $path_args = explode('/', current_path());
+    $blacklist = [
     'ajax',
     'autologout_ajax_logout',
     'autologout_ajax_set_last',
-  ];
+    ];
 
-  if (in_array($path_args[0], $blacklist)) {
-    return TRUE;
-  }
+    if (in_array($path_args[0], $blacklist)) {
+        return true;
+    }
 }
 
 /**
@@ -41,9 +53,14 @@ function hook_autologout_prevent() {
  *   to the server to keep the login alive.
  *   Return FALSE (or nothing) to just use the standard behaviour.
  */
-function hook_autologout_refresh_only() {
-  // Check to see if an open admin page will keep login alive.
-  if (\Drupal::service('router.admin_context')->isAdminRoute(routeMatch()->getRouteObject()) && !\Drupal::config('autologout.settings')->get('enforce_admin')) {
-    return TRUE;
-  }
+function Hook_Autologout_Refresh_only()
+{
+    // Check to see if an open admin page will keep login alive.
+    if (\Drupal::service('router.admin_context')->isAdminRoute(
+        routeMatch()->
+        getRouteObject()
+    ) && !\Drupal::config('autologout.settings')->get('enforce_admin')
+    ) {
+        return true;
+    }
 }
