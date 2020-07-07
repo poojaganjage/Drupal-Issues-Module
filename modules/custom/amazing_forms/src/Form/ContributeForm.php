@@ -20,31 +20,31 @@ class ContributeForm extends FormBase
 
     public function buildForm(array $form, FormStateInterface $form_state) 
     {
-        $form['fieldset'] = array(
-        '#type' => 'fieldset',
-        '#title' => $this->t('Title of the FieldSet'),
+        $form['fieldsetelement'] = array(
+        // '#type' => 'label',
+        '#markup' => '<p>'.$this->t('Title of the Fieldset').'</p>',
         );
-        $form['fieldset']['candidate_name']['fieldset_wrapper'] = array(
+        $form['candidate_name'] = array(
         '#type' => 'textfield',
         '#title' => $this->t('Candidate Name:'),
         '#required' => true,
         );
-        $form['fieldset']['candidate_mail'] = array(
+        $form['candidate_mail'] = array(
         '#type' => 'email',
         '#title' => $this->t('Email ID:'),
         '#required' => true,
         );
-        $form['fieldset']['candidate_number'] = array (
+        $form['candidate_number'] = array (
         '#type' => 'tel',
         '#title' => $this->t('Mobile no:'),
         '#required' => true,
         );
-        $form['fieldset']['candidate_dob'] = array (
+        $form['candidate_dob'] = array (
         '#type' => 'date',
         '#title' => $this->t('DOB:'),
         '#required' => true,
         );
-        $form['fieldset']['candidate_gender'] = array (
+        $form['candidate_gender'] = array (
         '#type' => 'select',
         '#title' => ('Gender:'),
         '#options' => array(
@@ -52,7 +52,7 @@ class ContributeForm extends FormBase
         'male' => $this->t('Male'),
         ),
         );
-        $form['fieldset']['candidate_confirmation'] = array (
+        $form['candidate_confirmation'] = array (
         '#type' => 'radios',
         '#title' => ('Are you above 18 years old?'),
         '#options' => array(
@@ -60,7 +60,7 @@ class ContributeForm extends FormBase
         'No' => $this->t('No')
         ),
         );
-        $form['fieldset']['candidate_copy'] = array(
+        $form['candidate_copy'] = array(
         '#type' => 'checkbox',
         '#title' => $this->t('Send me a copy of the application.'),
         );
@@ -68,14 +68,21 @@ class ContributeForm extends FormBase
         // '#type' => 'captcha',
         // '#captcha_type' => 'recaptcha/reCAPTCHA',
         // );
-        $form['fieldset']['actions']['#type'] = 'actions';
-        $form['fieldset']['actions']['submit'] = array(
+        $form['actions']['#type'] = 'actions';
+        $form['actions']['submit'] = array(
         '#type' => 'submit',
         '#value' => $this->t('Save'),
         '#button_type' => 'primary',
         );
+        
+    //     $build = [
+    //     '#theme' => 'amazing_forms_fieldset_element',
+    //     '#items' => $form,
+    // ];
 
-      return $form;
+        $form['#theme'] = 'fieldset_element';
+      
+        return $form;
     }
 
     public function validateForm(array &$form, FormStateInterface $form_state) 

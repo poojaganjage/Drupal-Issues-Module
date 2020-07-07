@@ -1,0 +1,5 @@
+global-css:
+  css:
+    theme:
+      css/dist/components/fieldset.css: {}
+      css/dist/components/form.css: {}
