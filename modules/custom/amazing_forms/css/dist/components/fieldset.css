@@ -6,7 +6,7 @@
   padding:0;
   border:2px solid #7e96a7;
   border-radius:2px;
-  /*background-color:#fff;*/
+  background-color:#fff;
 }
 
 .fieldsetelement--group{
@@ -32,7 +32,6 @@ _:-ms-fullscreen,
   width:100%;
   color:inherit;
   font-weight:700;
-  background-color: #7e96a7;
 }
 
 [dir] .fieldsetelement__legend{
@@ -67,13 +66,12 @@ _:-ms-fullscreen,
 
 .fieldsetelement__label{
   display:block;
-  line-height:0px;
+  line-height:18px;
   font-size: 20px;
-  color: #fff;
 }
 
 [dir] .fieldsetelement__label{
-  padding:5px 15px;
+  padding:9px 15px;
 }
 
 .fieldsetelement__label--group{
@@ -93,7 +91,6 @@ _:-ms-fullscreen,
 }
 
 [dir] .fieldsetelement__legend--visible ~ .fieldsetelement__wrapper{
-  /*margin-top:0;*/
   margin-top:38px;
 }
 
