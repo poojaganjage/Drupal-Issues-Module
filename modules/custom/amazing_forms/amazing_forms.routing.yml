@@ -1,0 +1,7 @@
+amazing_forms.amazing_forms_contribute:
+    path: '/amazingforms/contribute'
+    defaults:
+        _form: '\Drupal\amazing_forms\Form\ContributeForm'
+        _title: 'The first form in Drupal 8'
+    requirements:
+        _permission: 'access content'

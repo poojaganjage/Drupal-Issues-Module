@@ -1,0 +1,28 @@
+<?php
+/**
+ * Implementation of hook_form_alter().
+ */
+function amazing_forms_form_alter(&$form, $form_state, $form_id) {
+	if($form_id == 'amazing_forms_contribute'){
+		$form['my_captcha_element'] = array(
+		        '#type' => 'captcha',
+		        '#captcha_type' => 'recaptcha/reCAPTCHA',
+		        '#weight' => 8,
+		        );
+		// $form['captcha']['#disabled'] = TRUE;
+		}
+
+} 
+
+/**
+ * Implementation of hook_captcha().
+ */
+function amazing_forms_captcha($captcha, $captcha_type='', $captcha_sid=NULL) {
+	$result = image_captcha_captcha($captcha, $captcha_type='', $captcha_sid=NULL);
+	
+	// if($captcha == 'generate') {
+	// 	$result['form']['captcha_response']['#title'] = t('Captcha Module');
+	// }
+	
+	return $result;
+}
