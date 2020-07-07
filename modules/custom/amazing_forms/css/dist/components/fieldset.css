@@ -32,6 +32,7 @@ _:-ms-fullscreen,
   width:100%;
   color:inherit;
   font-weight:700;
+  background-color: #7e96a7;
 }
 
 [dir] .fieldsetelement__legend{
@@ -66,12 +67,13 @@ _:-ms-fullscreen,
 
 .fieldsetelement__label{
   display:block;
-  line-height:18px;
+  line-height:0px;
   font-size: 20px;
+  color: #fff;
 }
 
 [dir] .fieldsetelement__label{
-  padding:9px 15px;
+  padding:5px 15px;
 }
 
 .fieldsetelement__label--group{
