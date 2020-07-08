@@ -4,6 +4,9 @@ namespace Drupal\entity;
 
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\user\EntityOwnerInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\StringTranslation\TranslationInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides generic entity permissions which are cached per user.
@@ -42,6 +45,35 @@ use Drupal\user\EntityOwnerInterface;
  */
 class UncacheableEntityPermissionProvider extends EntityPermissionProviderBase {
 
+  use StringTranslationTrait;
+
+  /**
+   * The string translation information.
+   *
+   * @var Drupal\Core\StringTranslation\TranslationInterface
+   */
+  protected $stringTranslation;
+
+  /**
+   * Creates a Translation Interface object.
+   *
+   * @param Drupal\Core\StringTranslation\TranslationInterface $string_translation
+   *   The string translation information.
+   */
+
+  public function __construct(TranslationInterface $string_translation) {
+    $this->stringTranslation = $string_translation;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('string_translation')
+    );
+  }
+  
   /**
    * Builds permissions for the entity_type granularity.
    *
