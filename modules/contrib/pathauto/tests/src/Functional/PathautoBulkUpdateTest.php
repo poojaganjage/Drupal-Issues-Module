@@ -90,7 +90,8 @@ class PathautoBulkUpdateTest extends BrowserTestBase {
     $this->drupalPostForm('admin/config/search/path/update_bulk', $edit, t('Update'));
 
     // This has generated 8 aliases: 5 nodes, 2 users and 1 forum.
-    $this->assertText('Generated 8 URL aliases.');
+    // $this->assertText('Generated 8 URL aliases.');
+    $this->assertSession()->PageTextContains('Generated 8 URL aliases.');
 
     // Check that aliases have actually been created.
     foreach ($this->nodes as $node) {
@@ -105,7 +106,8 @@ class PathautoBulkUpdateTest extends BrowserTestBase {
 
     // Run the update again which should not run against any nodes.
     $this->drupalPostForm('admin/config/search/path/update_bulk', $edit, t('Update'));
-    $this->assertText('No new URL aliases to generate.');
+    // $this->assertText('No new URL aliases to generate.');
+    $this->assertSession()->PageTextContains('No new URL aliases to generate.');
     $this->assertNoEntityAliasExists($new_node);
 
     // Make sure existing aliases can be overridden.
@@ -114,7 +116,8 @@ class PathautoBulkUpdateTest extends BrowserTestBase {
     // Patterns did not change, so no aliases should be regenerated.
     $edit['action'] = 'all';
     $this->drupalPostForm('admin/config/search/path/update_bulk', $edit, t('Update'));
-    $this->assertText('No new URL aliases to generate.');
+    // $this->assertText('No new URL aliases to generate.');
+    $this->assertSession()->PageTextContains('No new URL aliases to generate.');
 
     // Update the node pattern, and leave other patterns alone. Existing nodes
     // should get a new alias, except the node above whose alias is manually
@@ -123,7 +126,8 @@ class PathautoBulkUpdateTest extends BrowserTestBase {
     $this->patterns['node'] = $this->createPattern('node', '/archive/node-[node:nid]');
 
     $this->drupalPostForm('admin/config/search/path/update_bulk', $edit, t('Update'));
-    $this->assertText('Generated 5 URL aliases.');
+    // $this->assertText('Generated 5 URL aliases.');
+    $this->assertSession()->PageTextContains('Generated 5 URL aliases.');
 
     // Prevent existing aliases to be overridden. The bulk generate page should
     // only offer to create an alias for paths which have none.
@@ -131,7 +135,8 @@ class PathautoBulkUpdateTest extends BrowserTestBase {
 
     $this->drupalGet('admin/config/search/path/update_bulk');
     $this->assertFieldByName('action', 'create');
-    $this->assertText('Pathauto settings are set to ignore paths which already have a URL alias.');
+    // $this->assertText('Pathauto settings are set to ignore paths which already have a URL alias.');
+    $this->assertSession()->PageTextContains('Pathauto settings are set to ignore paths which already have a URL alias.');
     $this->assertNoFieldByName('action', 'update');
     $this->assertNoFieldByName('action', 'all');
   }
@@ -156,7 +161,8 @@ class PathautoBulkUpdateTest extends BrowserTestBase {
     $this->drupalPostForm('admin/config/search/path/update_bulk', $edit, t('Update'));
 
     // Verify that the alias was created for the node.
-    $this->assertText('Generated 1 URL alias.');
+    // $this->assertText('Generated 1 URL alias.');
+    $this->assertSession()->PageTextContains('Generated 1 URL alias.');
   }
 
 }

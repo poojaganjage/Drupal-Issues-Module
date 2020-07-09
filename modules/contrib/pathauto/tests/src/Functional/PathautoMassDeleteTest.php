@@ -117,7 +117,8 @@ class PathautoMassDeleteTest extends BrowserTestBase {
       'options[keep_custom_aliases]' => FALSE,
     ];
     $this->drupalPostForm('admin/config/search/path/delete_bulk', $edit, $this->t('Delete aliases now!'));
-    $this->assertText($this->t('All of your path aliases have been deleted.'));
+    // $this->assertText($this->t('All of your path aliases have been deleted.'));
+    $this->assertSession()->PageTextContains($this->t('All of your path aliases have been deleted.'));
     $this->assertUrl('admin/config/search/path/delete_bulk');
 
     // Make sure that all of them are actually deleted.
@@ -163,7 +164,8 @@ class PathautoMassDeleteTest extends BrowserTestBase {
       'options[keep_custom_aliases]' => TRUE,
     ];
     $this->drupalPostForm('admin/config/search/path/delete_bulk', $edit, $this->t('Delete aliases now!'));
-    $this->assertText($this->t('All of your automatically generated path aliases have been deleted.'));
+    // $this->assertText($this->t('All of your automatically generated path aliases have been deleted.'));
+    $this->assertSession()->PageTextContains($this->t('All of your automatically generated path aliases have been deleted.'));
     $this->assertUrl('admin/config/search/path/delete_bulk');
 
     // Make sure that only custom aliases and aliases with no information about

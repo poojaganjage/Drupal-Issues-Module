@@ -80,7 +80,8 @@ class PathautoNodeWebTest extends BrowserTestBase {
 
     // Check whether the alias actually works.
     $this->drupalGet($automatic_alias);
-    $this->assertText($title, 'Node accessible through automatic alias.');
+    // $this->assertText($title, 'Node accessible through automatic alias.');
+    $this->assertSession()->PageTextContains($title, 'Node accessible through automatic alias.');
 
     // Manually set the node's alias.
     $manual_alias = '/content/' . $node->id();
@@ -89,7 +90,8 @@ class PathautoNodeWebTest extends BrowserTestBase {
       'path[0][alias]' => $manual_alias,
     ];
     $this->drupalPostForm($node->toUrl('edit-form'), $edit, t('Save'));
-    $this->assertText(t('@type @title has been updated.', ['@type' => 'page', '@title' => $title]));
+    // $this->assertText(t('@type @title has been updated.', ['@type' => 'page', '@title' => $title]));
+    $this->assertSession()->PageTextContains(t('@type @title has been updated.', ['@type' => 'page', '@title' => $title]));
 
     // Check that the automatic alias checkbox is now unchecked by default.
     $this->drupalGet("node/{$node->id()}/edit");
@@ -98,14 +100,15 @@ class PathautoNodeWebTest extends BrowserTestBase {
 
     // Submit the node form with the default values.
     $this->drupalPostForm(NULL, ['path[0][pathauto]' => FALSE], t('Save'));
-    $this->assertText(t('@type @title has been updated.', ['@type' => 'page', '@title' => $title]));
-
+    // $this->assertText(t('@type @title has been updated.', ['@type' => 'page', '@title' => $title]));
+    $this->assertSession()->PageTextContains(t('@type @title has been updated.', ['@type' => 'page', '@title' => $title]));
     // Test that the old (automatic) alias has been deleted and only accessible
     // through the new (manual) alias.
     $this->drupalGet($automatic_alias);
     $this->assertResponse(404, 'Node not accessible through automatic alias.');
     $this->drupalGet($manual_alias);
-    $this->assertText($title, 'Node accessible through manual alias.');
+    // $this->assertText($title, 'Node accessible through manual alias.');
+    $this->assertSession()->PageTextContains($title, 'Node accessible through manual alias.');
 
     // Test that the manual alias is not kept for new nodes when the pathauto
     // checkbox is ticked.
@@ -130,7 +133,8 @@ class PathautoNodeWebTest extends BrowserTestBase {
     }
 
     $this->drupalGet('node/add/article');
-    $this->assertNoFieldById('edit-path-0-pathauto');
+    // $this->assertNoFieldById('edit-path-0-pathauto');
+    $this->assertSession()->fieldNotExists('edit-path-0-pathauto')
     $this->assertFieldByName('path[0][alias]', '');
 
     $edit = [];
@@ -141,7 +145,8 @@ class PathautoNodeWebTest extends BrowserTestBase {
 
     // Pathauto checkbox should still not exist.
     $this->drupalGet($node->toUrl('edit-form'));
-    $this->assertNoFieldById('edit-path-0-pathauto');
+    // $this->assertNoFieldById('edit-path-0-pathauto');
+    $this->assertSession()->fieldNotExists('edit-path-0-pathauto')
     $this->assertFieldByName('path[0][alias]', '');
     $this->assertNoEntityAlias($node);
   }
@@ -171,7 +176,8 @@ class PathautoNodeWebTest extends BrowserTestBase {
       'node_bulk_form[' . $index . ']' => TRUE,
     ];
     $this->drupalPostForm(NULL, $edit, t('Apply to selected items'));
-    $this->assertText('Update URL alias was applied to 1 item.');
+    // $this->assertText('Update URL alias was applied to 1 item.');
+    $this->assertSession()->PageTextContains('Update URL alias was applied to 1 item.');
 
     $this->assertEntityAlias($node1, '/content/' . $node1->getTitle());
     $this->assertEntityAlias($node2, '/node/' . $node2->id());
@@ -214,7 +220,8 @@ class PathautoNodeWebTest extends BrowserTestBase {
 
     $edit = ['title[0][value]' => 'Node version two'];
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $this->assertText('Basic page Node version two has been updated.');
+    // $this->assertText('Basic page Node version two has been updated.');
+    $this->assertSession()->pageTextContains('Basic page Node version two has been updated.');
 
     $this->assertEntityAlias($node, '/test-alias');
     $this->assertNoEntityAliasExists($node, '/content/node-version-one');
@@ -231,7 +238,8 @@ class PathautoNodeWebTest extends BrowserTestBase {
       'path[0][alias]' => '/manually-edited-alias',
     ];
     $this->drupalPostForm(NULL, $edit, 'Save');
-    $this->assertText('Basic page Node version three has been updated.');
+    // $this->assertText('Basic page Node version three has been updated.');
+    $this->assertSession()->pageTextContains('Basic page Node version three has been updated.');
 
     $this->assertEntityAlias($node, '/manually-edited-alias');
     $this->assertNoEntityAliasExists($node, '/test-alias');
@@ -278,7 +286,8 @@ class PathautoNodeWebTest extends BrowserTestBase {
       'path[0][alias]' => '/sample-article',
     ];
     $this->drupalPostForm('node/add/article', $edit, t('Save'));
-    $this->assertText(t('article Sample article has been created.'));
+    // $this->assertText(t('article Sample article has been created.'));
+    $this->assertSession()->pageTextContains(t('article Sample article has been created.'));
 
     // Test the alias.
     $this->assertAliasExists(['alias' => '/sample-article']);

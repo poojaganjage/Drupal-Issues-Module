@@ -76,7 +76,8 @@ class PathautoTaxonomyWebTest extends BrowserTestBase {
 
     // Check whether the alias actually works.
     $this->drupalGet($automatic_alias);
-    $this->assertText($name, 'Term accessible through automatic alias.');
+    // $this->assertText($name, 'Term accessible through automatic alias.');
+    $this->assertSession()->pageTextContains($name, 'Term accessible through automatic alias.');
 
     // Manually set the term's alias.
     $manual_alias = '/tags/' . $term->id();
@@ -85,7 +86,8 @@ class PathautoTaxonomyWebTest extends BrowserTestBase {
       'path[0][alias]' => $manual_alias,
     ];
     $this->drupalPostForm("taxonomy/term/{$term->id()}/edit", $edit, t('Save'));
-    $this->assertText("Updated term $name.");
+    // $this->assertText("Updated term $name.");
+    $this->assertSession()->pageTextContains("Updated term $name.");
 
     // Check that the automatic alias checkbox is now unchecked by default.
     $this->drupalGet("taxonomy/term/{$term->id()}/edit");
@@ -94,14 +96,16 @@ class PathautoTaxonomyWebTest extends BrowserTestBase {
 
     // Submit the term form with the default values.
     $this->drupalPostForm(NULL, ['path[0][pathauto]' => FALSE], t('Save'));
-    $this->assertText("Updated term $name.");
+    // $this->assertText("Updated term $name.");
+    $this->assertSession()->pageTextContains("Updated term $name.");
 
     // Test that the old (automatic) alias has been deleted and only accessible
     // through the new (manual) alias.
     $this->drupalGet($automatic_alias);
     $this->assertResponse(404, 'Term not accessible through automatic alias.');
     $this->drupalGet($manual_alias);
-    $this->assertText($name, 'Term accessible through manual alias.');
+    // $this->assertText($name, 'Term accessible through manual alias.');
+    $this->assertSession()->pageTextContains($name, 'Term accessible through manual alias.');
   }
 
 }

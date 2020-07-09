@@ -131,19 +131,23 @@ class PathautoSettingsFormWebTest extends BrowserTestBase {
   public function testVerboseOption() {
     $edit = ['verbose' => '1'];
     $this->drupalPostForm('/admin/config/search/path/settings', $edit, t('Save configuration'));
-    $this->assertText(t('The configuration options have been saved.'));
+    // $this->assertText(t('The configuration options have been saved.'));
+    $this->assertSession()->pageTextContains(t('The configuration options have been saved.'));
     $this->assertFieldChecked('edit-verbose');
 
     $title = 'Verbose settings test';
     $this->drupalGet('/node/add/article');
     $this->assertFieldChecked('edit-path-0-pathauto');
     $this->drupalPostForm(NULL, ['title[0][value]' => $title], t('Save'));
-    $this->assertText('Created new alias /content/verbose-settings-test for');
+    // $this->assertText('Created new alias /content/verbose-settings-test for');
+    $this->assertSession()->pageTextContains('Created new alias /content/verbose-settings-test for');
 
     $node = $this->drupalGetNodeByTitle($title);
     $this->drupalPostForm('/node/' . $node->id() . '/edit', ['title[0][value]' => 'Updated title'], t('Save'));
-    $this->assertText('Created new alias /content/updated-title for');
-    $this->assertText('replacing /content/verbose-settings-test.');
+    // $this->assertText('Created new alias /content/updated-title for');
+    $this->assertSession()->pageTextContains('Created new alias /content/updated-title for');
+    // $this->assertText('replacing /content/verbose-settings-test.');
+    $this->assertSession()->pageTextContains('replacing /content/verbose-settings-test.');
   }
 
   /**
@@ -221,7 +225,8 @@ class PathautoSettingsFormWebTest extends BrowserTestBase {
     // Submit the settings form.
     $edit = array_merge($this->defaultFormValues + $this->defaultPunctuations, $settings);
     $this->drupalPostForm('/admin/config/search/path/settings', $edit, t('Save configuration'));
-    $this->assertText(t('The configuration options have been saved.'));
+    // $this->assertText(t('The configuration options have been saved.'));
+    $this->assertSession()->pageTextContains(t('The configuration options have been saved.'));
 
     // If we do not clear the caches here, AliasCleaner will use its
     // cleanStringCache instance variable. Due to that the creation of aliases
