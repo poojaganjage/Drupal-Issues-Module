@@ -9,11 +9,11 @@
   var isDesktopNav = drupalSettings.olivero.isDesktopNav;
 
 
-  var mobileNavButton = document.querySelector('.mobile-nav-button');
+  var mobileNavButton = document.querySelector('.js-mobile-nav-button');
   var mobileNavWrapperId = 'header-nav';
   var mobileNavWrapper = document.getElementById(mobileNavWrapperId);
   var body = document.querySelector('body');
-  var overlay = document.querySelector('.overlay');
+  var overlay = document.querySelector('.js-overlay');
 
   var focusableNavElements = mobileNavWrapper.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
   var firstFocusableEl = focusableNavElements[0];

@@ -4,12 +4,12 @@
  */
 
 (Drupal => {
-  const indentedComments = document.querySelectorAll('.comments .indented');
+  const indentedComments = document.querySelectorAll('.js-comments .js-indented');
 
-  document.querySelectorAll('.comment').forEach(comment => {
+  document.querySelectorAll('.js-comment').forEach(comment => {
     if (
       comment.nextElementSibling != null &&
-      comment.nextElementSibling.matches('.indented')
+      comment.nextElementSibling.matches('.js-indented')
     ) {
       comment.classList.add('has-children');
     }

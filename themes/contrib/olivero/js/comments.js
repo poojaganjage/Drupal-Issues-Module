@@ -6,10 +6,10 @@
 **/
 
 (function (Drupal) {
-  var indentedComments = document.querySelectorAll('.comments .indented');
+  var indentedComments = document.querySelectorAll('.js-comments .js-indented');
 
-  document.querySelectorAll('.comment').forEach(function (comment) {
-    if (comment.nextElementSibling != null && comment.nextElementSibling.matches('.indented')) {
+  document.querySelectorAll('.js-comment').forEach(function (comment) {
+    if (comment.nextElementSibling != null && comment.nextElementSibling.matches('.js-indented')) {
       comment.classList.add('has-children');
     }
   });

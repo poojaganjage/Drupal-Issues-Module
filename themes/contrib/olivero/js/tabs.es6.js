@@ -5,12 +5,12 @@
 
 (Drupal => {
   function init(el) {
-    const tabs = el.querySelector('.tabs');
+    const tabs = el.querySelector('.js-tabs');
     const expandedClass = 'is-expanded';
-    const activeTab = tabs.querySelector('.is-active');
+    const activeTab = tabs.querySelector('.js-is-active');
 
     function isTabsMobileLayout() {
-      return tabs.querySelector('.tabs__trigger').clientHeight > 0;
+      return tabs.querySelector('.js-tabs__trigger').clientHeight > 0;
     }
 
     function handleTriggerClick(e) {
@@ -23,15 +23,15 @@
       }
     }
 
-    if (isTabsMobileLayout() && !activeTab.matches('.tabs__tab:first-child')) {
+    if (isTabsMobileLayout() && !activeTab.matches('.js-tabs__tab:first-child')) {
       const newActiveTab = activeTab.cloneNode(true);
-      const firstTab = tabs.querySelector('.tabs__tab:first-child');
+      const firstTab = tabs.querySelector('.js-tabs__tab:first-child');
       tabs.insertBefore(newActiveTab, firstTab);
       tabs.removeChild(activeTab);
     }
 
     tabs
-      .querySelector('.tabs__trigger')
+      .querySelector('.js-tabs__trigger')
       .addEventListener('click', handleTriggerClick);
   }
 
