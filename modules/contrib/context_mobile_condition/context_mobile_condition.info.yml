@@ -1,0 +1,12 @@
+name: Context Mobile Condition
+description: Integrates Context Module with Mobile Detect library
+type: module
+core_version_requirement: ^8 || ^9
+package: Context
+dependencies:
+  - context:context
+
+# Information added by Drupal.org packaging script on 2020-07-10
+version: '8.x-1.x-dev'
+project: 'context_mobile_condition'
+datestamp: 1594382769
