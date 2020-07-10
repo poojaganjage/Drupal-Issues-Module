@@ -115,7 +115,8 @@ ContainerFactoryPluginInterface
         $configuration = $this->getConfiguration();
         $form['mobile_detect_condition'] = [
         '#title' => $this->t('Mobile detect'),
-        '#type' => 'radios',
+        // '#type' => 'radios',
+        '#type' => 'checkbox',
         '#options' => array(
         '0' => $this->t('Mobile Device'),
         '1' => $this->t('Tablet Device'),
