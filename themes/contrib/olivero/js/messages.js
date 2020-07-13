@@ -6,10 +6,10 @@
 **/
 
 (function (Drupal) {
-  var messages = document.querySelectorAll('.js-messages');
+  var messages = document.querySelectorAll('.messages');
 
   messages.forEach(function (el) {
-    var messageContainer = el.querySelector('.js-messages__container');
+    var messageContainer = el.querySelector('.messages__container');
 
     var closeBtnWrapper = document.createElement('div');
     closeBtnWrapper.setAttribute('class', 'messages__button');

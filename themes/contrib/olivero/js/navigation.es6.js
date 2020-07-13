@@ -6,11 +6,11 @@
 (() => {
   const { isDesktopNav } = drupalSettings.olivero;
 
-  const mobileNavButton = document.querySelector('.js-mobile-nav-button');
+  const mobileNavButton = document.querySelector('.mobile-nav-button');
   const mobileNavWrapperId = 'header-nav';
   const mobileNavWrapper = document.getElementById(mobileNavWrapperId);
   const body = document.querySelector('body');
-  const overlay = document.querySelector('.js-overlay');
+  const overlay = document.querySelector('.overlay');
 
   const focusableNavElements = mobileNavWrapper.querySelectorAll(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',

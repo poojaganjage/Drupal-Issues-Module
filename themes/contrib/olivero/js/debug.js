@@ -7,12 +7,12 @@
 
 (function () {
   function toggleLogo(isChecked) {
-    var headerInner = document.querySelector('.js-site-branding__inner');
+    var headerInner = document.querySelector('.site-branding__inner');
     if (headerInner) {
-      var currentLogo = headerInner.querySelector('.js-site-branding__logo');
+      var currentLogo = headerInner.querySelector('.site-branding__logo');
 
       if (isChecked) {
-        var logoHTML = '\n        <a href="/" rel="home" class="js-site-branding__logo">\n          <img src="/themes/contrib/olivero/logo.svg" alt="Home">\n        </a>';
+        var logoHTML = '\n        <a href="/" rel="home" class="site-branding__logo">\n          <img src="/themes/contrib/olivero/logo.svg" alt="Home">\n        </a>';
 
         if (currentLogo) {
           headerInner.removeChild(currentLogo);
@@ -46,7 +46,7 @@
   }
 
   function toggleEditableSiteName(isChecked) {
-    var siteNameText = document.querySelector('.js-site-branding__name a');
+    var siteNameText = document.querySelector('.site-branding__name a');
     if (siteNameText) {
       siteNameText.contentEditable = isChecked;
 
@@ -110,7 +110,7 @@
     debugElement.classList.add('olivero-debug');
     debugElement.innerHTML = '\n      <h2 class="visually-hidden">Theme debug options</h2>\n      <div><input id="logo-toggle" type="checkbox"><label for="logo-toggle">Logo</label></div>\n      <div><input id="edit-name-toggle" type="checkbox"><label for="edit-name-toggle">Editable Site Name</label></div>\n      <div><input id="rtl-toggle" type="checkbox"><label for="rtl-toggle">RTL</label></div>\n      <div><input id="nav-toggle" type="checkbox"><label for="nav-toggle">Always on mobile nav</label></div>\n      <div><input id="required-toggle" type="checkbox"><label for="required-toggle">Clear required attribute on form elements</label></div>\n      <div class="description">Disable debug in <a href="' + window.drupalSettings.path.baseUrl + 'admin/appearance/settings/olivero">Theme Settings</a>.</div>\n    ';
     document.querySelector('body').appendChild(debugElement);
-    document.querySelector('.js-olivero-debug').addEventListener('change', handleChange);
+    document.querySelector('.olivero-debug').addEventListener('change', handleChange);
 
     if (sessionStorage.getItem('olivero.debug.toggleLogo') != null) {
       toggleLogo(sessionStorage.getItem('olivero.debug.toggleLogo') === 'true');
@@ -132,7 +132,7 @@
       toggleAlwaysOnMobileNav(sessionStorage.getItem('olivero.debug.toggleAlwaysOnMobileNav') === 'true');
     }
 
-    if (document.querySelector('.js-site-branding__logo')) {
+    if (document.querySelector('.site-branding__logo')) {
       document.getElementById('logo-toggle').checked = true;
     }
 
@@ -140,7 +140,7 @@
       document.getElementById('required-toggle').checked = true;
     }
 
-    if (document.querySelector('.js-site-branding__name a') && document.querySelector('.js-site-branding__name a').contentEditable === 'true') {
+    if (document.querySelector('.site-branding__name a') && document.querySelector('.site-branding__name a').contentEditable === 'true') {
       document.getElementById('edit-name-toggle').checked = true;
     }
 

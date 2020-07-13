@@ -13,7 +13,7 @@
 
   function isDesktopNav() {
     // @todo, I'm not sure we even need the .mobile-buttons container anymore.
-    const navButtons = document.querySelector('.js-mobile-buttons');
+    const navButtons = document.querySelector('.mobile-buttons');
     return (
       window.getComputedStyle(navButtons).getPropertyValue('display') === 'none'
     );
@@ -21,8 +21,8 @@
 
   drupalSettings.olivero.isDesktopNav = isDesktopNav;
 
-  const wideNavButton = document.querySelector('.js-nav-primary__button');
-  const siteHeaderFixable = document.querySelector('.js-site-header__fixable');
+  const wideNavButton = document.querySelector('.nav-primary__button');
+  const siteHeaderFixable = document.querySelector('.site-header__fixable');
 
   function wideNavIsOpen() {
     return wideNavButton.getAttribute('aria-expanded') === 'true';
@@ -50,7 +50,7 @@
     'IntersectionObserverEntry' in window &&
     'intersectionRatio' in window.IntersectionObserverEntry.prototype
   ) {
-    const fixables = document.querySelectorAll('.js-fixable');
+    const fixables = document.querySelectorAll('.fixable');
 
     function toggleDesktopNavVisibility(entries) {
       if (!isDesktopNav()) return;
@@ -85,7 +85,7 @@
     }
 
     function monitorNavPosition() {
-      const primaryNav = document.querySelector('.js-site-header');
+      const primaryNav = document.querySelector('.site-header');
       const options = {
         rootMargin: getRootMargin(),
         threshold: [0.999, 1],
@@ -107,11 +107,11 @@
     });
 
     siteHeaderFixable
-      .querySelector('.js-site-header__inner')
+      .querySelector('.site-header__inner')
       .addEventListener('focusin', showWideNav);
 
     // If skip link is clicked, ensure that the wide navigation closes so the header will not be covered up.
-    document.querySelector('.js-skip-link').addEventListener('click', hideWideNav);
+    document.querySelector('.skip-link').addEventListener('click', hideWideNav);
 
     monitorNavPosition();
   }
