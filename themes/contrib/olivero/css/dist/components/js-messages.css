@@ -1,0 +1,172 @@
+.js-messages-list{
+  list-style:none;
+}[dir] .js-messages-list{
+  margin-top:18px;
+  margin-bottom:18px;
+  padding:0;
+}
+
+.js-messages{
+  min-height:68px;
+  outline:solid 1px transparent;
+}
+
+[dir] .js-messages{
+  padding:18px 27px;
+  background-color:#0d1214;
+}
+
+[dir] .js-messages.js-messages-list__item{
+    background-image:none;
+  }
+
+.js-messages__list{
+  list-style:none;
+}
+
+[dir] .js-messages__list{
+  margin:0;
+  padding:0;
+}
+
+[dir] .js-messages:not(.hidden) ~ .js-messages{
+  margin-top:18px;
+}
+
+[dir] .js-messages__item + .js-messages__item{
+  margin-top:9px;
+}
+
+.js-messages__container{
+  display:flex;
+}
+
+.js-messages__header{
+  flex-shrink:0;
+}
+
+[dir=ltr] .js-messages__header{
+  margin-right:18px;
+}
+
+[dir=rtl] .js-messages__header{
+  margin-left:18px;
+}
+
+.js-messages__content{
+  flex:1;
+  color:#fff;
+}
+
+[dir] .js-messages__content{
+  padding-top:3px;
+}
+
+.js-messages__button{
+  flex-shrink:0;
+}
+
+[dir] .js-messages__button{
+  padding-top:3px;
+}
+
+[dir=ltr] .js-messages__button{
+  margin-left:18px;
+}
+
+[dir=rtl] .js-messages__button{
+  margin-right:18px;
+}
+
+.js-messages__close{
+  position:relative;
+  width:25px;
+  height:25px;
+  vertical-align:top;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+}
+
+[dir] .js-messages__close{
+  padding:0;
+  cursor:pointer;
+  border:0;
+  border-radius:50%;
+  background:none;
+}
+
+.js-messages__close::before,
+  .js-messages__close::after{
+    position:absolute;
+    top:50%;
+    display:block;
+    width:33px;
+    height:2px;
+    content:"";
+  }
+
+[dir] .js-messages__close::before, [dir] .js-messages__close::after{
+    background-color:#7e96a7;
+  }
+
+[dir=ltr] .js-messages__close::before, [dir=ltr] .js-messages__close::after{
+  left:50%;
+  }
+
+[dir=rtl] .js-messages__close::before, [dir=rtl] .js-messages__close::after{
+    right:50%;
+  }
+
+[dir=ltr] .js-messages__close::before{
+  transform:translate(-50%, -50%) rotate(45deg);
+  }
+
+[dir=rtl] .js-messages__close::before{
+    transform:translate(50%, -50%) rotate(-45deg);
+  }
+
+[dir=ltr] .js-messages__close::after{
+  transform:translate(-50%, -50%) rotate(-45deg);
+  }
+
+[dir=rtl] .js-messages__close::after{
+    transform:translate(50%, -50%) rotate(45deg);
+  }
+
+[dir] .js-messages__close:hover::before, [dir] .js-messages__close:hover::after{
+      background-color:#fff;
+    }
+
+.js-messages__close:focus{
+    outline:2px solid #53b0eb;
+    outline-offset:1px;
+  }
+
+.js-messages__icon{
+  vertical-align:top;
+}
+
+.js-messages--error .js-messages__icon{
+  fill:#e33f1e;
+}
+
+.js-messages--warning .js-messages__icon{
+  fill:#fdca40;
+}
+
+.js-messages--status .js-messages__icon{
+  fill:#3fa21c;
+}
+
+.js-messages--info .js-messages__icon{
+  fill:#53b0eb;
+}
+
+.js-messages a{
+  color:#fff;
+}
+
+[dir] .js-messages pre{
+  margin:0;
+}

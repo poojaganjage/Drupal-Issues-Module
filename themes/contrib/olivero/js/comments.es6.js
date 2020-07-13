@@ -4,12 +4,12 @@
  */
 
 (Drupal => {
-  const indentedComments = document.querySelectorAll('.comments .indented');
+  const indentedComments = document.querySelectorAll('.js-comments .js-indented');
 
-  document.querySelectorAll('.comment').forEach(comment => {
+  document.querySelectorAll('.js-comment').forEach(comment => {
     if (
       comment.nextElementSibling != null &&
-      comment.nextElementSibling.matches('.indented')
+      comment.nextElementSibling.matches('.js-indented')
     ) {
       comment.classList.add('has-children');
     }
@@ -17,12 +17,12 @@
 
   indentedComments.forEach(commentGroup => {
     const showHideWrapper = document.createElement('div');
-    showHideWrapper.setAttribute('class', 'show-hide-wrapper');
+    showHideWrapper.setAttribute('class', 'js-show-hide-wrapper');
 
     const toggleCommentsBtn = document.createElement('button');
     toggleCommentsBtn.setAttribute('type', 'button');
     toggleCommentsBtn.setAttribute('aria-expanded', 'true');
-    toggleCommentsBtn.setAttribute('class', 'show-hide-btn');
+    toggleCommentsBtn.setAttribute('class', 'js-show-hide-btn');
     toggleCommentsBtn.innerText = Drupal.t('Replies');
 
     commentGroup.parentNode.insertBefore(showHideWrapper, commentGroup);

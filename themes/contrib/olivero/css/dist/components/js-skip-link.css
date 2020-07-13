@@ -1,0 +1,16 @@
+.js-skip-link{
+  z-index:1;
+  display:block;
+  width:100%;
+  max-width:1570px;
+  text-decoration:none;
+  color:#fff;
+  outline:0;
+}[dir] .js-skip-link{
+  padding:9px 18px;
+  background-color:#0d1214;
+}
+
+.js-skip-link:after{
+    content:"\0020	➔";
+  }

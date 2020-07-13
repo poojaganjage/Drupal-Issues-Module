@@ -31,18 +31,26 @@ global-styling:
       css/dist/components/form-select.css: {}
       css/dist/components/header.css: {}
       css/dist/components/header-buttons-mobile.css: {}
+      css/dist/components/js-header.css: {}
+      css/dist/components/js-header-buttons-mobile.css: {}
       css/dist/components/header-navigation.css: {}
+      css/dist/components/js-header-site-branding.css: {}
       css/dist/components/header-site-branding.css: {}
       css/dist/components/hero.css: {}
       css/dist/components/nav-button-mobile.css: {}
       css/dist/components/nav-button-wide.css: {}
       css/dist/components/nav-primary-button.css: {}
       css/dist/components/nav-primary.css: {}
+      css/dist/components/js-nav-button-mobile.css: {}
+      css/dist/components/js-nav-button-wide.css: {}
+      css/dist/components/js-nav-primary-button.css: {}
+      css/dist/components/js-nav-primary.css: {}
       css/dist/components/nav-secondary.css: {}
       css/dist/components/node.css: {}
       css/dist/components/node-teaser.css: {}
       css/dist/components/page-title.css: {}
       css/dist/components/skip-link.css: {}
+      css/dist/components/js-skip-link.css: {}
       css/dist/components/pager.css: {}
       css/dist/components/social-container.css: {}
       css/dist/components/table.css: {}
@@ -61,6 +69,7 @@ comments:
   css:
     component:
       css/dist/components/comments.css: {}
+      css/dist/components/js-comments.css: {}
   js:
     js/comments.js: {}
 
@@ -104,6 +113,7 @@ messages:
   css:
     component:
       css/dist/components/messages.css: {}
+      css/dist/components/js-messages.css: {}
   js:
     js/messages.js: {}
 
@@ -118,6 +128,7 @@ tabs:
   css:
     theme:
       css/dist/components/tabs.css: {}
+      css/dist/components/js-tabs.css: {}
   js:
     js/tabs.js: {}
 
@@ -130,6 +141,7 @@ debug:
   css:
     theme:
       css/dist/components/_debug.css: {}
+      css/dist/components/js-debug.css: {}
   js:
     js/debug.js: {}
 
@@ -142,6 +154,7 @@ search-wide:
   css:
     component:
       css/dist/components/header-search-wide.css: {}
+      css/dist/components/js-header-search-wide.css: {}
   js:
     js/search.js: {}
 
