@@ -44,14 +44,27 @@ function betterlogin_form_alter(&$form, FormStateInterface $form_state, $form_id
   // Autofocus on the username field.
   // And add some pretty CSS :).
   // And a few other things too...
+  // if ($form_id == 'user_login_form' || $form_id == 'user_register_form' || $form_id == 'user_pass' || $form_id == 'user_pass_reset') {
+  //   $form['name']['#attributes']['autofocus'] = 'autofocus';
+  //   // We don't really need descriptions to tell us what we already know...
+  //   unset($form['name']['#description']);
+  //   unset($form['pass']['#description']);
+
+  //   // Add in some CSS.
+  //   $form['#attached']['library'][] = 'betterlogin/betterlogin_css';
+  // }
+
   if ($form_id == 'user_login_form' || $form_id == 'user_register_form' || $form_id == 'user_pass' || $form_id == 'user_pass_reset') {
+    
     $form['name']['#attributes']['autofocus'] = 'autofocus';
+    $form['pass']['#attributes']['autofocus'] = 'autofocus';
     // We don't really need descriptions to tell us what we already know...
     unset($form['name']['#description']);
     unset($form['pass']['#description']);
 
     // Add in some CSS.
     $form['#attached']['library'][] = 'betterlogin/betterlogin_css';
+    $form['#validate'][] = 'betterlogin_validate';
   }
 
   // Exit if we're not on a target url, since the form may have been rendered
@@ -63,6 +76,26 @@ function betterlogin_form_alter(&$form, FormStateInterface $form_state, $form_id
   if (!in_array($path_args, $pages)) {
     return;
   }
+}
+
+/**
+ * Implements hook_validate().
+ */
+function betterlogin_validate(array $form, FormStateInterface $form_state){
+  if (!$form_state->hasValue('name') == 'Pooja')
+  {
+    $name = $form_state->getValue('name');
+    $form_state->setErrorByName($name, t('Invalid Username'));
+  }
+
+  // if ($form_state->getValue('name') != 'Pooja')
+  //  {
+  //     $form_state->setErrorByName('name', t('Invalid Username'));
+  //  }
+  if ($form_state->getValue('pass') != 'admin')
+   {
+      $form_state->setErrorByName('pass', t('Invalid Password'));
+   }
 }
 
 /**
