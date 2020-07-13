@@ -163,7 +163,7 @@
   display: block;
 }
 
-#drupal-off-canvas #blb_ui .blb_breakpoint_cols input:checked + label .blb_breakpoint_col.bp-selected {
+#drupal-off-canvas #blb_ui .blb_breakpoint_cols input[type="radio"]:checked + label .blb_breakpoint_col.bp-selected {
   color: #ffffff;
   background-color: #277abd;
 }
@@ -178,14 +178,14 @@
   border-radius: 3px;
 }
 
-#drupal-off-canvas #blb_ui .blb_breakpoint_col.bp-selected {
+/*#drupal-off-canvas #blb_ui .blb_breakpoint_col.bp-selected {
   color: #ffffff;
   background-color: #000000;
 }
 
 #drupal-off-canvas #blb_ui .blb_breakpoint_col.bp-selected:hover {
   color: #444444;
-}
+}*/
 
 #drupal-off-canvas #blb_ui .bootstrap_layout_builder_bg_color .form-radios > div.radio, #drupal-off-canvas #blb_ui .bootstrap_layout_builder_bg_color .fieldset-wrapper > div.radio {
   display: flex;

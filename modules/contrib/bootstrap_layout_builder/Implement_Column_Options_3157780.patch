@@ -1,0 +1,77 @@
+diff --git a/modules/contrib/bootstrap_layout_builder/css/base.css b/modules/contrib/bootstrap_layout_builder/css/base.css
+index 444db15..9bbe3fe 100644
+--- a/modules/contrib/bootstrap_layout_builder/css/base.css
++++ b/modules/contrib/bootstrap_layout_builder/css/base.css
+@@ -163,7 +163,7 @@
+   display: block;
+ }
+ 
+-#drupal-off-canvas #blb_ui .blb_breakpoint_cols input:checked + label .blb_breakpoint_col.bp-selected {
++#drupal-off-canvas #blb_ui .blb_breakpoint_cols input[type="radio"]:checked + label .blb_breakpoint_col.bp-selected {
+   color: #ffffff;
+   background-color: #277abd;
+ }
+@@ -178,14 +178,14 @@
+   border-radius: 3px;
+ }
+ 
+-#drupal-off-canvas #blb_ui .blb_breakpoint_col.bp-selected {
++/*#drupal-off-canvas #blb_ui .blb_breakpoint_col.bp-selected {
+   color: #ffffff;
+   background-color: #000000;
+ }
+ 
+ #drupal-off-canvas #blb_ui .blb_breakpoint_col.bp-selected:hover {
+   color: #444444;
+-}
++}*/
+ 
+ #drupal-off-canvas #blb_ui .bootstrap_layout_builder_bg_color .form-radios > div.radio, #drupal-off-canvas #blb_ui .bootstrap_layout_builder_bg_color .fieldset-wrapper > div.radio {
+   display: flex;
+diff --git a/modules/contrib/bootstrap_layout_builder/js/base.js b/modules/contrib/bootstrap_layout_builder/js/base.js
+index e5ee9b3..5aec81d 100644
+--- a/modules/contrib/bootstrap_layout_builder/js/base.js
++++ b/modules/contrib/bootstrap_layout_builder/js/base.js
+@@ -47,10 +47,10 @@
+           var colsConfig = cols.split('_');
+           var colsLabel = $(this).find('label');
+           var col_classes = 'blb_breakpoint_col';
+-          var checked = $(this).find('input').prop("checked");
+-          if (typeof checked !== typeof undefined && checked !== false) {
+-            col_classes += 'bp-selected';
+-          }
++          // var checked = $(this).find('input').prop("checked");
++          // if (typeof checked !== typeof undefined && checked !== false) {
++          //   col_classes += 'bp-selected';
++          // }
+ 
+           // Wrap our radio labels and display as a tooltip.
+           colsLabel.wrapInner('<div class="blb_tooltip blb_tooltip-lg"></div>');
+@@ -64,15 +64,20 @@
+               'class': col_classes,
+             })
+             .appendTo(colsLabel)           
+-            .on('click', function () {
+-              $(this).parents('.blb_breakpoint_cols').find('.blb_breakpoint_col').removeClass('bp-selected');
+-              $(this).parents('.blb_breakpoint_cols').find('input').prop("checked", false);
+-              $(this).parents('label').parent().find('input').prop("checked", true);
+-              $(this).parents('label').find('.blb_breakpoint_col').addClass('bp-selected');
+-            });
++            // .on('click', function () {
++            //   $(this).parents('.blb_breakpoint_cols').find('.blb_breakpoint_col').removeClass('bp-selected');
++            //   $(this).parents('.blb_breakpoint_cols').find('input').prop("checked", false);
++            //   $(this).parents('label').parent().find('input').prop("checked", true);
++            //   $(this).parents('label').find('.blb_breakpoint_col').addClass('bp-selected');
++            // });
++            $(function() {
++              var $radios = $("input:radio").on('click', function () {
++                $radios.not(this).next().find('.blb_breakpoint_col').removeClass('bp-selected');
++                $(this).next().find('.blb_breakpoint_col').addClass('bp-selected'); 
++              });
+           });
+         });
+-
++      });
+       });
+ 
+       $(".bootstrap_layout_builder_bg_color input:radio", context).once('blb_bg-color').each(function () {

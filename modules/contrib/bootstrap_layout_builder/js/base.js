@@ -47,10 +47,10 @@
           var colsConfig = cols.split('_');
           var colsLabel = $(this).find('label');
           var col_classes = 'blb_breakpoint_col';
-          var checked = $(this).find('input').prop("checked");
-          if (typeof checked !== typeof undefined && checked !== false) {
-            col_classes += 'bp-selected';
-          }
+          // var checked = $(this).find('input').prop("checked");
+          // if (typeof checked !== typeof undefined && checked !== false) {
+          //   col_classes += 'bp-selected';
+          // }
 
           // Wrap our radio labels and display as a tooltip.
           colsLabel.wrapInner('<div class="blb_tooltip blb_tooltip-lg"></div>');
@@ -64,15 +64,20 @@
               'class': col_classes,
             })
             .appendTo(colsLabel)           
-            .on('click', function () {
-              $(this).parents('.blb_breakpoint_cols').find('.blb_breakpoint_col').removeClass('bp-selected');
-              $(this).parents('.blb_breakpoint_cols').find('input').prop("checked", false);
-              $(this).parents('label').parent().find('input').prop("checked", true);
-              $(this).parents('label').find('.blb_breakpoint_col').addClass('bp-selected');
-            });
+            // .on('click', function () {
+            //   $(this).parents('.blb_breakpoint_cols').find('.blb_breakpoint_col').removeClass('bp-selected');
+            //   $(this).parents('.blb_breakpoint_cols').find('input').prop("checked", false);
+            //   $(this).parents('label').parent().find('input').prop("checked", true);
+            //   $(this).parents('label').find('.blb_breakpoint_col').addClass('bp-selected');
+            // });
+            $(function() {
+              var $radios = $("input:radio").on('click', function () {
+                $radios.not(this).next().find('.blb_breakpoint_col').removeClass('bp-selected');
+                $(this).next().find('.blb_breakpoint_col').addClass('bp-selected'); 
+              });
           });
         });
-
+      });
       });
 
       $(".bootstrap_layout_builder_bg_color input:radio", context).once('blb_bg-color').each(function () {
