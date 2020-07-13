@@ -48,9 +48,8 @@ use Drupal\Core\StringTranslation\TranslationInterface;
  *    label = @Translation("Mobile detect condition"),
  * )
  */
-class MobileDetectCondition extends ConditionPluginBase implements 
-ContainerFactoryPluginInterface
-{
+class MobileDetectCondition extends ConditionPluginBase implements ContainerFactoryPluginInterface {
+    
     use StringTranslationTrait;
 
     /**
@@ -63,17 +62,14 @@ ContainerFactoryPluginInterface
     /**
      * Constructs a HttpStatusCode condition plugin.
      *
-     * @param array  $configuration      A configuration array containing
-     *                                   information about the plugin
-     *                                   instance about the plugin
-     *                                   instance.
-     * @param string $plugin_id          The plugin_id for the plugin instance. 
-     * @param array  $plugin_definition  The plugin implementation definition.
+     * @param array $configuration A configuration array containing
+     * information about the plugin instance about the plugin instance.
+     * @param string $plugin_id The plugin_id for the plugin instance. 
+     * @param array $plugin_definition The plugin implementation definition.
      * @param $string_translation The string translation information.   
      */
-    public function __construct(array $configuration, $plugin_id, 
-        array $plugin_definition, TranslationInterface $string_translation
-    ) {
+    public function __construct(array $configuration, $plugin_id, array $plugin_definition,
+        TranslationInterface $string_translation) {
         parent::__construct($configuration, $plugin_id, $plugin_definition);
         $this->stringTranslation = $string_translation;
     }
@@ -81,16 +77,14 @@ ContainerFactoryPluginInterface
     /**
      * Create Method.
      *
-     * @param $container         The container variable.
-     * @param $configuration     The configuration variable.
-     * @param $plugin_id         The plugin id variable.
+     * @param $container The container variable.
+     * @param $configuration The configuration variable.
+     * @param $plugin_id The plugin id variable.
      * @param $plugin_definition The plugin definition variable.
      *
      * @return object
      */
-    public static function create(ContainerInterface $container, 
-        array $configuration, $plugin_id, $plugin_definition
-    ) {
+    public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
         return new static(
             $configuration,
             $plugin_id,
@@ -104,14 +98,12 @@ ContainerFactoryPluginInterface
      *
      * Build the form using $form and $form_state variable using.
      *
-     * @param $form       Build the form using $form varibale using.
+     * @param $form Build the form using $form varibale using.
      * @param $form_state Build the form using $form_state interface.
      *
      * @return string
      */
-    public function buildConfigurationForm(array $form, 
-        FormStateInterface $form_state
-    ) {
+    public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
         $configuration = $this->getConfiguration();
         $form['mobile_detect_condition'] = [
         '#title' => $this->t('Mobile detect'),
@@ -135,14 +127,12 @@ ContainerFactoryPluginInterface
      *
      * Submit the form using $form and $form_state variable using.
      *
-     * @param $form       Submit the form using $form varibale using.
+     * @param $form Submit the form using $form varibale using.
      * @param $form_state Submit the form using $form_state interface.
      *
      * @return string
      */
-    public function submitConfigurationForm(array &$form, 
-        FormStateInterface $form_state
-    ) {
+    public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
         $this->configuration['mobile_detect_condition']
             = $form_state->getValue('mobile_detect_condition');
             parent::submitConfigurationForm($form, $form_state);
@@ -153,8 +143,7 @@ ContainerFactoryPluginInterface
      *
      * @return string
      */
-    public function summary()
-    {
+    public function summary() {
         return $this->t('Select type');
     }
 
@@ -163,8 +152,7 @@ ContainerFactoryPluginInterface
      *
      * @return bool
      */
-    public function evaluate()
-    {
+    public function evaluate() {
         $detect = new Mobile_Detect;
         $a = $detect->isMobile();
         $b = $detect->isTablet();
