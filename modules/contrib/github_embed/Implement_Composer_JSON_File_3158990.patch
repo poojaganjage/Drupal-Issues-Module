@@ -1,0 +1,27 @@
+diff --git a/modules/contrib/github_embed/composer.json b/modules/contrib/github_embed/composer.json
+index e69de29..87d6e09 100644
+--- a/modules/contrib/github_embed/composer.json
++++ b/modules/contrib/github_embed/composer.json
+@@ -0,0 +1,22 @@
++{
++  "name": "drupal/github_embed",
++  "description": "Embed github source files into your content.",
++  "type": "drupal-module",
++  "keywords": ["Drupal", "Filter"],
++  "homepage": "https://www.drupal.org/project/github_embed",
++  "license": "GPL-2.0+",
++  "authors": [
++    {
++      "name": "Borut Piletic (borutpiletic)",
++      "homepage": "https://www.drupal.org/u/borutpiletic",
++      "role": "Maintainer"
++    }
++  ],
++  "support": {
++    "issues": "https://www.drupal.org/project/issues/github_embed",
++    "source": "https://cgit.drupalcode.org/github_embed"
++  },
++  "require": {
++    "drupal/core": "^8 || ^9"
++  }
++}
