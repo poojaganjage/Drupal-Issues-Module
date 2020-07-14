@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * @file
+ * Contains github_embed.module.
+ */
+
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Routing\RouteMatchInterface;
+use GuzzleHttp\Exception\ClientException;
+
+/**
+ * Implements hook_help().
+ */
+function github_embed_help($route_name, RouteMatchInterface $route_match) {
+  $output = '';
+  if ($route_name === 'help.page.github_embed') {
+    $output = nl2br(file_get_contents(__DIR__ . '/README.txt'));
+  }
+  return $output;
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function github_embed_token_info() {
+  $types = $tokens = [];
+  $types['github_embed'] = [
+    'name' => 'Github embed',
+    'description' => 'Github embed tokens.',
+  ];
+  $tokens['file'] = [
+    'name' => 'Github file',
+    'description' => 'Embed github file',
+    'type' => 'array',
+  ];
+  return [
+    'types' => $types,
+    'tokens' => [
+      'github_embed' => $tokens,
+    ],
+  ];
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function github_embed_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+  // Only "filter" is allowed to execute "github_embed" token.
+  if ($type === 'github_embed' &&
+    isset($data['settings'], $data['filter_process']) &&
+    $data['filter_process'] === 'github_embed') {
+    /** @var \Drupal\Core\Utility\Token $token */
+    $token_service = \Drupal::service('token');
+    foreach ($tokens as $value => $token) {
+      $token_file_prefix = $token_service->findWithPrefix([$value => $token], 'file');
+      $file_uri = $data['settings']['base_url'] . '/';
+      if (empty($token_file_prefix)) {
+        // Use filter repository settings.
+        $file_uri .= $data['settings']['repository_user'] . '/' . $data['settings']['repository_name'] . '/' . $value;
+      }
+      else {
+        $file_name = key($token_file_prefix);
+        $file_uri .= $file_name;
+      }
+      try {
+        $response = \Drupal::httpClient()->get($file_uri);
+        if ($response->getStatusCode() === 200) {
+          $replacements[$token] = $response->getBody()->getContents();
+        }
+        else {
+          \Drupal::logger('github_embed')
+            ->error(t("Failed to load file from: @file_uri", [
+              '@file_uri' => $file_uri,
+            ]));
+        }
+      }
+      catch (ClientException $exception) {
+        \Drupal::logger('github_embed')->error($exception->getMessage());
+      }
+    }
+  }
+  return $replacements;
+}

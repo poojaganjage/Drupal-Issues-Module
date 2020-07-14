@@ -1,0 +1,11 @@
+name: 'Github code embed'
+type: module
+description: 'Embed github source files into your content.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: Git
+
+# Information added by Drupal.org packaging script on 2020-07-05
+version: '8.x-1.0-beta1'
+project: 'github_embed'
+datestamp: 1593946509
