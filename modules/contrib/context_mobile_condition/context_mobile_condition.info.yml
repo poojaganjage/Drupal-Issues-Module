@@ -6,7 +6,7 @@ package: Context
 dependencies:
   - context:context
 
-# Information added by Drupal.org packaging script on 2020-07-10
+# Information added by Drupal.org packaging script on 2020-07-14
 version: '8.x-1.x-dev'
 project: 'context_mobile_condition'
-datestamp: 1594382769
+datestamp: 1594690608
