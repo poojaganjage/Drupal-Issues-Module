@@ -109,9 +109,9 @@ class MobileDetectCondition extends ConditionPluginBase implements ContainerFact
     '#type' => 'checkboxes',
     '#default_value' => isset($configuration['mobile_detect_condition']) ? $configuration['mobile_detect_condition'] : [],
     '#options' => array(
-    'is_mobile' => $this->t('Mobile Device'),
-    'is_tablet' => $this->t('Tablet Device'),
-    'is_computer' => $this->t('Computer Device'),
+      'is_mobile' => $this->t('Mobile Device'),
+      'is_tablet' => $this->t('Tablet Device'),
+      'is_computer' => $this->t('Computer Device'),
     )
     ];
 
