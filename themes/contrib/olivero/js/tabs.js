@@ -7,12 +7,12 @@
 
 (function (Drupal) {
   function init(el) {
-    var tabs = el.querySelector('.js-tabs');
+    var tabs = el.querySelector('.tabs');
     var expandedClass = 'is-expanded';
-    var activeTab = tabs.querySelector('.js-is-active');
+    var activeTab = tabs.querySelector('.is-active');
 
     function isTabsMobileLayout() {
-      return tabs.querySelector('.js-tabs__trigger').clientHeight > 0;
+      return tabs.querySelector('.tabs__trigger').clientHeight > 0;
     }
 
     function handleTriggerClick(e) {
@@ -25,14 +25,14 @@
       }
     }
 
-    if (isTabsMobileLayout() && !activeTab.matches('.js-tabs__tab:first-child')) {
+    if (isTabsMobileLayout() && !activeTab.matches('.tabs__tab:first-child')) {
       var newActiveTab = activeTab.cloneNode(true);
-      var firstTab = tabs.querySelector('.js-tabs__tab:first-child');
+      var firstTab = tabs.querySelector('.tabs__tab:first-child');
       tabs.insertBefore(newActiveTab, firstTab);
       tabs.removeChild(activeTab);
     }
 
-    tabs.querySelector('.js-tabs__trigger').addEventListener('click', handleTriggerClick);
+    tabs.querySelector('.tabs__trigger').addEventListener('click', handleTriggerClick);
   }
 
   Drupal.behaviors.tabs = {

@@ -6,8 +6,8 @@
 **/
 
 (function () {
-  var searchWideButton = document.querySelector('.js-header-nav__search-button');
-  var searchWideWrapper = document.querySelector('.js-search-wide__wrapper');
+  var searchWideButton = document.querySelector('.header-nav__search-button');
+  var searchWideWrapper = document.querySelector('.search-wide__wrapper');
 
   function searchIsVisible() {
     return searchWideWrapper.classList.contains('is-active');
@@ -38,9 +38,9 @@
   drupalSettings.olivero.toggleSearchVisibility = toggleSearchVisibility;
 
   document.addEventListener('click', function (e) {
-    if (e.target.matches('.js-header-nav__search-button, .js-header-nav__search-button *')) {
+    if (e.target.matches('.header-nav__search-button, .header-nav__search-button *')) {
       toggleSearchVisibility(!searchIsVisible());
-    } else if (searchIsVisible() && !e.target.matches('.js-search-wide__wrapper, .js-search-wide__wrapper *')) {
+    } else if (searchIsVisible() && !e.target.matches('.search-wide__wrapper, .search-wide__wrapper *')) {
       toggleSearchVisibility(false);
     }
   });

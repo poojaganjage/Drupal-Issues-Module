@@ -4,8 +4,8 @@
  */
 
 (() => {
-  const searchWideButton = document.querySelector('.js-header-nav__search-button');
-  const searchWideWrapper = document.querySelector('.js-search-wide__wrapper');
+  const searchWideButton = document.querySelector('.header-nav__search-button');
+  const searchWideWrapper = document.querySelector('.search-wide__wrapper');
 
   function searchIsVisible() {
     return searchWideWrapper.classList.contains('is-active');
@@ -38,13 +38,13 @@
   document.addEventListener('click', e => {
     if (
       e.target.matches(
-        '.js-header-nav__search-button, .js-header-nav__search-button *',
+        '.header-nav__search-button, .header-nav__search-button *',
       )
     ) {
       toggleSearchVisibility(!searchIsVisible());
     } else if (
       searchIsVisible() &&
-      !e.target.matches('.js-search-wide__wrapper, .js-search-wide__wrapper *')
+      !e.target.matches('.search-wide__wrapper, .search-wide__wrapper *')
     ) {
       toggleSearchVisibility(false);
     }

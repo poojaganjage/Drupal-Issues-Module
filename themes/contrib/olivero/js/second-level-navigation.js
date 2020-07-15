@@ -8,25 +8,25 @@
 (function () {
   var isDesktopNav = drupalSettings.olivero.isDesktopNav;
 
-  var secondLevelNavMenus = document.querySelectorAll('.js-primary-nav__menu-item--has-children');
+  var secondLevelNavMenus = document.querySelectorAll('.primary-nav__menu-item--has-children');
 
   function toggleSubNav(topLevelMenuITem, toState) {
-    var button = topLevelMenuITem.querySelector('.js-primary-nav__button-toggle, .js-primary-nav__menu-link--button');
+    var button = topLevelMenuITem.querySelector('.primary-nav__button-toggle, .primary-nav__menu-link--button');
     var state = toState !== undefined ? toState : button.getAttribute('aria-expanded') !== 'true';
 
     if (state) {
       button.setAttribute('aria-expanded', 'true');
-      topLevelMenuITem.querySelector('.js-primary-nav__menu--level-2').classList.add('is-active');
+      topLevelMenuITem.querySelector('.primary-nav__menu--level-2').classList.add('is-active');
     } else {
       button.setAttribute('aria-expanded', 'false');
-      topLevelMenuITem.querySelector('.js-primary-nav__menu--level-2').classList.remove('is-active');
+      topLevelMenuITem.querySelector('.primary-nav__menu--level-2').classList.remove('is-active');
     }
   }
 
   drupalSettings.olivero.toggleSubNav = toggleSubNav;
 
   secondLevelNavMenus.forEach(function (el) {
-    var button = el.querySelector('.js-primary-nav__button-toggle, .js-primary-nav__menu-link--button');
+    var button = el.querySelector('.primary-nav__button-toggle, .primary-nav__menu-link--button');
 
     button.removeAttribute('aria-hidden');
     button.removeAttribute('tabindex');
@@ -61,7 +61,7 @@
     var subNavsAreOpen = false;
 
     secondLevelNavMenus.forEach(function (el) {
-      var button = el.querySelector('.js-primary-nav__button-toggle');
+      var button = el.querySelector('.primary-nav__button-toggle');
       var state = button.getAttribute('aria-expanded') === 'true';
 
       if (state) {

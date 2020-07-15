@@ -5,13 +5,13 @@
 
 (() => {
   function toggleLogo(isChecked) {
-    const headerInner = document.querySelector('.js-site-branding__inner');
+    const headerInner = document.querySelector('.site-branding__inner');
     if (headerInner) {
-      const currentLogo = headerInner.querySelector('.js-site-branding__logo');
+      const currentLogo = headerInner.querySelector('.site-branding__logo');
 
       if (isChecked) {
         const logoHTML = `
-        <a href="/" rel="home" class="js-site-branding__logo">
+        <a href="/" rel="home" class="site-branding__logo">
           <img src="/themes/contrib/olivero/logo.svg" alt="Home">
         </a>`;
 
@@ -47,7 +47,7 @@
   }
 
   function toggleEditableSiteName(isChecked) {
-    const siteNameText = document.querySelector('.js-site-branding__name a');
+    const siteNameText = document.querySelector('.site-branding__name a');
     if (siteNameText) {
       siteNameText.contentEditable = isChecked;
 
@@ -122,7 +122,7 @@
     `;
     document.querySelector('body').appendChild(debugElement);
     document
-      .querySelector('.js-olivero-debug')
+      .querySelector('.olivero-debug')
       .addEventListener('change', handleChange);
 
     // Get values from sessionStorage, and make changes to DOM.
@@ -157,7 +157,7 @@
     }
 
     // Ensure that the initial value of the checkboxes matches what's in the DOM.
-    if (document.querySelector('.js-site-branding__logo')) {
+    if (document.querySelector('.site-branding__logo')) {
       document.getElementById('logo-toggle').checked = true;
     }
 
@@ -166,8 +166,8 @@
     }
 
     if (
-      document.querySelector('.js-site-branding__name a') &&
-      document.querySelector('.js-site-branding__name a').contentEditable ===
+      document.querySelector('.site-branding__name a') &&
+      document.querySelector('.site-branding__name a').contentEditable ===
         'true'
     ) {
       document.getElementById('edit-name-toggle').checked = true;

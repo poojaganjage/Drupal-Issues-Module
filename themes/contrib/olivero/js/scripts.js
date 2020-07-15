@@ -12,14 +12,14 @@
   document.documentElement.classList.add('js');
 
   function isDesktopNav() {
-    var navButtons = document.querySelector('.js-mobile-buttons');
+    var navButtons = document.querySelector('.mobile-buttons');
     return window.getComputedStyle(navButtons).getPropertyValue('display') === 'none';
   }
 
   drupalSettings.olivero.isDesktopNav = isDesktopNav;
 
-  var wideNavButton = document.querySelector('.js-nav-primary__button');
-  var siteHeaderFixable = document.querySelector('.js-site-header__fixable');
+  var wideNavButton = document.querySelector('.nav-primary__button');
+  var siteHeaderFixable = document.querySelector('.site-header__fixable');
 
   function wideNavIsOpen() {
     return wideNavButton.getAttribute('aria-expanded') === 'true';
@@ -40,7 +40,7 @@
   }
 
   if ('IntersectionObserver' in window && 'IntersectionObserverEntry' in window && 'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
-    var fixables = document.querySelectorAll('.js-fixable');
+    var fixables = document.querySelectorAll('.fixable');
 
     function toggleDesktopNavVisibility(entries) {
       if (!isDesktopNav()) return;
@@ -76,7 +76,7 @@
     }
 
     function monitorNavPosition() {
-      var primaryNav = document.querySelector('.js-site-header');
+      var primaryNav = document.querySelector('.site-header');
       var options = {
         rootMargin: getRootMargin(),
         threshold: [0.999, 1]
@@ -94,9 +94,9 @@
       }
     });
 
-    siteHeaderFixable.querySelector('.js-site-header__inner').addEventListener('focusin', showWideNav);
+    siteHeaderFixable.querySelector('.site-header__inner').addEventListener('focusin', showWideNav);
 
-    document.querySelector('.js-skip-link').addEventListener('click', hideWideNav);
+    document.querySelector('.skip-link').addEventListener('click', hideWideNav);
 
     monitorNavPosition();
   }

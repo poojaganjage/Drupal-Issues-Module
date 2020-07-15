@@ -4,20 +4,20 @@
  */
 
 (Drupal => {
-  const messages = document.querySelectorAll('.js-messages');
+  const messages = document.querySelectorAll('.messages');
 
   messages.forEach(el => {
-    const messageContainer = el.querySelector('.js-messages__container');
+    const messageContainer = el.querySelector('.messages__container');
 
     const closeBtnWrapper = document.createElement('div');
-    closeBtnWrapper.setAttribute('class', 'js-messages__button');
+    closeBtnWrapper.setAttribute('class', 'messages__button');
 
     const closeBtn = document.createElement('button');
     closeBtn.setAttribute('type', 'button');
-    closeBtn.setAttribute('class', 'js-messages__close');
+    closeBtn.setAttribute('class', 'messages__close');
 
     const closeBtnText = document.createElement('span');
-    closeBtnText.setAttribute('class', 'js-visually-hidden');
+    closeBtnText.setAttribute('class', 'visually-hidden');
     closeBtnText.innerText = Drupal.t('Close message');
 
     messageContainer.appendChild(closeBtnWrapper);
