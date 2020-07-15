@@ -40,7 +40,7 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
  *
  * @link https://www.drupal.org
  */
-class FloodUnblockManager {
+class FloodUnblockManager implements FloodUnblockManagerInterface{
 
   use StringTranslationTrait;
 
