@@ -153,7 +153,7 @@ class FloodUnblockManager {
    * @return array
    *   User blocked entries in the flood table.
    */
-  public function getBlockeduUserEntries() {
+  public function getBlockedUserEntries() {
     $entries = [];
 
     if ($this->database->schema()->tableExists('flood')) {
