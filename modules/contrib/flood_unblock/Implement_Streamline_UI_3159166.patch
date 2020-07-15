@@ -1,0 +1,131 @@
+diff --git a/modules/contrib/flood_unblock/flood_unblock.info.yml b/modules/contrib/flood_unblock/flood_unblock.info.yml
+index 70ea3d4..a241173 100644
+--- a/modules/contrib/flood_unblock/flood_unblock.info.yml
++++ b/modules/contrib/flood_unblock/flood_unblock.info.yml
+@@ -1,6 +1,6 @@
+ name: Flood Unblock
+ type: module
+-description: "Interface for unblocking ip's that are blocked by the flood table"
++description: "Interface for unblocking the IP's that are blocked by the flood table."
+ package: user
+ configure: flood_unblock.form
+ # version: VERSION
+diff --git a/modules/contrib/flood_unblock/flood_unblock.links.menu.yml b/modules/contrib/flood_unblock/flood_unblock.links.menu.yml
+index 267bf51..6fbf879 100644
+--- a/modules/contrib/flood_unblock/flood_unblock.links.menu.yml
++++ b/modules/contrib/flood_unblock/flood_unblock.links.menu.yml
+@@ -1,6 +1,6 @@
+ flood_unblock.admin:
+-  title: 'Flood unblock'
+-  description: 'List all user blocked by the flood table.'
++  title: 'Flood Unblock'
++  description: 'List all users that are blocked by the flood table.'
+   parent: entity.user.collection
+   route_name: flood_unblock.form
+   menu_name: devel
+diff --git a/modules/contrib/flood_unblock/flood_unblock.links.task.yml b/modules/contrib/flood_unblock/flood_unblock.links.task.yml
+index 6dc3ec1..a285c52 100644
+--- a/modules/contrib/flood_unblock/flood_unblock.links.task.yml
++++ b/modules/contrib/flood_unblock/flood_unblock.links.task.yml
+@@ -1,5 +1,5 @@
+ flood_unblock.flood_unblock_task:
+-  title: 'Flood unblock'
++  title: 'Flood Unblock'
+   route_name: flood_unblock.form
+   base_route: entity.user.collection
+   weight: 40
+\ No newline at end of file
+diff --git a/modules/contrib/flood_unblock/flood_unblock.module b/modules/contrib/flood_unblock/flood_unblock.module
+index 405d7d7..7f1d93d 100644
+--- a/modules/contrib/flood_unblock/flood_unblock.module
++++ b/modules/contrib/flood_unblock/flood_unblock.module
+@@ -50,8 +50,8 @@ function flood_unblock_help($route_name, RouteMatchInterface $route_match) {
+       $output = [
+         '#markup' => t(
+           "<h2>About</h2><p>This module provides a simple @interface that
+-          makes possible for site administrators to remove ip-adresses from the
+-          flood table, or to remove all ip-adresses from the flood table depending on
++          makes possible for site administrators to remove ip-addresses from the
++          flood table, or to remove all ip-addresses from the flood table depending on
+           the event type.</p><p>Drupal prevents brute force attacks on accounts. It does so by
+           refusing login attempts when more than 5 attempts failed. The amount
+           of failed logins is recorded in the table 'flood'. You can either
+diff --git a/modules/contrib/flood_unblock/flood_unblock.permissions.yml b/modules/contrib/flood_unblock/flood_unblock.permissions.yml
+index 19b5a58..8b91016 100644
+--- a/modules/contrib/flood_unblock/flood_unblock.permissions.yml
++++ b/modules/contrib/flood_unblock/flood_unblock.permissions.yml
+@@ -1,5 +1,5 @@
+ # In my_module.permissions.yml file.
+ access flood unblock:
+   title: 'Access the flood unblock module'
+-  description: 'Allow user to flood unblock.'
++  description: 'Allow user to unblock ip-addresses from flood table.'
+   restrict access: TRUE
+diff --git a/modules/contrib/flood_unblock/src/FloodUnblockManager.php b/modules/contrib/flood_unblock/src/FloodUnblockManager.php
+index 36886a3..a62b913 100644
+--- a/modules/contrib/flood_unblock/src/FloodUnblockManager.php
++++ b/modules/contrib/flood_unblock/src/FloodUnblockManager.php
+@@ -198,7 +198,7 @@ public function getBlockedUserEntries() {
+               $user_link = $user->toLink($user->getAccountName());
+           } else {
+               $user_link = $this->t(
+-                'Deleted user: @user', 
++                'Deleted User: @user', 
+                 ['@user' => $result->uid]
+               );
+           }
+@@ -237,7 +237,7 @@ public function floodUnblockClearEvent($type, $identifier) {
+         $success = $query->execute();
+         if ($success) {
+             \Drupal::messenger()->addMessage(
+-              $this->t('Flood entries cleared.'),
++              $this->t('Flood entries removed.'),
+               'status', false
+             );
+         }
+diff --git a/modules/contrib/flood_unblock/src/Form/FloodUnblockAdminForm.php b/modules/contrib/flood_unblock/src/Form/FloodUnblockAdminForm.php
+index b24f4d1..b5bbf41 100644
+--- a/modules/contrib/flood_unblock/src/Form/FloodUnblockAdminForm.php
++++ b/modules/contrib/flood_unblock/src/Form/FloodUnblockAdminForm.php
+@@ -131,7 +131,7 @@ public function buildForm(array $form, FormStateInterface $form_state) {
+ 
+     $header = [
+     'blocked' => $this->t('Blocked'),
+-    'type' => $this->t('Type of block'),
++    'type' => $this->t('Block Type'),
+     'count' => $this->t('Count'),
+     'uid' => $this->t('Account name'),
+     'ip' => $this->t('IP Address'),
+@@ -151,7 +151,7 @@ public function buildForm(array $form, FormStateInterface $form_state) {
+     $form['top_markup'] = [
+     '#markup' => $this->t(
+         '<p>Use the table below to view the 
+-      available flood entries. You can clear seperate items.</p>'
++      available flood entries. You can clear separate items.</p>'
+     ),
+     ];
+ 
+@@ -159,12 +159,12 @@ public function buildForm(array $form, FormStateInterface $form_state) {
+     '#type' => 'tableselect',
+     '#header' => $header,
+     '#options' => $options,
+-    '#empty' => $this->t('There are no failed logins at this time.'),
++    '#empty' => $this->t('There are no failed users logins at this time.'),
+     ];
+ 
+     $form['submit'] = [
+     '#type' => 'submit',
+-    '#value' => $this->t('Clear flood'),
++    '#value' => $this->t('Remove flood'),
+     ];
+ 
+     if (count($entries) == 0) {
+@@ -193,7 +193,7 @@ public function validateForm(array &$form, FormStateInterface $form_state) {
+     );
+     if (empty($selected_entries)) {
+       $form_state->setErrorByName('table', 
+-        $this->t('Please make a selection.'));
++        $this->t('Please make a selection entries.'));
+     }
+   }
+ 

@@ -50,8 +50,8 @@ function flood_unblock_help($route_name, RouteMatchInterface $route_match) {
       $output = [
         '#markup' => t(
           "<h2>About</h2><p>This module provides a simple @interface that
-          makes possible for site administrators to remove ip-adresses from the
-          flood table, or to remove all ip-adresses from the flood table depending on
+          makes possible for site administrators to remove ip-addresses from the
+          flood table, or to remove all ip-addresses from the flood table depending on
           the event type.</p><p>Drupal prevents brute force attacks on accounts. It does so by
           refusing login attempts when more than 5 attempts failed. The amount
           of failed logins is recorded in the table 'flood'. You can either

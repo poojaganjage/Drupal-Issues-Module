@@ -198,7 +198,7 @@ class FloodUnblockManager implements FloodUnblockManagerInterface{
               $user_link = $user->toLink($user->getAccountName());
           } else {
               $user_link = $this->t(
-                'Deleted user: @user', 
+                'Deleted User: @user', 
                 ['@user' => $result->uid]
               );
           }
@@ -237,7 +237,7 @@ class FloodUnblockManager implements FloodUnblockManagerInterface{
         $success = $query->execute();
         if ($success) {
             \Drupal::messenger()->addMessage(
-              $this->t('Flood entries cleared.'),
+              $this->t('Flood entries removed.'),
               'status', false
             );
         }
