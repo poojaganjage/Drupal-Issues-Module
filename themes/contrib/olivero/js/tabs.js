@@ -25,9 +25,9 @@
       }
     }
 
-    if (isTabsMobileLayout() && !activeTab.matches('.tabs__tab:first-child')) {
+    if (isTabsMobileLayout() && !activeTab.matches('.js-tabs__tab:first-child')) {
       var newActiveTab = activeTab.cloneNode(true);
-      var firstTab = tabs.querySelector('.tabs__tab:first-child');
+      var firstTab = tabs.querySelector('.js-tabs__tab:first-child');
       tabs.insertBefore(newActiveTab, firstTab);
       tabs.removeChild(activeTab);
     }

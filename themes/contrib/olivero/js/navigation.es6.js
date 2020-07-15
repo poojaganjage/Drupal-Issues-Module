@@ -10,7 +10,7 @@
   const mobileNavWrapperId = 'header-nav';
   const mobileNavWrapper = document.getElementById(mobileNavWrapperId);
   const body = document.querySelector('body');
-  const overlay = document.querySelector('.overlay');
+  const overlay = document.querySelector('.js-overlay');
 
   const focusableNavElements = mobileNavWrapper.querySelectorAll(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',

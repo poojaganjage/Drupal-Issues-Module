@@ -17,7 +17,7 @@
 
   indentedComments.forEach(commentGroup => {
     const showHideWrapper = document.createElement('div');
-    showHideWrapper.setAttribute('class', 'show-hide-wrapper');
+    showHideWrapper.setAttribute('class', 'js-show-hide-wrapper');
 
     const toggleCommentsBtn = document.createElement('button');
     toggleCommentsBtn.setAttribute('type', 'button');

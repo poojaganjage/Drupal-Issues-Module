@@ -23,9 +23,9 @@
       }
     }
 
-    if (isTabsMobileLayout() && !activeTab.matches('.tabs__tab:first-child')) {
+    if (isTabsMobileLayout() && !activeTab.matches('.js-tabs__tab:first-child')) {
       const newActiveTab = activeTab.cloneNode(true);
-      const firstTab = tabs.querySelector('.tabs__tab:first-child');
+      const firstTab = tabs.querySelector('.js-tabs__tab:first-child');
       tabs.insertBefore(newActiveTab, firstTab);
       tabs.removeChild(activeTab);
     }
