@@ -1,0 +1,29 @@
+diff --git a/modules/contrib/jquery_ui_touch_punch/composer.json b/modules/contrib/jquery_ui_touch_punch/composer.json
+index 876ce1c..fd16e58 100644
+--- a/modules/contrib/jquery_ui_touch_punch/composer.json
++++ b/modules/contrib/jquery_ui_touch_punch/composer.json
+@@ -19,8 +19,23 @@
+       "role": "Maintainer"
+     }
+   ],
++  "repositories": [
++    {
++      "type": "package",
++      "package": {
++        "name": "drupal/jquery_ui_touch_punch",
++        "version": "1.0.x-dev",
++        "type": "drupal-library",
++        "dist": {
++          "url": "https://github.com/furf/jquery-ui-touch-punch",
++        }
++      }
++    }
++  ],
+   "require": {
+-    "drupal/jquery_ui": "^1.0"
++    "drupal/core": "^8 || ^9",
++    "drupal/jquery_ui": "^1.0",
++    "drupal/jquery_ui_touch_punch": "1.0.x-dev"
+   },
+   "suggest": {
+     "furf/jquery-ui-touch-punch": "Required to use drupal/jquery_ui_touch_punch module."
