@@ -1,5 +1,21 @@
 <?php
 
+/**
+ * Provides flood_unblock module Implementation.
+ *
+ * @category Module
+ *
+ * @package Contrib
+ *
+ * @author Display Name <username@example.com>
+ *
+ * @license https://www.drupal.org Drupal 8
+ *
+ * @version "GIT: <1001>"
+ *
+ * @link https://www.drupal.org
+ */
+
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\user\Entity\User;
 use Drupal\Core\Url;
@@ -16,8 +32,7 @@ function flood_unblock_help($route_name, RouteMatchInterface $route_match) {
   ];
 
   foreach ($links as $key => $route) {
-    $f_links[$key] = Link::fromTextAndUrl(
-      t($key),
+    $f_links[$key] = Link::fromTextAndUrl($key,
       Url::fromRoute($route)->setOptions(
         ['attributes' => ['target' => '_blank']]
       )
@@ -32,7 +47,7 @@ function flood_unblock_help($route_name, RouteMatchInterface $route_match) {
 
   switch ($route_name) {
     case 'help.page.flood_unblock':
-      $output =  [
+      $output = [
         '#markup' => t(
           "<h2>About</h2><p>This module provides a simple @interface that
           makes possible for site administrators to remove ip-adresses from the
@@ -54,9 +69,10 @@ function flood_unblock_help($route_name, RouteMatchInterface $route_match) {
             'user interface',
             '@page' => $f_link['official']->toString(),
           ]
-        )
+        ),
       ];
 
       return $output;
   }
+  
 }
