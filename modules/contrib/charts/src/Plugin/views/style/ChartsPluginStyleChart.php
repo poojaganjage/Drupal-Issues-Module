@@ -236,6 +236,7 @@ class ChartsPluginStyleChart extends StylePluginBase implements ContainerFactory
     }
 
     $chart_id = $this->view->id() . '_' . $this->view->current_display;
+    $colors = array('#2F7ED8', '#36130D', '#8BBC21', '#910000', '#1AADCE', '#492970', '#F28F43', '#77A1E5', '#C42525', '#A6C96A');
     $chart = [
       '#type' => 'chart',
       '#chart_type' => $chart_settings['type'],
@@ -249,7 +250,8 @@ class ChartsPluginStyleChart extends StylePluginBase implements ContainerFactory
       '#title_position' => $chart_settings['display']['title_position'],
       '#tooltips' => $chart_settings['display']['tooltips'],
       '#data_labels' => $chart_settings['display']['data_labels'],
-      '#colors' => $chart_settings['display']['colors'],
+      // '#colors' => $chart_settings['display']['colors'],
+      '#colors' => $colors,
       '#background' => $chart_settings['display']['background'] ? $chart_settings['display']['background'] : 'transparent',
       '#legend' => !empty($chart_settings['display']['legend_position']),
       '#legend_position' => $chart_settings['display']['legend_position'] ? $chart_settings['display']['legend_position'] : '',
