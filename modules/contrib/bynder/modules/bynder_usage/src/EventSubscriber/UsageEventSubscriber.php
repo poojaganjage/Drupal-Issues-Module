@@ -86,7 +86,7 @@ class UsageEventSubscriber implements EventSubscriberInterface {
     }
 
     $source_plugin = $media->getSource();
-    if (!$source_plugin instanceof Bynder) {
+    if (!$source_plugin is_subclass_of(object, Bynder)) {
       return NULL;
     }
 
@@ -95,7 +95,7 @@ class UsageEventSubscriber implements EventSubscriberInterface {
       $entity = $this->entityTypeManager->getStorage($event->getReferencingEntityType())->load($event->getReferencingEntityId());
 
       // If the entity is a paragraph, attempt to recursively load the parent.
-      while ($entity && $entity instanceof ParagraphInterface) {
+      while ($entity && $entity is_subclass_of(object, ParagraphInterface)) {
         $entity = $entity->getParentEntity();
       }
 
