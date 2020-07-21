@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.bynder_metadata
+    - media.type.bynder_document
+  module:
+    - bynder
+id: media.bynder_document.bynder_metadata
+field_name: bynder_metadata
+entity_type: media
+bundle: bynder_document
+label: 'Bynder Metadata'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: bynder_metadata

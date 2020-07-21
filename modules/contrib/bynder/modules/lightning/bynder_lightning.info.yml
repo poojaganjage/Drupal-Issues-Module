@@ -1,0 +1,14 @@
+name: Bynder Lightning
+description: 'Bynder integration for the Lightning distribution.'
+type: module
+package: Lightning
+core: 8.x
+
+dependencies:
+  - bynder:bynder
+  - lightning:lightning
+
+# Information added by Drupal.org packaging script on 2020-01-07
+version: '8.x-3.x-dev'
+project: 'bynder'
+datestamp: 1578390490

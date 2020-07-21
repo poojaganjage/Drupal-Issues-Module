@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_bynder_id
+    - media.type.bynder_document
+_core:
+  default_config_hash: HwjCoW_Yht6wWCN4fmnrFoufxlw36y54rWrIiUKCoMs
+id: media.bynder_document.field_bynder_id
+field_name: field_bynder_id
+entity_type: media
+bundle: bynder_document
+label: 'Bynder ID'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

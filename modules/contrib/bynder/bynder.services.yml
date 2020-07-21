@@ -1,0 +1,12 @@
+services:
+  bynder_api:
+    class: Drupal\bynder\BynderApi
+    arguments: ['@config.factory', '@logger.factory', '@session', '@state', '@cache.default', '@datetime.time']
+  bynder.config_hash_generator:
+    class: Drupal\bynder\EventSubscriber\BynderConfigHashGenerator
+    arguments: ['@state']
+    tags:
+      - { name: event_subscriber }
+  bynder:
+    class: Drupal\bynder\BynderService
+    arguments: ['@bynder_api', '@entity_type.manager', '@logger.factory', '@state', '@datetime.time', '@config.factory']

@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.bynder.body
+    - field.field.node.bynder.field_media
+    - node.type.bynder
+  module:
+    - bynder
+    - text
+    - user
+_core:
+  default_config_hash: yc0HDSK5pU68I3cxiQRmEKzfOBSorxhElAyIgMWl8aY
+id: node.bynder.default
+targetEntityType: node
+bundle: bynder
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_media:
+    type: entity_reference_entity_view
+    weight: 102
+    label: hidden
+    settings:
+      view_mode: default
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - bynder
+id: bynder_document
+label: 'Bynder Document'
+description: 'Store for document assets that are stored on Bynder.'
+source: bynder
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_bynder_id
+field_map: {  }

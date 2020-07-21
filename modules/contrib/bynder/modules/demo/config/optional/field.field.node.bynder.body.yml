@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.bynder
+  module:
+    - text
+_core:
+  default_config_hash: fb0nxQ2zUMJZf32wXlD9fG-rdU_o4va_KyonfZe0DG0
+id: node.bynder.body
+field_name: body
+entity_type: node
+bundle: bynder
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

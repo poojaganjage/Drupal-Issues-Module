@@ -1,0 +1,14 @@
+name: Bynder Usage
+description: 'Reports usage tracking of media items back to the Bynder API'
+type: module
+package: Media
+core: 8.x
+
+dependencies:
+  - bynder:bynder
+  - entity_usage:entity_usage(>= 8.x-1.x, < 8.x-2.x)
+
+# Information added by Drupal.org packaging script on 2020-01-07
+version: '8.x-3.x-dev'
+project: 'bynder'
+datestamp: 1578390490

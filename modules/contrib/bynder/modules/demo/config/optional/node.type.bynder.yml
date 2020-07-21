@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: { }
+_core:
+  default_config_hash: Z_fmPdrh_F8Wc8WrNRHQKZcVCbJEkbEjCXG6_YW5np4
+name: 'Bynder example'
+type: bynder
+description: 'Example content that demonstrates integration with Bynder.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

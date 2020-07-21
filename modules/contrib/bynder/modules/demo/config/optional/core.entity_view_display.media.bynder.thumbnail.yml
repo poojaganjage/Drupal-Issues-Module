@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.thumbnail
+    - field.field.media.bynder.bynder_metadata
+    - field.field.media.bynder.field_bynder_description
+    - field.field.media.bynder.field_bynder_id
+    - field.field.media.bynder.field_bynder_type
+    - image.style.thumbnail
+    - media.type.bynder
+  module:
+    - image
+_core:
+  default_config_hash: C4Gh4zZhk-8tot840kx9CDYgeUEajSKP71_2t8PNvwQ
+id: media.bynder.thumbnail
+targetEntityType: media
+bundle: bynder
+mode: thumbnail
+content:
+  name:
+    type: string
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  thumbnail:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings: {  }
+hidden:
+  bynder_metadata: true
+  created: true
+  field_bynder_description: true
+  field_bynder_id: true
+  field_bynder_type: true
+  uid: true

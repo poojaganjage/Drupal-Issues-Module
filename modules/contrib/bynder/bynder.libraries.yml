@@ -1,0 +1,55 @@
+upload:
+  version: VERSION
+  js:
+    js/bynder.upload.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+oauth:
+  version: VERSION
+  js:
+    js/bynder.oauth.js: {}
+  css:
+    theme:
+      css/bynder.throbber.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+config_form:
+  version: VERSION
+  css:
+    theme:
+      css/bynder.config_form.css: {}
+
+search_view:
+  version: VERSION
+  js:
+    js/bynder.search_view.js: {}
+  dependencies:
+    - bynder/compactview
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+
+compactview:
+  remote: https://developer-docs.bynder.com/ui-components/
+  version: 2
+  license:
+    name: proprietary
+    gpl-compatible: false
+  js:
+    https://d8ejoa1fys2rk.cloudfront.net/5.0.5/modules/compactview/bynder-compactview-2-latest.js: { type: external }
+
+formatter:
+  version: VERSION
+  js:
+    js/bynder.formatter.js: {}
+  css:
+    theme:
+      css/bynder.formatter.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.ui.tooltip

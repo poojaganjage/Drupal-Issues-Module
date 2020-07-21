@@ -1,0 +1,6 @@
+services:
+  bynder_usage_subscriber:
+    class: Drupal\bynder_usage\EventSubscriber\UsageEventSubscriber
+    arguments: ['@bynder_api', '@entity_type.manager', '@request_stack']
+    tags:
+      - { name: 'event_subscriber' }

@@ -1,0 +1,177 @@
+<?php
+
+/**
+ * @file
+ * Install, uninstall and update hooks for Bynder module.
+ */
+
+use Drupal\bynder\Plugin\Field\FieldType\BynderMetadataItem;
+use Drupal\Core\Utility\UpdateException;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\system\Entity\Action;
+
+/**
+ * Implements hook_requirements().
+ */
+function bynder_requirements($phase) {
+  $requirements = [];
+
+  // Test if we can connect to the Bynder API.
+  if ($phase === 'runtime') {
+    $api = \Drupal::service('bynder_api');
+    try {
+      $api->getBrands();
+      $requirements['bynder'] = [
+        'title' => t('Bynder'),
+        'value' => t('Connected to @url', ['@url' => \Drupal::config('bynder.settings')->get('account_domain')]),
+      ];
+    }
+    catch (\Exception $e) {
+      $requirements['bynder'] = [
+        'title' => t('Bynder'),
+        'value' => t('Error connecting to @url', ['@url' => \Drupal::config('bynder.settings')->get('account_domain')]),
+        'description' => $e->getMessage(),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_install().
+ */
+function bynder_install() {
+  $source = drupal_get_path('module', 'bynder') . '/images/icons';
+  $destination = \Drupal::config('media.settings')->get('icon_base_uri');
+  file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+  $files = file_scan_directory($source, '/.*\.(svg|png|jpg|jpeg|gif)$/');
+  foreach ($files as $file) {
+    // When reinstalling this module we don't want to copy the icons when they
+    // already exist. The icons could be replaced (by a contrib module or
+    // manually), so we don't want to replace the existing files. Removing the
+    // files when we uninstall could also be a problem if the files are
+    // referenced somewhere else. Since showing an error that it was not
+    // possible to copy the files is also confusing, we silently do nothing.
+    if (!file_exists($destination . DIRECTORY_SEPARATOR . $file->filename)) {
+      file_unmanaged_copy($file->uri, $destination, FILE_EXISTS_ERROR);
+    }
+  }
+}
+
+/**
+ * Install Bynder metaproperty schema.
+ */
+function bynder_update_8001() {
+  // Removed so it won't run on sites that didn't run it yet.
+}
+
+/**
+ * Remove unecessary database table.
+ */
+function bynder_update_8002() {
+  if (db_table_exists('bynder_metaproperty_information')) {
+    db_drop_table('bynder_metaproperty_information');
+  }
+}
+
+/**
+ * Update module's configuration.
+ */
+function bynder_update_8003() {
+  \Drupal::configFactory()->getEditable('bynder.settings')
+    ->set('cache_lifetime', 86400)
+    ->clear('derivatives')
+    ->save();
+}
+
+/**
+ * Update cached information.
+ */
+function bynder_update_8004() {
+  \Drupal::service('bynder_api')->updateCachedData();
+}
+
+/**
+ * Set default timeout for API requests.
+ */
+function bynder_update_8005() {
+  \Drupal::configFactory()->getEditable('bynder.settings')
+    ->set('timeout', 10)
+    ->save();
+}
+
+/**
+ * Creates bynder_metadata field and set the update frequency.
+ */
+function bynder_update_8008() {
+  // Clear field type plugin caches to allow the new field to be installed.
+  \Drupal::service('plugin.manager.field.field_type')->clearCachedDefinitions();
+
+  // Update local metadata information once per week (in seconds).
+  \Drupal::configFactory()->getEditable('bynder.settings')->set('update_frequency', 7 * 24 * 60 * 60)->save();
+
+  // Add the action config entity to update the Bynder metadata.
+  if (!Action::load('bynder_metadata')) {
+    $action = Action::create([
+      'id' => 'bynder_metadata',
+      'label' => 'Update Bynder metadata',
+      'type' => 'media',
+      'plugin' => 'bynder_metadata',
+    ]);
+    $action->save();
+  }
+
+  // Do nothing if the field already exists.
+  if ($metadata_field_storage = FieldStorageConfig::loadByName('media', BynderMetadataItem::METADATA_FIELD_NAME)) {
+    if ($metadata_field_storage->getType() !== 'bynder_metadata') {
+      throw new UpdateException('The "bynder_metadata" media field already exists. Please remove the it before running the update function.');
+    }
+
+    return;
+  }
+
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $metadata_field_storage = NULL;
+
+  // Create a field instance for each of the Bynder media types.
+  foreach (\Drupal::service('bynder')->getBynderMediaTypes() as $media_type_id => $media_type) {
+    /** @var \Drupal\bynder\Plugin\media\Source\Bynder $source */
+    $source = $media_type->getSource();
+    if (!$metadata_field_storage) {
+      $metadata_field_storage = $source->createMetadataFieldStorage();
+      $metadata_field_storage->save();
+    }
+
+    $metadata_field = $source->createMetadataField($media_type);
+    $metadata_field->save();
+
+    /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
+    $form_display = $entity_type_manager->getStorage('entity_form_display')->load("media.$media_type_id.default");
+    if ($form_display) {
+      $form_display->removeComponent(BynderMetadataItem::METADATA_FIELD_NAME)->save();
+    }
+
+    /** @var \Drupal\Core\Entity\Display\EntityViewDisplayInterface $view_display */
+    $view_display = $entity_type_manager->getStorage('entity_view_display')->load("media.$media_type_id.default");
+    if ($view_display) {
+      $view_display->removeComponent(BynderMetadataItem::METADATA_FIELD_NAME)->save();
+    }
+  }
+}
+
+/**
+ * Enables the bynder_usage submodule.
+ */
+function bynder_update_8009() {
+  /** @var \Drupal\Core\Extension\ModuleExtensionList $module_list */
+  $module_list = \Drupal::service('extension.list.module');
+  if ($module_list->exists('entity_usage')) {
+    \Drupal::service('module_installer')->install(['bynder_usage']);
+  }
+
+  if (!$module_list->exists('dropzonejs') || !$module_list->exists('entity_usage')) {
+    return t('Dropzonejs and Entity Usage are now optional dependencies and no longer required. Explicitly require these dependencies to keep upload and usage functionality available: composer require drupal/dropzonejs drupal/entity_usage:1.*');
+  }
+}

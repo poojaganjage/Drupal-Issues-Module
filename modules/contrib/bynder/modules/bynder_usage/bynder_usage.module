@@ -1,0 +1,65 @@
+<?php
+
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_cron().
+ */
+function bynder_usage_cron() {
+  bynder_usage_update_media_usage_info();
+}
+
+/**
+ * Auxiliary function ran during cron to update all media usage information.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ */
+function bynder_usage_update_media_usage_info() {
+  $query = \Drupal::entityQuery('media');
+  $query->condition('bundle', 'bynder');
+  $entity_ids = $query->execute();
+  $entities = \Drupal::entityTypeManager()
+    ->getStorage('media')
+    ->loadMultiple($entity_ids);
+  /** @var \Drupal\media\MediaInterface $media */
+  foreach ($entities as $media) {
+    foreach (\Drupal::service('entity_usage.usage')->listUsage($media) as $type => $usage) {
+      if ($type == 'node') {
+        foreach ($usage as $nid => $count) {
+          $usage_url = Url::fromRoute(
+            'entity.node.canonical',
+            ['node' => $nid],
+            ['fragment' => "node/$nid"]
+          );
+          // We know this media item is using the Bynder source plugin.
+          /** @var \Drupal\bynder\Plugin\media\Source\Bynder $source_plugin */
+          $source_plugin = $media->getSource();
+          $media_id = $source_plugin->getSourceFieldValue($media);
+          try {
+            $usages = \Drupal::service('bynder_api')->getAssetUsages($media_id);
+            foreach ($usages as $usage_info) {
+              $old_usage_url = $usage_info['uri'];
+              $url_parts = explode('#', $old_usage_url);
+              $node_info = isset($url_parts[1]) ? $url_parts[1] : NULL;
+              if ($node_info == "node/$nid"
+                && $usage_info['uri'] !== $usage_url->setAbsolute(TRUE)->toString()
+                && $usage_info['integration']['id']
+                && \Drupal::service('bynder_api')->getIntegrationId()) {
+                \Drupal::service('bynder_api')->removeAssetUsage($media_id, $usage_info['uri']);
+                \Drupal::service('bynder_api')->addAssetUsage(
+                  $media_id,
+                  $usage_url,
+                  $usage_info['timestamp'],
+                  $usage_info['additional']
+                );
+              }
+            }
+          }
+          catch (\Exception $exception) {
+            watchdog_exception('bynder', $exception);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+bynder.settings:
+  type: config_object
+  label: 'Bynder configuration'
+  mapping:
+    consumer_key:
+      type: text
+      label: 'Consumer key'
+    consumer_secret:
+      type: text
+      label: 'Consumer secret'
+    token:
+      type: text
+      label: 'Token'
+    token_secret:
+      type: text
+      label: 'Token secret'
+    account_domain:
+      type: text
+      label: 'Account domain'
+    debug:
+      type: boolean
+      label: 'Debug'
+    usage_metaproperty:
+      type: string
+      label: 'Usage metaproperty'
+    restrictions:
+      type: mapping
+      label: 'Restrictions'
+      mapping:
+        royalty_free:
+          type: string
+          label: 'Royalty free'
+        web_license:
+          type: string
+          label: 'Web license'
+        print_license:
+          type: string
+          label: 'Print license'
+    cache_lifetime:
+      type: integer
+      label: 'Cached data lifetime'
+    timeout:
+      type: integer
+      label: 'API request timeout, in seconds'
+    update_frequency:
+      type: integer
+      label: 'The metadata update frequency in seconds'
+    use_remote_images:
+      type: boolean
+      label: 'Use remote versions of thumbnail images.'
+
+media.source.bynder:
+  type: media.source.field_aware
+  label: 'Bynder type configuration'
+
+field.formatter.settings.bynder:
+  type: mapping
+  label: 'Bynder display format settings'
+  mapping:
+    thumbnail:
+      type: string
+      label: 'Thumbnail'
+    alt_field:
+      type: string
+      label: 'Alt attribute field'
+    title_field:
+      type: string
+      label: 'Title attribute field'
+
+entity_browser.browser.widget.bynder_search:
+  type: mapping
+  label: 'Bynder search widget configuration'
+  mapping:
+    submit_text:
+      type: string
+      label: 'Submit button text'
+    media_type:
+      type: string
+      label: 'Media type for created image entities'
+    media_type_document:
+      type: string
+      label: 'Media type for created document entities'
+
+entity_browser.browser.widget.bynder_upload:
+  type: mapping
+  label: 'Bynder upload widget configuration'
+  mapping:
+    submit_text:
+      type: string
+      label: 'Submit button text'
+    media_type:
+      type: string
+      label: 'Media type for created entities'
+    brand:
+      type: string
+      label: 'Bynder brand for uploaded assets'
+    extensions:
+      type: string
+      label: 'Allowed file extensions'
+    dropzone_description:
+      type: string
+      label: 'Dropzone area description'
+    tags:
+      type: sequence
+      label: 'List of tags to be added to the uploaded assets'
+      sequence:
+        type: string
+        label: 'Tag'
+    metaproperty_options:
+      type: sequence
+      label: 'Metaproperty options to be added to the uploaded assets'
+      sequence:
+        type: sequence
+        label: 'Options'
+        sequence:
+          type: string
+          label: 'Option'
+
+action.configuration.bynder_metadata:
+  type: action_configuration_default
+  label: 'Update bynder metadata'

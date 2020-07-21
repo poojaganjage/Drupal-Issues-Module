@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - media
+  module:
+    - bynder
+id: bynder_metadata
+label: 'Update Bynder metadata'
+type: media
+plugin: bynder_metadata
+configuration: {  }

@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.bynder_document.bynder_metadata
+    - field.field.media.bynder_document.field_bynder_id
+    - media.type.bynder_document
+  module:
+    - bynder
+_core:
+  default_config_hash: 1A8RE7LkGTafAgF2haXB3_-ofbDqfxTS4jQnUOj3hB0
+id: media.bynder_document.default
+targetEntityType: media
+bundle: bynder_document
+mode: default
+content:
+  field_bynder_id:
+    label: visually_hidden
+    weight: 0
+    settings:
+      link: '1'
+      title_field: name
+    third_party_settings: {  }
+    type: bynder_document
+    region: content
+hidden:
+  bynder_metadata: true
+  created: true
+  name: true
+  thumbnail: true
+  uid: true

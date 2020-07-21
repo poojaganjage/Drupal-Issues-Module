@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.bynder.bynder_metadata
+    - field.field.media.bynder.field_bynder_description
+    - field.field.media.bynder.field_bynder_id
+    - field.field.media.bynder.field_bynder_type
+    - media.type.bynder
+  module:
+    - bynder
+_core:
+  default_config_hash: C4Gh4zZhk-8tot840kx9CDYgeUEajSKP71_2t8PNvwQ
+id: media.bynder.default
+targetEntityType: media
+bundle: bynder
+mode: default
+content:
+  field_bynder_id:
+    type: bynder
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      thumbnail: webimage
+      alt_field: name
+      title_field: field_bynder_description
+    third_party_settings: {  }
+hidden:
+  bynder_metadata: true
+  created: true
+  field_bynder_description: true
+  field_bynder_type: true
+  name: true
+  thumbnail: true
+  uid: true

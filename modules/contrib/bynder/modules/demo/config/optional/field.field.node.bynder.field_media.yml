@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media
+    - media.type.bynder
+    - media.type.bynder_document
+    - node.type.bynder
+_core:
+  default_config_hash: L7t0UZopYJzvPFuTnMnyBmdFqByfgq4QqcVRdKMIxZ0
+id: node.bynder.field_media
+field_name: field_media
+entity_type: node
+bundle: bynder
+label: 'Media assets'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      bynder_document: bynder_document
+      bynder: bynder
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: bynder_document
+field_type: entity_reference
