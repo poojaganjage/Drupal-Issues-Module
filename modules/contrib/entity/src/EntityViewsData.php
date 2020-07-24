@@ -7,9 +7,6 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\Sql\TableMappingInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Field\FieldDefinitionInterface;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Core\StringTranslation\TranslationInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\views\EntityViewsData as CoreEntityViewsData;
 
 /**
@@ -34,41 +31,12 @@ use Drupal\views\EntityViewsData as CoreEntityViewsData;
  */
 class EntityViewsData extends CoreEntityViewsData {
 
-  use StringTranslationTrait;
-
   /**
    * The table mapping.
    *
    * @var \Drupal\Core\Entity\Sql\DefaultTableMapping
    */
   protected $tableMapping;
-
-  /**
-   * The string translation information.
-   *
-   * @var Drupal\Core\StringTranslation\TranslationInterface
-   */
-  protected $stringTranslation;
-
-  /**
-   * Creates a Translation Interface object.
-   *
-   * @param Drupal\Core\StringTranslation\TranslationInterface $string_translation
-   *   The string translation information.
-   */
-
-  public function __construct(TranslationInterface $string_translation) {
-    $this->stringTranslation = $string_translation;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('string_translation')
-    );
-  }
 
   /**
    * {@inheritdoc}
@@ -236,8 +204,8 @@ class EntityViewsData extends CoreEntityViewsData {
       $label = $field_definition->getLabel();
 
       $table_data['delta'] = [
-        'title' => $this->t('@label (@name:delta)', ['@label' => $label, '@name' => $field_name]),
-        'title short' => $this->t('@label:delta', ['@label' => $label]),
+        'title' => t('@label (@name:delta)', ['@label' => $label, '@name' => $field_name]),
+        'title short' => t('@label:delta', ['@label' => $label]),
       ];
       $table_data['delta']['field'] = [
         'id' => 'numeric',

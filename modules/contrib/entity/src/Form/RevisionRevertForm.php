@@ -8,14 +8,10 @@ use Drupal\Core\Entity\RevisionableInterface;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\RevisionLogInterface;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Core\StringTranslation\TranslationInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class RevisionRevertForm extends ConfirmFormBase {
-
-  use StringTranslationTrait;
 
   /**
    * The entity revision.
@@ -39,27 +35,16 @@ class RevisionRevertForm extends ConfirmFormBase {
   protected $bundleInformation;
 
   /**
-   * The string translation information.
-   *
-   * @var Drupal\Core\StringTranslation\TranslationInterface
-   */
-  protected $stringTranslation;
-
-  /**
    * Creates a new RevisionRevertForm instance.
    *
    * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   The date formatter.
    * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $bundle_information
    *   The bundle information.
-   * @param Drupal\Core\StringTranslation\TranslationInterface $string_translation
-   *   The string translation information.
    */
-  
-  public function __construct(DateFormatterInterface $date_formatter, EntityTypeBundleInfoInterface $bundle_information, TranslationInterface $string_translation) {
+  public function __construct(DateFormatterInterface $date_formatter, EntityTypeBundleInfoInterface $bundle_information) {
     $this->dateFormatter = $date_formatter;
     $this->bundleInformation = $bundle_information;
-    $this->stringTranslation = $string_translation;
   }
 
   /**
@@ -68,8 +53,7 @@ class RevisionRevertForm extends ConfirmFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('date.formatter'),
-      $container->get('entity_type.bundle.info'),
-      $container->get('string_translation')
+      $container->get('entity_type.bundle.info')
     );
   }
 
@@ -135,14 +119,14 @@ class RevisionRevertForm extends ConfirmFormBase {
       $original_revision_timestamp = $this->revision->getRevisionCreationTime();
 
       $this->revision->setRevisionLogMessage($this->t('Copy of the revision from %date.', ['%date' => $this->dateFormatter->format($original_revision_timestamp)]));
-      $this->messenger()->addStatus($this->t('@type %title has been reverted to the revision from %revision-date.', [
+      $this->messenger()->addStatus(t('@type %title has been reverted to the revision from %revision-date.', [
         '@type' => $this->getBundleLabel($this->revision),
         '%title' => $this->revision->label(),
         '%revision-date' => $this->dateFormatter->format($original_revision_timestamp),
       ]));
     }
     else {
-      $this->messenger()->addStatus($this->t('@type %title has been reverted', [
+      $this->messenger()->addStatus(t('@type %title has been reverted', [
         '@type' => $this->getBundleLabel($this->revision),
         '%title' => $this->revision->label(),
       ]));
