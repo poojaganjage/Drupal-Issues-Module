@@ -2,7 +2,7 @@
 
 namespace Drupal\entity_export_csv\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Defines the fields event.

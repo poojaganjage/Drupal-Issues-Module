@@ -22,9 +22,9 @@ class EntityExportCsvBatch {
   /**
    * Export entity data.
    *
-   * @param $entity_type_id
+   * @param string $entity_type_id
    *   The entity type on which to export.
-   * @param $bundle
+   * @param string $bundle
    *   The entity bundle type.
    * @param array $fields
    *   An array of fields to export keyed by field_name.
@@ -193,11 +193,11 @@ class EntityExportCsvBatch {
   /**
    * The finished callback for the entity content export.
    *
-   * @param $success
+   * @param bool $success
    *   A boolean if the batch process was successful.
-   * @param $results
+   * @param array $results
    *   An array of results for the given batch process.
-   * @param $operations
+   * @param array $operations
    *   An array of batch operations that were performed.
    *
    */
@@ -225,9 +225,9 @@ class EntityExportCsvBatch {
   /**
    * Prepare the export file.
    *
-   * @param $entity_type_id
+   * @param string $entity_type_id
    *   The entity type on which to export.
-   * @param $bundle
+   * @param string $bundle
    *   The entity bundle type.
    * @param array $context
    *   An array of the batch context.

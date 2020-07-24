@@ -78,7 +78,7 @@ class FieldTypeExport extends Plugin {
   /**
    * The first exclusive plugin found win and is the only one available.
    *
-   * @var array
+   * @var bool
    */
   public $exclusive = FALSE;
 

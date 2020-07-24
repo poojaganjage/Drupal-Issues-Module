@@ -68,9 +68,9 @@ interface EntityExportCsvManagerInterface {
   /**
    * Get the fields as options given an entity type and a bundle
    *
-   * @param $entity_type_id
+   * @param string $entity_type_id
    *   The entity type id.
-   * @param $bundle
+   * @param string $bundle
    *   The bundle.
    * @param bool $return_field_definition
    *   Return the field definitions or label.

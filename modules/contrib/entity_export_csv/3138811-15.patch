@@ -1,0 +1,198 @@
+diff --git a/modules/contrib/entity_export_csv/src/Annotation/FieldTypeExport.php b/modules/contrib/entity_export_csv/src/Annotation/FieldTypeExport.php
+index 9d4fabb..02720dc 100644
+--- a/modules/contrib/entity_export_csv/src/Annotation/FieldTypeExport.php
++++ b/modules/contrib/entity_export_csv/src/Annotation/FieldTypeExport.php
+@@ -78,7 +78,7 @@ class FieldTypeExport extends Plugin {
+   /**
+    * The first exclusive plugin found win and is the only one available.
+    *
+-   * @var array
++   * @var bool
+    */
+   public $exclusive = FALSE;
+ 
+diff --git a/modules/contrib/entity_export_csv/src/EntityExportCsvBatch.php b/modules/contrib/entity_export_csv/src/EntityExportCsvBatch.php
+index 3e3f691..423d481 100644
+--- a/modules/contrib/entity_export_csv/src/EntityExportCsvBatch.php
++++ b/modules/contrib/entity_export_csv/src/EntityExportCsvBatch.php
+@@ -22,9 +22,9 @@ class EntityExportCsvBatch {
+   /**
+    * Export entity data.
+    *
+-   * @param $entity_type_id
++   * @param string $entity_type_id
+    *   The entity type on which to export.
+-   * @param $bundle
++   * @param string $bundle
+    *   The entity bundle type.
+    * @param array $fields
+    *   An array of fields to export keyed by field_name.
+@@ -193,11 +193,11 @@ public static function export($entity_type_id, $bundle, array $fields, $langcode
+   /**
+    * The finished callback for the entity content export.
+    *
+-   * @param $success
++   * @param bool $success
+    *   A boolean if the batch process was successful.
+-   * @param $results
++   * @param array $results
+    *   An array of results for the given batch process.
+-   * @param $operations
++   * @param array $operations
+    *   An array of batch operations that were performed.
+    *
+    */
+@@ -225,9 +225,9 @@ public static function finished($success, $results, $operations) {
+   /**
+    * Prepare the export file.
+    *
+-   * @param $entity_type_id
++   * @param string $entity_type_id
+    *   The entity type on which to export.
+-   * @param $bundle
++   * @param string $bundle
+    *   The entity bundle type.
+    * @param array $context
+    *   An array of the batch context.
+diff --git a/modules/contrib/entity_export_csv/src/EntityExportCsvManager.php b/modules/contrib/entity_export_csv/src/EntityExportCsvManager.php
+index 5413b3e..fd11012 100644
+--- a/modules/contrib/entity_export_csv/src/EntityExportCsvManager.php
++++ b/modules/contrib/entity_export_csv/src/EntityExportCsvManager.php
+@@ -49,7 +49,7 @@ class EntityExportCsvManager implements EntityExportCsvManagerInterface {
+   /**
+    * The entity type manager.
+    *
+-   * @var \Drupal\Core\Entity\EntityTypeManager
++   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+    */
+   protected $entityTypeManager;
+ 
+diff --git a/modules/contrib/entity_export_csv/src/EntityExportCsvManagerInterface.php b/modules/contrib/entity_export_csv/src/EntityExportCsvManagerInterface.php
+index 18d38d6..9e86437 100644
+--- a/modules/contrib/entity_export_csv/src/EntityExportCsvManagerInterface.php
++++ b/modules/contrib/entity_export_csv/src/EntityExportCsvManagerInterface.php
+@@ -68,9 +68,9 @@ public function getBundlesEnabledPerEntityType($entity_type_id, $return_label =
+   /**
+    * Get the fields as options given an entity type and a bundle
+    *
+-   * @param $entity_type_id
++   * @param string $entity_type_id
+    *   The entity type id.
+-   * @param $bundle
++   * @param string $bundle
+    *   The bundle.
+    * @param bool $return_field_definition
+    *   Return the field definitions or label.
+diff --git a/modules/contrib/entity_export_csv/src/Event/EntityExportCsvFieldsEvent.php b/modules/contrib/entity_export_csv/src/Event/EntityExportCsvFieldsEvent.php
+index 9454f86..dda43d6 100644
+--- a/modules/contrib/entity_export_csv/src/Event/EntityExportCsvFieldsEvent.php
++++ b/modules/contrib/entity_export_csv/src/Event/EntityExportCsvFieldsEvent.php
+@@ -2,7 +2,7 @@
+ 
+ namespace Drupal\entity_export_csv\Event;
+ 
+-use Symfony\Component\EventDispatcher\Event;
++use Symfony\Contracts\EventDispatcher\Event;
+ 
+ /**
+  * Defines the fields event.
+diff --git a/modules/contrib/entity_export_csv/src/Form/EntityExportCsv.php b/modules/contrib/entity_export_csv/src/Form/EntityExportCsv.php
+index 34577af..9e185dc 100644
+--- a/modules/contrib/entity_export_csv/src/Form/EntityExportCsv.php
++++ b/modules/contrib/entity_export_csv/src/Form/EntityExportCsv.php
+@@ -469,7 +469,7 @@ protected function getConfiguration() {
+   /**
+    * Get element property value.
+    *
+-   * @param $property
++   * @param array $property
+    * @param \Drupal\Core\Form\FormStateInterface $form_state
+    * @param mixed $default
+    *
+diff --git a/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExport/AddressExport.php b/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExport/AddressExport.php
+index bea19b2..1948889 100644
+--- a/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExport/AddressExport.php
++++ b/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExport/AddressExport.php
+@@ -60,11 +60,11 @@ public function getFieldProperties(FieldDefinitionInterface $definition) {
+   /**
+    * Utility function to move an element before another in an array
+    *
+-   * @param $array
++   * @param array $array
+    *   The array to change.
+-   * @param $find
++   * @param array $find
+    *   The key of the element before we want mode before the $move.
+-   * @param $move
++   * @param array $move
+    *   The key of the element we want to move before $find.
+    *
+    * @return array
+diff --git a/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExport/DateRangeExport.php b/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExport/DateRangeExport.php
+index 41f80ed..e2c6aa3 100644
+--- a/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExport/DateRangeExport.php
++++ b/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExport/DateRangeExport.php
+@@ -35,6 +35,20 @@ class DateRangeExport extends FieldTypeExportBase {
+    */
+   protected $dateFormats = [];
+ 
++  /**
++   * start_date.
++   *
++   * @var date
++   */
++  protected $start_date;
++
++  /**
++   * end_date.
++   *
++   * @var date
++   */
++  protected $end_date;
++
+   /**
+    * {@inheritdoc}
+    */
+diff --git a/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExport/DateTimeExport.php b/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExport/DateTimeExport.php
+index 2f88347..a6c6eda 100644
+--- a/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExport/DateTimeExport.php
++++ b/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExport/DateTimeExport.php
+@@ -35,6 +35,13 @@ class DateTimeExport extends FieldTypeExportBase {
+    */
+   protected $dateFormats = [];
+ 
++  /**
++   * Date.
++   *
++   * @var date
++   */
++  protected $date;
++
+   /**
+    * {@inheritdoc}
+    */
+diff --git a/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExportBase.php b/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExportBase.php
+index 05c9c27..a47d1a2 100644
+--- a/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExportBase.php
++++ b/modules/contrib/entity_export_csv/src/Plugin/FieldTypeExportBase.php
+@@ -87,9 +87,9 @@ abstract class FieldTypeExportBase extends PluginBase implements FieldTypeExport
+   /**
+    * The field properties.
+    *
+-   * @var \Drupal\Core\TypedData\DataDefinitionInterface[]
++   * @var \Drupal\Core\TypedData\DataDefinitionInterface
+    */
+-  protected $properties = NULL;
++  protected $properties = [];
+ 
+   /**
+    * LogGeneratorBase constructor.
+@@ -527,7 +527,7 @@ public function getHeaderLabel(FieldDefinitionInterface $field_definition) {
+   /**
+    * Get the property header label.
+    *
+-   * @param $property_name
++   * @param string $property_name
+    *   The property name.
+    * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
+    *   The field definition.

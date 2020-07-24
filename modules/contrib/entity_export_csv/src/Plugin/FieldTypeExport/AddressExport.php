@@ -60,11 +60,11 @@ class AddressExport extends FieldTypeExportBase {
   /**
    * Utility function to move an element before another in an array
    *
-   * @param $array
+   * @param array $array
    *   The array to change.
-   * @param $find
+   * @param array $find
    *   The key of the element before we want mode before the $move.
-   * @param $move
+   * @param array $move
    *   The key of the element we want to move before $find.
    *
    * @return array

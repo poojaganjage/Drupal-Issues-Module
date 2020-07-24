@@ -36,6 +36,13 @@ class DateTimeExport extends FieldTypeExportBase {
   protected $dateFormats = [];
 
   /**
+   * Date.
+   *
+   * @var date
+   */
+  protected $date;
+
+  /**
    * {@inheritdoc}
    */
   public function getSummary() {

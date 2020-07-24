@@ -87,9 +87,9 @@ abstract class FieldTypeExportBase extends PluginBase implements FieldTypeExport
   /**
    * The field properties.
    *
-   * @var \Drupal\Core\TypedData\DataDefinitionInterface[]
+   * @var \Drupal\Core\TypedData\DataDefinitionInterface
    */
-  protected $properties = NULL;
+  protected $properties = [];
 
   /**
    * LogGeneratorBase constructor.
@@ -527,7 +527,7 @@ abstract class FieldTypeExportBase extends PluginBase implements FieldTypeExport
   /**
    * Get the property header label.
    *
-   * @param $property_name
+   * @param string $property_name
    *   The property name.
    * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
    *   The field definition.

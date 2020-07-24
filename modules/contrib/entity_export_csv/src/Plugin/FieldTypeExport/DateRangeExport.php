@@ -36,6 +36,20 @@ class DateRangeExport extends FieldTypeExportBase {
   protected $dateFormats = [];
 
   /**
+   * start_date.
+   *
+   * @var date
+   */
+  protected $start_date;
+
+  /**
+   * end_date.
+   *
+   * @var date
+   */
+  protected $end_date;
+
+  /**
    * {@inheritdoc}
    */
   public function getSummary() {
