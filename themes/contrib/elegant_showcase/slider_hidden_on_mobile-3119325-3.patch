@@ -1,0 +1,31 @@
+diff --git a/css/override.css b/css/override.css
+index 1366b03..a132732 100644
+--- a/css/override.css
++++ b/css/override.css
+@@ -30,7 +30,7 @@
+ 
+ @media (max-width : 768px) {
+     body {
+-        border: 2px solid red;    
++        border: 2px solid red;
+     }
+     .navbar-nav {
+         margin: unset !important;
+@@ -105,9 +105,6 @@
+ }
+ 
+ @media (max-width : 420px){
+-    .hero-slide{
+-        display: none;
+-    }
+     body {
+         border: 1px solid green;
+     }
+@@ -120,6 +117,6 @@
+         width: 100%;
+     }
+     .social-links {
+-        float: unset !important; 
++        float: unset !important;
+     }
+ }

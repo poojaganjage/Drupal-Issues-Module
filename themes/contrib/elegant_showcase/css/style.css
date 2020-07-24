@@ -521,3 +521,8 @@ hr {
   padding: 5px;
 }
 
+p img {
+  max-width: 100%;
+  height: auto;
+}
+

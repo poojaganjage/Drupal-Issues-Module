@@ -104,11 +104,12 @@
 }
 
 @media (max-width : 420px) {
-  .hero-slide {
+/*  .hero-slide {
     display: none;
-  }
+  }*/
   body {
     border: 1px solid green;
+    width: 100%;
   }
   .header-email {
     text-align: center;
