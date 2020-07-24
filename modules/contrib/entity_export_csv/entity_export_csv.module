@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains entity_export_csv.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function entity_export_csv_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the entity_export_csv module.
+    case 'help.page.entity_export_csv':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Export Content Entity to CSV.') . '</p>';
+      return $output;
+
+    default:
+  }
+}

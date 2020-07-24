@@ -1,0 +1,7 @@
+services:
+  plugin.manager.field_type_export:
+    class: Drupal\entity_export_csv\Plugin\FieldTypeExportManager
+    parent: default_plugin_manager
+  entity_export_csv.manager:
+    class: Drupal\entity_export_csv\EntityExportCsvManager
+    arguments: ['@config.factory', '@entity_type.manager', '@entity.repository', '@language_manager', '@entity_field.manager', '@plugin.manager.field_type_export', '@current_user', '@entity_type.bundle.info', '@event_dispatcher', '@queue', '@datetime.time', '@state']

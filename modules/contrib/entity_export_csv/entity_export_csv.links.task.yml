@@ -1,0 +1,5 @@
+entity_export_csv.export_form:
+  title: 'Export CSV'
+  base_route: system.admin_content
+  route_name: entity_export_csv.export_form
+  weight: 100

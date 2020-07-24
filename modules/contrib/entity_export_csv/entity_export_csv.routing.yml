@@ -1,0 +1,22 @@
+entity_export_csv.settings:
+  path: '/admin/config/content/entity-export-csv/settings'
+  defaults:
+    _title: 'Entity Export CSV Settings'
+    _form: \Drupal\entity_export_csv\Form\EntityExportCsvSettings
+  requirements:
+    _permission: 'administer entity export csv'
+
+entity_export_csv.export_form:
+  path: '/admin/content/entity-export-csv'
+  defaults:
+    _title: 'Export CSV'
+    _form: \Drupal\entity_export_csv\Form\EntityExportCsv
+  requirements:
+    _permission: 'use entity export csv'
+
+entity_export_csv.download:
+  path: '/admin/content/entity-export-csv/download'
+  defaults:
+    _controller: \Drupal\entity_export_csv\Controller\EntityExportCsvDownload::downloadExport
+  requirements:
+    _permission: 'use entity export csv'

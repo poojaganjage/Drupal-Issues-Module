@@ -1,0 +1,11 @@
+entity_export_csv.settings:
+  title: 'Entity Export CSV Settings'
+  description: 'Manage entities allowed to be exported.'
+  parent: system.admin_config_content
+  route_name: entity_export_csv.settings
+
+entity_export_csv.export_form:
+  title: 'Export CSV'
+  description: 'Export content to a CSV file.'
+  parent: system.admin_content
+  route_name: entity_export_csv.export_form

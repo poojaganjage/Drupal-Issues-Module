@@ -1,0 +1,14 @@
+fieldset.inline-checkboxes {
+  margin: 1rem 0 1.5rem;
+}
+fieldset.inline-checkboxes .form-checkboxes {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+fieldset.inline-checkboxes .form-checkboxes .form-type-checkbox {
+  padding-right: 1.5rem;
+}

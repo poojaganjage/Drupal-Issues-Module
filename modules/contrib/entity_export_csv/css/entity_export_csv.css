@@ -1,0 +1,80 @@
+.inline-elements {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-align: stretch;
+      align-items: stretch;
+}
+.inline-elements > fieldset.form-item {
+  margin: 5px;
+  -ms-flex: 1 0 100%;
+      flex: 1 0 100%;
+  max-width: 100%;
+}
+@media screen and (min-width: 460px) {
+  .inline-elements > fieldset.form-item {
+    -ms-flex: 1 0 50%;
+        flex: 1 0 50%;
+    max-width: 50%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .inline-elements > fieldset.form-item {
+    -ms-flex: 1 0 33.33333333%;
+        flex: 1 0 33.33333333%;
+    max-width: 33.33333333%;
+  }
+}
+@media screen and (min-width: 991px) {
+  .inline-elements > fieldset.form-item {
+    -ms-flex: 1 0 25%;
+        flex: 1 0 25%;
+    max-width: 25%;
+  }
+}
+@media screen and (min-width: 1260px) {
+  .inline-elements > fieldset.form-item {
+    -ms-flex: 1 0 16.666666666%;
+        flex: 1 0 16.666666666%;
+    max-width: 16.666666666%;
+  }
+}
+.inline-elements > .form-item.reset-flex {
+  -ms-flex: 1 0 100%;
+      flex: 1 0 100%;
+  max-width: 100%;
+}
+.inline-elements fieldset:not(.fieldgroup) {
+  padding-top: 40px;
+}
+.inline-elements fieldset:not(.fieldgroup) > legend {
+  position: absolute;
+  top: 10px;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  font-size: 0.8rem;
+  font-weight: bold;
+  line-height: 1rem;
+}
+.inline-radios .form-radios {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-align: center;
+      align-items: center;
+}
+.inline-radios .form-radios .form-type-radio {
+  padding-right: 1rem;
+}
+input.button.btn-secondary {
+  background: transparent;
+}
+input.button.btn-secondary:hover {
+  background: transparent;
+}

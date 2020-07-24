@@ -1,0 +1,72 @@
+entity_export_csv.settings:
+  type: config_object
+  label: 'Entity Export CSV settings.'
+  mapping:
+    entity_types:
+      type: sequence
+      label: 'Entity types enabled'
+      sequence:
+        type: mapping
+        label: 'Entity type settings'
+        mapping:
+          enable:
+            type: boolean
+            label: 'Entity Type enable'
+          limit_per_bundle:
+            type: sequence
+            label: 'Limit per bundle'
+            sequence:
+              type: string
+          bundles:
+            type: sequence
+            label: 'Bundles'
+            sequence:
+              type: sequence
+              label: 'Bundle'
+              sequence:
+                type: sequence
+                label: 'Bundle fields'
+                sequence:
+                  type: string
+                  label: 'Field'
+    multiple:
+      type: mapping
+      label: 'Multiple field settings'
+      mapping:
+        columns:
+          type: integer
+          label: 'Max number of columns'
+field_type_export.plugin:
+  type: mapping
+  label: 'Field Type Export Plugin'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'label'
+    weight:
+      type: integer
+      label: 'Weight'
+    field_type:
+      type: sequence
+      label: 'Field types'
+      sequence:
+        type: string
+        label: 'Field type'
+field_type_export.plugin.default:
+  type: field_type_export.plugin
+  label: 'Field type export default'
+field_type_export.plugin.date:
+  type: field_type_export.plugin
+  label: 'Field type export date'
+field_type_export.plugin.text:
+  type: field_type_export.plugin
+  label: 'Field type export text'
+field_type_export.plugin.entity_reference:
+  type: field_type_export.plugin
+  label: 'Field type export entity reference'
+field_type_export.plugin.link:
+  type: field_type_export.plugin
+  label: 'Field type export link'

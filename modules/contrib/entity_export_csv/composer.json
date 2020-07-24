@@ -1,0 +1,18 @@
+{
+    "name": "drupal/entity_export_csv",
+    "type": "drupal-module",
+    "description": "Export Content Entity to CSV.",
+    "license": "GPL-2.0+",
+    "keywords": [
+        "Drupal",
+        "Export",
+        "CSV",
+        "Content entity"
+    ],
+    "homepage": "https://www.drupal.org/project/entity_export_csv",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/entity_export_csv",
+        "source": "http://cgit.drupalcode.org/entity_export_csv"
+    }
+}

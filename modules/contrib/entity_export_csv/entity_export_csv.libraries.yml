@@ -1,0 +1,15 @@
+download:
+  js:
+    js/download.js: {}
+  dependencies:
+    - core/jquery
+
+export_form:
+  css:
+    theme:
+      css/entity_export_csv.css: {}
+
+admin:
+  css:
+    theme:
+      css/admin.css: {}
