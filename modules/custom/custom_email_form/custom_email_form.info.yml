@@ -1,0 +1,7 @@
+name: Custom Email Form
+type: module
+description: 'Creating Mail Programmatically'
+package: Custom
+core: 8.x
+version: 8.x
+

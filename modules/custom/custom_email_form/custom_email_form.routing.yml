@@ -1,0 +1,7 @@
+custom_email_form.custom_email_form_sent:
+    path: '/customemailform/sent'
+    defaults:
+        _form: '\Drupal\custom_email_form\Form\EmailForm'
+        _title: 'Email Sent Programmatically'
+    requirements:
+        _permission: 'access content'
