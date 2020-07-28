@@ -1,0 +1,16 @@
+diff --git a/modules/contrib/drush_entity/drush_entity.info.yml b/modules/contrib/drush_entity/drush_entity.info.yml
+index e69de29..e30db86 100644
+--- a/modules/contrib/drush_entity/drush_entity.info.yml
++++ b/modules/contrib/drush_entity/drush_entity.info.yml
+@@ -0,0 +1,10 @@
++name: Drush Entity
++description: Query the entity system with drush entity.
++package: Drush
++type: module
++
++
++# Information added by Drupal.org packaging script on 2020-05-24
++version: '8.x-6.x-dev'
++project: 'drush_entity'
++datestamp: 1590299335000
+\ No newline at end of file
