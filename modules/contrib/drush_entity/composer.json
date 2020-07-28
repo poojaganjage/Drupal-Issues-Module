@@ -1,0 +1,12 @@
+{
+    "name": "drupal/drush_entity",
+    "description": "Drush support for entities.",
+    "type": "drupal-drush",
+    "keywords": ["drupal"],
+    "homepage": "https://www.drupal.org/project/drush_entity",
+    "license": "GPL-2.0+",
+    "minimum-stability": "dev",
+    "require": {
+        "sebastian/exporter": "^4.0@dev"
+    }
+}
