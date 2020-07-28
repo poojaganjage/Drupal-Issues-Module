@@ -1,1 +1,54 @@
 <?php
+
+use Drupal\Core\Mail\MailManagerInterface;
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function custom_email_form_form_alter(&$form, $form_state, $form_id) {
+  
+  if($form_id == 'custom_email_form_sent') {
+    
+    //custom name
+    $form['actions']['submit']['#submit'][] = 'custom_email_form_entity_insert'; 
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function custom_email_form_mail($key, &$message) {
+  
+  switch ($key) {
+    case 'create_form':
+      
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      break;
+  }
+}
+
+
+/**
+ * Implements hook_entity_insert().
+ */
+function custom_email_form_entity_insert(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+// this is used to send HTML emails
+$mailManager = \Drupal::service('plugin.manager.mail');
+
+$module = 'custom_email_form';
+$key = 'create_form';
+$to = \Drupal::currentUser()->getEmail();
+
+$form = $form_state->getValue('subject');
+$form = $form_state->getValue('message');
+
+$langcode = \Drupal::currentUser()->getPreferredLangcode();
+$send = true;
+ 
+$result = $mailManager->mail($module, $key, $to, $langcode, $form, NULL, $send);
+if ($result['result'] !== true) {
+    drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
+  } else {
+    drupal_set_message(t('Your message has been sent.'));
+  }
+}
