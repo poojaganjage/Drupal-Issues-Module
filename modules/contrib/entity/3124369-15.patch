@@ -1,0 +1,144 @@
+diff --git a/modules/contrib/entity/src/EntityViewsData.php b/modules/contrib/entity/src/EntityViewsData.php
+index 4bad6a7..de31c2d 100644
+--- a/modules/contrib/entity/src/EntityViewsData.php
++++ b/modules/contrib/entity/src/EntityViewsData.php
+@@ -7,6 +7,9 @@
+ use Drupal\Core\Entity\Sql\TableMappingInterface;
+ use Drupal\Core\Field\BaseFieldDefinition;
+ use Drupal\Core\Field\FieldDefinitionInterface;
++use Drupal\Core\StringTranslation\StringTranslationTrait;
++use Drupal\Core\StringTranslation\TranslationInterface;
++use Symfony\Component\DependencyInjection\ContainerInterface;
+ use Drupal\views\EntityViewsData as CoreEntityViewsData;
+ 
+ /**
+@@ -31,6 +34,8 @@
+  */
+ class EntityViewsData extends CoreEntityViewsData {
+ 
++  use StringTranslationTrait;
++
+   /**
+    * The table mapping.
+    *
+@@ -38,6 +43,33 @@ class EntityViewsData extends CoreEntityViewsData {
+    */
+   protected $tableMapping;
+ 
++  /**
++   * The string translation information.
++   *
++   * @var Drupal\Core\StringTranslation\TranslationInterface
++   */
++  protected $stringTranslation;
++
++  /**
++   * Creates a Translation Interface object.
++   *
++   * @param Drupal\Core\StringTranslation\TranslationInterface $string_translation
++   *   The string translation information.
++   */
++
++  public function __construct(TranslationInterface $string_translation) {
++    $this->stringTranslation = $string_translation;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container) {
++    return new static(
++      $container->get('string_translation')
++    );
++  }
++
+   /**
+    * {@inheritdoc}
+    */
+@@ -204,8 +236,8 @@ protected function mapFieldDefinition($table, $field_name, FieldDefinitionInterf
+       $label = $field_definition->getLabel();
+ 
+       $table_data['delta'] = [
+-        'title' => t('@label (@name:delta)', ['@label' => $label, '@name' => $field_name]),
+-        'title short' => t('@label:delta', ['@label' => $label]),
++        'title' => $this->t('@label (@name:delta)', ['@label' => $label, '@name' => $field_name]),
++        'title short' => $this->t('@label:delta', ['@label' => $label]),
+       ];
+       $table_data['delta']['field'] = [
+         'id' => 'numeric',
+diff --git a/modules/contrib/entity/src/Form/RevisionRevertForm.php b/modules/contrib/entity/src/Form/RevisionRevertForm.php
+index 43d18a3..57d7f73 100644
+--- a/modules/contrib/entity/src/Form/RevisionRevertForm.php
++++ b/modules/contrib/entity/src/Form/RevisionRevertForm.php
+@@ -8,11 +8,15 @@
+ use Drupal\Core\Form\ConfirmFormBase;
+ use Drupal\Core\Form\FormStateInterface;
+ use Drupal\Core\Entity\RevisionLogInterface;
++use Drupal\Core\StringTranslation\StringTranslationTrait;
++use Drupal\Core\StringTranslation\TranslationInterface;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
+ use Symfony\Component\HttpFoundation\Request;
+ 
+ class RevisionRevertForm extends ConfirmFormBase {
+ 
++  use StringTranslationTrait;
++
+   /**
+    * The entity revision.
+    *
+@@ -34,6 +38,13 @@ class RevisionRevertForm extends ConfirmFormBase {
+    */
+   protected $bundleInformation;
+ 
++  /**
++   * The string translation information.
++   *
++   * @var Drupal\Core\StringTranslation\TranslationInterface
++   */
++  protected $stringTranslation;
++
+   /**
+    * Creates a new RevisionRevertForm instance.
+    *
+@@ -41,10 +52,13 @@ class RevisionRevertForm extends ConfirmFormBase {
+    *   The date formatter.
+    * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $bundle_information
+    *   The bundle information.
++   * @param Drupal\Core\StringTranslation\TranslationInterface $string_translation
++   *   The string translation information.
+    */
+-  public function __construct(DateFormatterInterface $date_formatter, EntityTypeBundleInfoInterface $bundle_information) {
++  public function __construct(DateFormatterInterface $date_formatter, EntityTypeBundleInfoInterface $bundle_information, TranslationInterface $string_translation) {
+     $this->dateFormatter = $date_formatter;
+     $this->bundleInformation = $bundle_information;
++    $this->stringTranslation = $string_translation;
+   }
+ 
+   /**
+@@ -53,7 +67,8 @@ public function __construct(DateFormatterInterface $date_formatter, EntityTypeBu
+   public static function create(ContainerInterface $container) {
+     return new static(
+       $container->get('date.formatter'),
+-      $container->get('entity_type.bundle.info')
++      $container->get('entity_type.bundle.info'),
++      $container->get('string_translation')
+     );
+   }
+ 
+@@ -119,14 +134,14 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
+       $original_revision_timestamp = $this->revision->getRevisionCreationTime();
+ 
+       $this->revision->setRevisionLogMessage($this->t('Copy of the revision from %date.', ['%date' => $this->dateFormatter->format($original_revision_timestamp)]));
+-      $this->messenger()->addStatus(t('@type %title has been reverted to the revision from %revision-date.', [
++      $this->messenger()->addStatus($this->t('@type %title has been reverted to the revision from %revision-date.', [
+         '@type' => $this->getBundleLabel($this->revision),
+         '%title' => $this->revision->label(),
+         '%revision-date' => $this->dateFormatter->format($original_revision_timestamp),
+       ]));
+     }
+     else {
+-      $this->messenger()->addStatus(t('@type %title has been reverted', [
++      $this->messenger()->addStatus($this->t('@type %title has been reverted', [
+         '@type' => $this->getBundleLabel($this->revision),
+         '%title' => $this->revision->label(),
+       ]));
