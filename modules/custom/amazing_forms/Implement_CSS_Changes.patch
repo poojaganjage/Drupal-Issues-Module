@@ -1,0 +1,39 @@
+diff --git a/css/dist/components/fieldset.css b/css/dist/components/fieldset.css
+index c9279f5..9249752 100644
+--- a/css/dist/components/fieldset.css
++++ b/css/dist/components/fieldset.css
+@@ -32,6 +32,8 @@ _:-ms-fullscreen,
+   width:100%;
+   color:inherit;
+   font-weight:700;
++  /*background-color:#7e96a7;*/
++  background-color:#fff;
+ }
+ 
+ [dir] .fieldset__legend{
+@@ -67,10 +69,11 @@ _:-ms-fullscreen,
+ .fieldset__label{
+   display:block;
+   line-height:18px;
++  font-size: 20px;
+ }
+ 
+ [dir] .fieldset__label{
+-  padding:9px 18px;
++  padding:9px 15px;
+ }
+ 
+ .fieldset__label--group{
+diff --git a/css/dist/components/form.css b/css/dist/components/form.css
+index da33676..653830e 100644
+--- a/css/dist/components/form.css
++++ b/css/dist/components/form.css
+@@ -11,7 +11,7 @@
+ }
+ 
+ [dir] .form-item{
+-  margin-top:18px;
++  /*margin-top:18px;*/
+   margin-bottom:18px;
+ }
+ 

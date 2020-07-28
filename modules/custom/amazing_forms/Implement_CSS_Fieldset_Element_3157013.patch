@@ -1,0 +1,199 @@
+diff --git a/css/dist/components/fieldset.css b/css/dist/components/fieldset.css
+index c9279f5..9249752 100644
+--- a/css/dist/components/fieldset.css
++++ b/css/dist/components/fieldset.css
+@@ -32,6 +32,8 @@ _:-ms-fullscreen,
+   width:100%;
+   color:inherit;
+   font-weight:700;
++  /*background-color:#7e96a7;*/
++  background-color:#fff;
+ }
+ 
+ [dir] .fieldset__legend{
+@@ -67,10 +69,11 @@ _:-ms-fullscreen,
+ .fieldset__label{
+   display:block;
+   line-height:18px;
++  font-size: 20px;
+ }
+ 
+ [dir] .fieldset__label{
+-  padding:9px 18px;
++  padding:9px 15px;
+ }
+ 
+ .fieldset__label--group{
+diff --git a/css/dist/components/form.css b/css/dist/components/form.css
+index da33676..653830e 100644
+--- a/css/dist/components/form.css
++++ b/css/dist/components/form.css
+@@ -11,7 +11,7 @@
+ }
+ 
+ [dir] .form-item{
+-  margin-top:18px;
++  /*margin-top:18px;*/
+   margin-bottom:18px;
+ }
+ 
+diff --git a/modules/custom/amazing_forms/amazing_forms.info.yml b/modules/custom/amazing_forms/amazing_forms.info.yml
+index 958d029..accf9d3 100644
+--- a/modules/custom/amazing_forms/amazing_forms.info.yml
++++ b/modules/custom/amazing_forms/amazing_forms.info.yml
+@@ -3,4 +3,5 @@ type: module
+ description: 'Demo for creating Drupal 8 forms.'
+ package: Custom
+ core: 8.x
+-version: 8.x
+\ No newline at end of file
++version: 8.x
++
+diff --git a/modules/custom/amazing_forms/amazing_forms.module b/modules/custom/amazing_forms/amazing_forms.module
+index 93972e8..293edf2 100644
+--- a/modules/custom/amazing_forms/amazing_forms.module
++++ b/modules/custom/amazing_forms/amazing_forms.module
+@@ -1,4 +1,48 @@
+ <?php
++/**
++ * Implementation of hook_theme().
++ */
++
++function amazing_forms_theme() {
++	return [
++    'fieldset_element' => [
++    	'render element' => 'form', 
++    ],
++  ];
++}
++
++/**
++ * Implements template_preprocess_HOOK() for fieldset.
++ */
++// function template_preprocess_fieldset_element(&$variables) {
++//   $form = $variables['form'];
++//   $composite_types = ['checkboxes', 'radios'];
++
++//   if (!empty($form['#type']) && in_array($form['#type'], $composite_types) && !empty($variables['form']['#children_errors'])) {
++//     $variables['legend_span']['attributes']->addClass('has-error');
++//   }
++
++//   if (!empty($form['#disabled'])) {
++//     $variables['legend_span']['attributes']->addClass('is-disabled');
++
++//     if (!empty($variables['description']) && !empty($variables['description']['attributes'])) {
++//       $variables['description']['attributes']->addClass('is-disabled');
++//     }
++//   }
++//   // Remove 'container-inline' class from the main attributes and add a flag
++//   // instead.
++//   // @todo remove this after https://www.drupal.org/node/3059593 has been
++//   //   resolved.
++//   if (!empty($variables['attributes']['class'])) {
++//     $container_inline_key = array_search('container-inline', $variables['attributes']['class']);
++
++//     if ($container_inline_key !== FALSE) {
++//       unset($variables['attributes']['class'][$container_inline_key]);
++//       $variables['inline_items'] = TRUE;
++//     }
++//   }
++// }
++
+ /**
+  * Implementation of hook_form_alter().
+  */
+@@ -11,6 +55,7 @@ function amazing_forms_form_alter(&$form, $form_state, $form_id) {
+ 		        );
+ 		// $form['captcha']['#disabled'] = TRUE;
+ 		}
++		$form['fieldset']['#attached']['library'][] = 'amazing_forms/global-css';
+ 
+ } 
+ 
+diff --git a/modules/custom/amazing_forms/src/Form/ContributeForm.php b/modules/custom/amazing_forms/src/Form/ContributeForm.php
+index 45d16d8..f72130f 100644
+--- a/modules/custom/amazing_forms/src/Form/ContributeForm.php
++++ b/modules/custom/amazing_forms/src/Form/ContributeForm.php
+@@ -20,31 +20,31 @@ public function getFormId()
+ 
+     public function buildForm(array $form, FormStateInterface $form_state) 
+     {
+-        $form['fieldset'] = array(
+-        '#type' => 'fieldset',
+-        '#title' => $this->t('Title of the FieldSet'),
++        $form['fieldsetelement'] = array(
++        // '#type' => 'label',
++        '#markup' => '<p>'.$this->t('Title of the Fieldset').'</p>',
+         );
+-        $form['fieldset']['candidate_name']['fieldset_wrapper'] = array(
++        $form['candidate_name'] = array(
+         '#type' => 'textfield',
+         '#title' => $this->t('Candidate Name:'),
+         '#required' => true,
+         );
+-        $form['fieldset']['candidate_mail'] = array(
++        $form['candidate_mail'] = array(
+         '#type' => 'email',
+         '#title' => $this->t('Email ID:'),
+         '#required' => true,
+         );
+-        $form['fieldset']['candidate_number'] = array (
++        $form['candidate_number'] = array (
+         '#type' => 'tel',
+         '#title' => $this->t('Mobile no:'),
+         '#required' => true,
+         );
+-        $form['fieldset']['candidate_dob'] = array (
++        $form['candidate_dob'] = array (
+         '#type' => 'date',
+         '#title' => $this->t('DOB:'),
+         '#required' => true,
+         );
+-        $form['fieldset']['candidate_gender'] = array (
++        $form['candidate_gender'] = array (
+         '#type' => 'select',
+         '#title' => ('Gender:'),
+         '#options' => array(
+@@ -52,7 +52,7 @@ public function buildForm(array $form, FormStateInterface $form_state)
+         'male' => $this->t('Male'),
+         ),
+         );
+-        $form['fieldset']['candidate_confirmation'] = array (
++        $form['candidate_confirmation'] = array (
+         '#type' => 'radios',
+         '#title' => ('Are you above 18 years old?'),
+         '#options' => array(
+@@ -60,7 +60,7 @@ public function buildForm(array $form, FormStateInterface $form_state)
+         'No' => $this->t('No')
+         ),
+         );
+-        $form['fieldset']['candidate_copy'] = array(
++        $form['candidate_copy'] = array(
+         '#type' => 'checkbox',
+         '#title' => $this->t('Send me a copy of the application.'),
+         );
+@@ -68,14 +68,21 @@ public function buildForm(array $form, FormStateInterface $form_state)
+         // '#type' => 'captcha',
+         // '#captcha_type' => 'recaptcha/reCAPTCHA',
+         // );
+-        $form['fieldset']['actions']['#type'] = 'actions';
+-        $form['fieldset']['actions']['submit'] = array(
++        $form['actions']['#type'] = 'actions';
++        $form['actions']['submit'] = array(
+         '#type' => 'submit',
+         '#value' => $this->t('Save'),
+         '#button_type' => 'primary',
+         );
++        
++    //     $build = [
++    //     '#theme' => 'amazing_forms_fieldset_element',
++    //     '#items' => $form,
++    // ];
+ 
+-      return $form;
++        $form['#theme'] = 'fieldset_element';
++      
++        return $form;
+     }
+ 
+     public function validateForm(array &$form, FormStateInterface $form_state) 
