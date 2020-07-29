@@ -1,0 +1,5 @@
+name: Drush Entity
+description: Query the entity system with drush entity.
+package: Drush
+type: module
+core_version_requirement: ^8 || ^9

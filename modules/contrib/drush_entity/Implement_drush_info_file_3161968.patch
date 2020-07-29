@@ -1,0 +1,22 @@
+diff --git a/modules/contrib/drush_entity/composer.json b/modules/contrib/drush_entity/composer.json
+index c4d740d..bb0ba7b 100644
+--- a/modules/contrib/drush_entity/composer.json
++++ b/modules/contrib/drush_entity/composer.json
+@@ -7,6 +7,7 @@
+     "license": "GPL-2.0+",
+     "minimum-stability": "dev",
+     "require": {
++        "drupal/core": "^8 || ^9",
+         "sebastian/exporter": "^4.0@dev"
+     }
+ }
+diff --git a/modules/contrib/drush_entity/drush_entity.info.yml b/modules/contrib/drush_entity/drush_entity.info.yml
+index e69de29..c31cf99 100644
+--- a/modules/contrib/drush_entity/drush_entity.info.yml
++++ b/modules/contrib/drush_entity/drush_entity.info.yml
+@@ -0,0 +1,5 @@
++name: Drush Entity
++description: Query the entity system with drush entity.
++package: Drush
++type: module
++core_version_requirement: ^8 || ^9
