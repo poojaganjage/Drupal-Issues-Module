@@ -1,0 +1,15 @@
+services:
+  commerce_fraud.commerce_fraud_subscriber:
+    class: Drupal\commerce_fraud\EventSubscriber\CommerceFraudSubscriber
+    arguments: ['@event_dispatcher', '@messenger', '@database', '@config.factory']
+    tags:
+      - { name: event_subscriber }
+  commerce_fraud.fraud_count_subscriber:
+    class: Drupal\commerce_fraud\EventSubscriber\FraudCountUpdatedSubscriber
+    arguments: ['@database']
+    tags:
+      - {name: event_subscriber}
+
+  plugin.manager.commerce_fraud_rule:
+    class: Drupal\commerce_fraud\CommerceFraudManager
+    parent: default_plugin_manager

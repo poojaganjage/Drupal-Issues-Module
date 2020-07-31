@@ -1,0 +1,5 @@
+entity.rules.add_form:
+  route_name: entity.rules.add_form
+  title: 'Add Rules'
+  appears_on:
+    - entity.rules.collection

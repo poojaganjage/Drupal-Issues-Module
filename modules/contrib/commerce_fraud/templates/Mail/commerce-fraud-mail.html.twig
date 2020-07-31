@@ -1,0 +1,67 @@
+#
+/**
+ * @file commerce_fraud/templates/Mail/commerce_fraud_mail.html.twig
+ * Default theme implementation to send order mail about fraudulent orders.
+ *
+ * Available variables:
+ * - message: A list of order properties
+ *   Possible keys:
+ *     - sitename: Name of site.
+ *     - order_id: Order ID.
+ *     - user_id: User ID.
+ *     - status: Current Order status.
+ *     - placed: When was the order placed in m/d/y format.
+ *     - fraud_score: Fraud score of order.
+ *     - stopped: Bool to check if order is allowed to be completed.
+ *     - fraud_notes: List of name of fraud rules that applied to order.
+ *
+ * @see template_preprocess_commerce_fraud_mail()
+ *
+ * @ingroup themeable
+ */
+#}
+<h2>New Blocklisted order</h2>
+
+<h3> A new order has been placed on {{ message['sitename'] }} that is suspected to be fraudulent. </h3>
+<p> Here is a brief summary of the order :</p>
+
+<ul>
+    <li>
+        <strong>Order with user</strong> : {{ message['user_name'] }}
+    </li>
+    <li>
+        <strong>Current order status</strong> : {{ message['status'] }}
+    </li>
+    <li>
+        <strong>This order was placed at</strong> : {{ message['placed'] }}
+    </li>
+    <li>
+        <strong>With fraud score</strong> : {{ message['fraud_score'] }}
+    </li>
+</ul>
+
+<h3>Commerce Fraud rules that applied to this order with their contribution in fraud score</h3>
+
+<ul>
+    {% for rules in message['fraud_notes'] %}
+        <li>
+            {{rules['note']}}
+        </li>
+    {% endfor %}
+</ul>
+
+{% set order_url = [ url('<front>')|render, 'admin/commerce/orders/',
+      message['order_id']] | join %}
+{% set user_url = [ url('<front>')|render, 'user/',
+      message['user_id']] | join %}
+<strong>
+    <p>
+        {% if message['stopped'] %}
+            This order has not been completed and requires a manual review before it can be processed.
+        {% else %}
+            This order should be manually reviewed for suspicious activity.     
+        {% endif %}
+    </p>
+    <p>You can view the order <a href="{{ order_url }}">here</a></p>
+    <p>User account profile can be visited <a href="{{ user_url }}">here</a></p>
+</strong>

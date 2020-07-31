@@ -1,0 +1,19 @@
+add rules entities:
+  title: 'Create new Rules entities'
+
+administer rules entities:
+  title: 'Administer Rules entities'
+  description: 'Allow to access the administration form to configure Rules entities.'
+  restrict access: true
+
+delete rules entities:
+  title: 'Delete Rules entities'
+
+edit rules entities:
+  title: 'Edit Rules entities'
+
+view published rules entities:
+  title: 'View published Rules entities'
+
+view unpublished rules entities:
+  title: 'View unpublished Rules entities'

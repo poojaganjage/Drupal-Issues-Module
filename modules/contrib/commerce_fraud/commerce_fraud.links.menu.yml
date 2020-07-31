@@ -1,0 +1,14 @@
+commerce_fraud.settings:
+  title: 'Commerce Fraud'
+  route_name: commerce_fraud.settings
+  parent: commerce.configuration
+  description: 'Manage Commerce Fraud configuration.'
+  weight: 10
+
+# Rules menu items definition
+entity.rules.collection:
+  title: 'Rules list'
+  route_name: entity.rules.collection
+  description: 'List Rules entities'
+  parent: 'commerce.admin_commerce'
+  weight: 9
