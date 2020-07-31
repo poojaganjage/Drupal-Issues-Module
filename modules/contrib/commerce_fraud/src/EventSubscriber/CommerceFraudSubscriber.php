@@ -253,7 +253,7 @@ class CommerceFraudSubscriber implements EventSubscriberInterface {
     $key = 'send_blocklist';
     $to = \Drupal::state()->get('send_email', $this->config->get('mail'));
     // Mail message.
-    $params['message'] = $this->getMailParams($order, $fraud_score);
+    $params['message'] = $this->getMailParamsForBlocklist($order, $fraud_score);
     $params['order_id'] = $order->id();
     $langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
     $send = TRUE;
@@ -276,14 +276,13 @@ class CommerceFraudSubscriber implements EventSubscriberInterface {
    *   - sitename: Name of site.
    *   - order_id: Order ID.
    *   - user_id: User id
-   *   - user_name: User name.
    *   - status: Current Order status.
    *   - placed: When was the order placed in m/d/y format.
    *   - fraud_score: Fraud score of order.
    *   - stopped: Bool to check if order is allowed to be completed.
    *   - fraud_notes: List of name of fraud rules that applied to order.
    */
-   public function getMailParams(OrderInterface $order, int $fraud_score) {
+   public function getMailParamsForBlocklist(OrderInterface $order, int $fraud_score) {
     return [
       'sitename' => $this->config->get('name'),
       'order_id' => $order->id(),

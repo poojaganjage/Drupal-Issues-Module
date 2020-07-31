@@ -1,0 +1,96 @@
+diff --git a/modules/contrib/commerce_fraud/src/EventSubscriber/CommerceFraudSubscriber.php b/modules/contrib/commerce_fraud/src/EventSubscriber/CommerceFraudSubscriber.php
+index 3a49761..c6ecf5a 100644
+--- a/modules/contrib/commerce_fraud/src/EventSubscriber/CommerceFraudSubscriber.php
++++ b/modules/contrib/commerce_fraud/src/EventSubscriber/CommerceFraudSubscriber.php
+@@ -253,7 +253,7 @@ public function sendBlockListedOrderMail(OrderInterface $order, int $fraud_score
+     $key = 'send_blocklist';
+     $to = \Drupal::state()->get('send_email', $this->config->get('mail'));
+     // Mail message.
+-    $params['message'] = $this->getMailParams($order, $fraud_score);
++    $params['message'] = $this->getMailParamsForBlocklist($order, $fraud_score);
+     $params['order_id'] = $order->id();
+     $langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
+     $send = TRUE;
+@@ -276,14 +276,13 @@ public function sendBlockListedOrderMail(OrderInterface $order, int $fraud_score
+    *   - sitename: Name of site.
+    *   - order_id: Order ID.
+    *   - user_id: User id
+-   *   - user_name: User name.
+    *   - status: Current Order status.
+    *   - placed: When was the order placed in m/d/y format.
+    *   - fraud_score: Fraud score of order.
+    *   - stopped: Bool to check if order is allowed to be completed.
+    *   - fraud_notes: List of name of fraud rules that applied to order.
+    */
+-   public function getMailParams(OrderInterface $order, int $fraud_score) {
++   public function getMailParamsForBlocklist(OrderInterface $order, int $fraud_score) {
+     return [
+       'sitename' => $this->config->get('name'),
+       'order_id' => $order->id(),
+diff --git a/modules/contrib/commerce_fraud/tests/src/Kernel/EventSubscriber/CommerceFraudSubscriberTest.php b/modules/contrib/commerce_fraud/tests/src/Kernel/EventSubscriber/CommerceFraudSubscriberTest.php
+index 416558f..02d1272 100644
+--- a/modules/contrib/commerce_fraud/tests/src/Kernel/EventSubscriber/CommerceFraudSubscriberTest.php
++++ b/modules/contrib/commerce_fraud/tests/src/Kernel/EventSubscriber/CommerceFraudSubscriberTest.php
+@@ -6,7 +6,18 @@
+ use Drupal\commerce_fraud\Entity\Rules;
+ use Drupal\Tests\commerce_order\Kernel\OrderKernelTestBase;
+ use Drupal\Core\Database\Database;
++use Drupal\Core\Database\Connection;
+ use Drupal\user\Entity\User;
++use Drupal\Core\Entity\EntityStorageInterface;
++use Drupal\commerce_fraud\EventSubscriber\CommerceFraudSubscriber;
++use Drupal\state_machine\Event\WorkflowTransitionEvent;
++use Drupal\Core\Messenger\MessengerInterface;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++use Drupal\commerce_order\Entity\OrderInterface;
++use Symfony\Component\EventDispatcher\EventDispatcherInterface;
++use Drupal\commerce_fraud\Event\FraudEvents;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++use Drupal\Core\Config\ConfigFactoryInterface;
+ 
+ /**
+  * Tests the CommerceFraudSubscriber class.
+@@ -17,6 +28,13 @@
+  */
+ class CommerceFraudSubscriberTest extends OrderKernelTestBase {
+ 
++  /**
++   * The test order.
++   *
++   * @var \Drupal\commerce_order\Entity\OrderInterface
++   */
++  protected $order;
++
+   /**
+    * {@inheritDoc}
+    */
+@@ -57,6 +75,14 @@ protected function setUp(): void {
+ 
+     $rule2->save();
+ 
++    $dispatcher = $this->prophesize(EventDispatcherInterface::class);
++    $messenger = $this->prophesize(MessengerInterface::class);
++    $connection = $this->prophesize(Connection::class);
++    $config = $this->prophesize(ConfigFactoryInterface::class);
++    $config->get('system.site')->willReturn('SiteName');
++
++    $this->subscriber = new CommerceFraudSubscriber($dispatcher->reveal(), $messenger->reveal(), $connection->reveal(), $config->reveal());
++
+   }
+ 
+   /**
+@@ -123,4 +149,14 @@ public function testSetFraudScore() {
+ 
+   }
+ 
++  /**
++   * @covers ::getMailParamsForBlocklist
++   */
++  public function testMailParameters() {
++
++    $order = $this->createMock(Order::class);
++
++    $params = $this->subscriber->getMailParamsForBlocklist($order, 20);
++  }
++
+ }

@@ -6,7 +6,18 @@ use Drupal\commerce_order\Entity\Order;
 use Drupal\commerce_fraud\Entity\Rules;
 use Drupal\Tests\commerce_order\Kernel\OrderKernelTestBase;
 use Drupal\Core\Database\Database;
+use Drupal\Core\Database\Connection;
 use Drupal\user\Entity\User;
+use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\commerce_fraud\EventSubscriber\CommerceFraudSubscriber;
+use Drupal\state_machine\Event\WorkflowTransitionEvent;
+use Drupal\Core\Messenger\MessengerInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Drupal\commerce_order\Entity\OrderInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Drupal\commerce_fraud\Event\FraudEvents;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * Tests the CommerceFraudSubscriber class.
@@ -16,6 +27,13 @@ use Drupal\user\Entity\User;
  * @group commerce
  */
 class CommerceFraudSubscriberTest extends OrderKernelTestBase {
+
+  /**
+   * The test order.
+   *
+   * @var \Drupal\commerce_order\Entity\OrderInterface
+   */
+  protected $order;
 
   /**
    * {@inheritDoc}
@@ -56,6 +74,14 @@ class CommerceFraudSubscriberTest extends OrderKernelTestBase {
     ]);
 
     $rule2->save();
+
+    $dispatcher = $this->prophesize(EventDispatcherInterface::class);
+    $messenger = $this->prophesize(MessengerInterface::class);
+    $connection = $this->prophesize(Connection::class);
+    $config = $this->prophesize(ConfigFactoryInterface::class);
+    $config->get('system.site')->willReturn('SiteName');
+
+    $this->subscriber = new CommerceFraudSubscriber($dispatcher->reveal(), $messenger->reveal(), $connection->reveal(), $config->reveal());
 
   }
 
@@ -121,6 +147,16 @@ class CommerceFraudSubscriberTest extends OrderKernelTestBase {
 
     $this->assertEquals('fraudulent', $order2->getState()->getId());
 
+  }
+
+  /**
+   * @covers ::getMailParamsForBlocklist
+   */
+  public function testMailParameters() {
+
+    $order = $this->createMock(Order::class);
+
+    $params = $this->subscriber->getMailParamsForBlocklist($order, 20);
   }
 
 }
