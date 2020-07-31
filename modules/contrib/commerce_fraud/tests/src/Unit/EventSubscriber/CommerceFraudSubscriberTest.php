@@ -1,74 +1,123 @@
 <?php
 
-namespace Drupal\Tests\commerce_fraud\Unit;
+namespace Drupal\Tests\commerce_fraud\Kernel\EventSubscriber;
 
-use Drupal\Tests\UnitTestCase;
 use Drupal\commerce_order\Entity\Order;
-use Drupal\Core\Entity\EntityStorageInterface;
-use Drupal\commerce_fraud\EventSubscriber\CommerceFraudSubscriber;
-use Drupal\state_machine\Event\WorkflowTransitionEvent;
-use Drupal\Core\Messenger\MessengerInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Drupal\commerce_order\Entity\OrderInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Drupal\commerce_fraud\Event\FraudEvents;
-use Drupal\commerce_fraud\Event\FraudEvent;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Database\Connection;
-use Drupal\Core\Config\ConfigFactoryInterface;
-
+use Drupal\Tests\commerce_order\Kernel\OrderKernelTestBase;
+use Drupal\Core\Database\Database;
 
 /**
+ * Tests the CommerceFraudSubscriber class.
+ *
  * @coversDefaultClass \Drupal\commerce_fraud\EventSubscriber\CommerceFraudSubscriber
+ *
  * @group commerce
  */
-class CommerceFraudSubscriberTest extends UnitTestCase {
+class CommerceFraudSubscriberUnitTest extends OrderKernelTestBase {
 
   /**
-   * The test order.
+   * System site configuration.
    *
-   * @var \Drupal\commerce_order\Entity\OrderInterface
+   * @var \Drupal\Core\Config\ImmutableConfig
    */
-  protected $order;
+  protected $config;
+
+  /**
+   * {@inheritDoc}
+   */
+  public static $modules = [
+    'commerce_log',
+    'commerce_fraud',
+  ];
 
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  protected function setUp(): void {
+
     parent::setUp();
 
-    $dispatcher = $this->prophesize(EventDispatcherInterface::class);
-    $messenger = $this->prophesize(MessengerInterface::class);
-    $connection = $this->prophesize(Connection::class);
-    $config = $this->prophesize(ConfigFactoryInterface::class);
-    $config->get('system.site')->willReturn('SiteName');
-    // $config->get('name')->willReturn('SiteName');
+    $this->installEntitySchema('commerce_order');
+    $this->installEntitySchema('commerce_log');
+    $this->installEntitySchema('rules');
+    $this->installConfig(['commerce_fraud']);
+    $this->installSchema('commerce_fraud', ['commerce_fraud_fraud_score']);
 
-    $this->subscriber = new CommerceFraudSubscriber($dispatcher->reveal(), $messenger->reveal(), $connection->reveal(), $config->reveal());
+    $config_factory = $this->container->get('config.factory');
+
+    $editConfig = $config_factory->getEditable('system.site');
+    $editConfig->set('name', 'SiteName');
+    $editConfig->save();
+
+    $this->config = $config_factory->get('system.site');
+
+    $this->commerceFraudSubscriber = $this->container->get('commerce_fraud.commerce_fraud_subscriber');
+
+    $user = $this->createUser();
+
+    /** @var \Drupal\commerce_order\Entity\Order order */
+    $this->order = Order::create([
+      'type' => 'default',
+      'state' => 'draft',
+      'mail' => 'test@example.com',
+      'ip_address' => '127.0.0.1',
+      'order_number' => '6',
+      'uid' => $user,
+      'store_id' => $this->store,
+      'order_items' => [],
+    ]);
+    $this->order->save();
+
   }
 
   /**
-   * @covers ::getMailParams
+   * Tests getMailParamsForBlocklisted function in CommerceFraudSubscriber.
    */
-  public function testMailParameters() {
-    // $this->order = new Order([
-    //   'type' => 'default',
-    //   'state' => 'completed',
-    //   'mail' => 'test@example.com',
-    //   'ip_address' => '127.0.0.1',
-    //   'order_number' => '6',
-    //   'uid' => 1,
-    //   'store_id' => 1,
-    //   'order_items' => [],
-    // ]);
-    $order = $this->createMock(Order::class);
+  public function testGetMailParamsForBlocklisted() {
 
-    $params = $this->subscriber->getMailParams($order, 20);
-    // $this->assertIsArray($types);
-    // foreach ($types as $key => $type) {
-    //   $this->assertInstanceOf(CreditCardType::class, $type);
-    //   $this->assertEquals($key, $type->getId());
-    // }
+    $fields = [
+      'fraud_score' => 20,
+      'order_id' => $this->order->id(),
+      'note' => 'Name of fraud rule: 20',
+    ];
+
+    Database::getConnection()->insert('commerce_fraud_fraud_score')
+      ->fields($fields)
+      ->execute();
+
+    $fields = [
+      'fraud_score' => 20,
+      'order_id' => 5,
+      'note' => 'Name of fraud rule: 20',
+    ];
+
+    Database::getConnection()->insert('commerce_fraud_fraud_score')
+      ->fields($fields)
+      ->execute();
+
+    $params = $this->commerceFraudSubscriber->getMailParamsForBlocklist($this->order,20);
+
+    $this->assertEqual($params['order_id'], $this->order->id());
+    $this->assertEqual($params['user_id'], $this->order->getCustomerId());
+    $this->assertEqual($params['user_name'], $this->order->getCustomer()->getDisplayName());
+    $this->assertEqual($params['status'], 'draft');
+    $this->assertEqual($params['fraud_score'], 20);
+    $this->assertEqual($params['stopped'], FALSE);
+
+    $fraud_note =
+    [
+      "Name of fraud rule: 20" => [
+        "note" =>  "Name of fraud rule: 20",
+      ]
+    ];
+    $this->assertEqual($params['fraud_notes'], $fraud_note);
+
+    foreach ($params['fraud_notes'] as $rules) {
+      $this->assertEqual($rules['note'], 'Name of fraud rule: 20');
+    }
+
+    $this->assertEqual($params['sitename'], 'SiteName');
+
   }
 
 }
