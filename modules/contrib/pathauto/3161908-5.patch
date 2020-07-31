@@ -1,0 +1,19 @@
+diff --git a/modules/contrib/pathauto/src/Plugin/migrate/source/PathautoPattern.php b/modules/contrib/pathauto/src/Plugin/migrate/source/PathautoPattern.php
+index a2a92c8..2603013 100644
+--- a/modules/contrib/pathauto/src/Plugin/migrate/source/PathautoPattern.php
++++ b/modules/contrib/pathauto/src/Plugin/migrate/source/PathautoPattern.php
+@@ -106,8 +106,13 @@ public function prepareRow(Row $row) {
+         // Check that the bundle exists.
+         $bundles = $this->entityTypeBundleInfo->getBundleInfo($entity_type);
+         if (!in_array($bundle, array_keys($bundles))) {
++          $msg = sprintf("Pattern lookup skipped migration '%s'", $this->configuration['migration']);
++          if (isset($this->configuration['source'])) {
++            $msg = sprintf("%s with source '%s'", $msg, $this->configuration['source']);
++          }
++          throw new MigrateSkipProcessException($msg);
+           // No matching bundle found in destination.
+-          return FALSE;
++          // return FALSE;
+         }
+ 
+         // Set process values.

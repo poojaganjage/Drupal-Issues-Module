@@ -1,0 +1,96 @@
+diff --git a/modules/contrib/pathauto/tests/src/Functional/PathautoMassDeleteTest.php b/modules/contrib/pathauto/tests/src/Functional/PathautoMassDeleteTest.php
+index ad8b4d8..740df92 100644
+--- a/modules/contrib/pathauto/tests/src/Functional/PathautoMassDeleteTest.php
++++ b/modules/contrib/pathauto/tests/src/Functional/PathautoMassDeleteTest.php
+@@ -4,6 +4,9 @@
+ 
+ use Drupal\pathauto\PathautoState;
+ use Drupal\Tests\BrowserTestBase;
++use Drupal\Core\StringTranslation\StringTranslationTrait;
++use Drupal\Core\StringTranslation\TranslationInterface;
++use Symfony\Component\DependencyInjection\ContainerInterface;
+ 
+ /**
+  * Mass delete functionality tests.
+@@ -12,7 +15,7 @@
+  */
+ class PathautoMassDeleteTest extends BrowserTestBase {
+ 
+-  use PathautoTestHelperTrait;
++  use PathautoTestHelperTrait, StringTranslationTrait;
+ 
+   /**
+    * {@inheritdoc}
+@@ -53,7 +56,34 @@ class PathautoMassDeleteTest extends BrowserTestBase {
+    * @var \Drupal\taxonomy\TermInterface
+    */
+   protected $terms;
++  
++  /**
++   * The string translation information.
++   *
++   * @var Drupal\Core\StringTranslation\TranslationInterface
++   */
++  protected $stringTranslation;
++
++  /**
++   * Creates a Translation Interface object.
++   *
++   * @param Drupal\Core\StringTranslation\TranslationInterface $string_translation
++   *   The string translation information.
++   */
+ 
++  public function __construct(TranslationInterface $string_translation) {
++    $this->stringTranslation = $string_translation;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container) {
++    return new static(
++      $container->get('string_translation')
++    );
++  }
++  
+   /**
+    * {@inheritdoc}
+    */
+@@ -86,8 +116,8 @@ public function testDeleteAll() {
+       'delete[all_aliases]' => TRUE,
+       'options[keep_custom_aliases]' => FALSE,
+     ];
+-    $this->drupalPostForm('admin/config/search/path/delete_bulk', $edit, t('Delete aliases now!'));
+-    $this->assertText(t('All of your path aliases have been deleted.'));
++    $this->drupalPostForm('admin/config/search/path/delete_bulk', $edit, $this->t('Delete aliases now!'));
++    $this->assertText($this->t('All of your path aliases have been deleted.'));
+     $this->assertUrl('admin/config/search/path/delete_bulk');
+ 
+     // Make sure that all of them are actually deleted.
+@@ -102,9 +132,13 @@ public function testDeleteAll() {
+         'delete[plugins][' . $pathauto_plugin . ']' => TRUE,
+         'options[keep_custom_aliases]' => FALSE,
+       ];
+-      $this->drupalPostForm('admin/config/search/path/delete_bulk', $edit, t('Delete aliases now!'));
++      $this->drupalPostForm('admin/config/search/path/delete_bulk', $edit, $this->t('Delete aliases now!'));
+       $alias_type = $manager->createInstance($pathauto_plugin);
+-      $this->assertRaw(t('All of your %label path aliases have been deleted.', ['%label' => $alias_type->getLabel()]));
++      // $this->assertRaw(t('All of your %label path aliases have been deleted.', ['%label' => $alias_type->getLabel()]));
++      $this->assertSession()->responseContains([
++        '#title' => $this->t('All of your %label path aliases have been deleted.'),
++        '%label' => $alias_type->getLabel(),
++      ]);
+       // Check that the aliases were actually deleted.
+       foreach ($this->{$attribute} as $entity) {
+         $this->assertNoEntityAlias($entity);
+@@ -128,8 +162,8 @@ public function testDeleteAll() {
+       'delete[all_aliases]' => TRUE,
+       'options[keep_custom_aliases]' => TRUE,
+     ];
+-    $this->drupalPostForm('admin/config/search/path/delete_bulk', $edit, t('Delete aliases now!'));
+-    $this->assertText(t('All of your automatically generated path aliases have been deleted.'));
++    $this->drupalPostForm('admin/config/search/path/delete_bulk', $edit, $this->t('Delete aliases now!'));
++    $this->assertText($this->t('All of your automatically generated path aliases have been deleted.'));
+     $this->assertUrl('admin/config/search/path/delete_bulk');
+ 
+     // Make sure that only custom aliases and aliases with no information about

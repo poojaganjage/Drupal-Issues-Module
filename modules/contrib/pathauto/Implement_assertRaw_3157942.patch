@@ -1,0 +1,17 @@
+diff --git a/modules/contrib/pathauto/tests/src/Functional/PathautoMassDeleteTest.php b/modules/contrib/pathauto/tests/src/Functional/PathautoMassDeleteTest.php
+index ad8b4d8..a3abc76 100644
+--- a/modules/contrib/pathauto/tests/src/Functional/PathautoMassDeleteTest.php
++++ b/modules/contrib/pathauto/tests/src/Functional/PathautoMassDeleteTest.php
+@@ -104,7 +104,11 @@ public function testDeleteAll() {
+       ];
+       $this->drupalPostForm('admin/config/search/path/delete_bulk', $edit, t('Delete aliases now!'));
+       $alias_type = $manager->createInstance($pathauto_plugin);
+-      $this->assertRaw(t('All of your %label path aliases have been deleted.', ['%label' => $alias_type->getLabel()]));
++      // $this->assertRaw(t('All of your %label path aliases have been deleted.', ['%label' => $alias_type->getLabel()]));
++      $this->assertSession()->responseContains([
++        '#title' => t('All of your %label path aliases have been deleted.'),
++        '%label' => $alias_type->getLabel(),
++      ]);
+       // Check that the aliases were actually deleted.
+       foreach ($this->{$attribute} as $entity) {
+         $this->assertNoEntityAlias($entity);

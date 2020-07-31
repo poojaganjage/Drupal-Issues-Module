@@ -106,8 +106,14 @@ class PathautoPattern extends DrupalSqlBase {
         // Check that the bundle exists.
         $bundles = $this->entityTypeBundleInfo->getBundleInfo($entity_type);
         if (!in_array($bundle, array_keys($bundles))) {
+          $var = 'pathauto_records_pattern';
+          $msg = sprintf("Pathauto pattern migration skipped the %s.", $var);
+          if (isset($this->configuration['source'])) {
+            $msg = sprintf("%s with source '%s'", $msg, $this->configuration['source']);
+          }
+          throw new MigrateSkipProcessException($msg);
           // No matching bundle found in destination.
-          return FALSE;
+          // return FALSE;
         }
 
         // Set process values.
