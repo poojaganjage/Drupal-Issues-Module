@@ -2,6 +2,19 @@
 
 use Drupal\Core\Mail\MailManagerInterface;
 
+/*
+* hook_theme()
+*/
+function custom_email_form_theme() {
+  return [
+    'mail-body' =>
+    [
+      'variables' => [
+        'form' => [],
+      ],
+    ]
+  ];
+}
 
 /**
  * Implementation of hook_form_alter().
@@ -11,7 +24,7 @@ function custom_email_form_form_alter(&$form, $form_state, $form_id) {
   if($form_id == 'custom_email_form_sent') {
     
     //custom name
-    $form['actions']['submit']['#submit'][] = 'custom_email_form_entity_insert'; 
+    $form['actions']['submit']['#submit'][] = 'custom_email_form_html_mails';
   }
 }
 
@@ -23,15 +36,16 @@ function custom_email_form_mail($key, $message, $form) {
   switch ($key) {
     case 'create_form':
     $message['from'] = \Drupal::config('system.site')->get('mail');
+    $message['subject'] = $form;
     break;
   }
 }
 
 
 /**
- * Implements custom_email_form_entity_insert().
+ * Implements hook_html_mails().
  */
-function custom_email_form_entity_insert(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+function custom_email_form_html_mails(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
 // this is used to send HTML emails
 $mailManager = \Drupal::service('plugin.manager.mail');
 
@@ -40,7 +54,14 @@ $key = 'create_form';
 $to = \Drupal::currentUser()->getEmail();
 
 $form = $form_state->getValue('subject');
-$form = $form_state->getValue('message');
+// $form = $form_state->getValue('message');
+
+$form = array(
+  '#theme' => 'mail-body',
+  '#form' => $form_state->getValue('message'),
+);
+// $mail_body = drupal_render($form);
+// $form['message'] = $mail_body;
 
 $langcode = \Drupal::currentUser()->getPreferredLangcode();
 $send = true;

@@ -21,6 +21,7 @@ class EmailForm extends FormBase {
         $form['from'] = array(
         '#type' => 'email',
         '#title' => $this->t('From'),
+        '#default_value' => \Drupal::config('system.site')->get('mail'),
         '#required' => true,
         );
         $form['to'] = array(
