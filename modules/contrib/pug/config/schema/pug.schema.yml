@@ -1,0 +1,54 @@
+# Schema for the configuration files of the Pug module.
+
+pug.settings:
+  type: config_object
+  label: 'Pug settings'
+  mapping:
+    confirm_title: 
+      type: label
+      label: 'Confirm Title'
+    confirm_success: 
+      type: label
+      label: 'Confirm Success'
+    confirm_failure: 
+      type: label
+      label: 'Confirm Failure'
+    strength_title: 
+      type: label
+      label: 'Strength Title'
+    has_weaknesses: 
+      type: label
+      label: 'Recommendation Statement'
+    password_length: 
+      type: integer
+      label: 'Minimum Password Length'
+    too_short: 
+      type: label
+      label: 'Too Short Title'
+    add_lowerCase: 
+      type: label
+      label: 'Lowercase Title'
+    add_upperCase: 
+      type: label
+      label: 'Uppercase Title'
+    add_numbers: 
+      type: label
+      label: 'Numbers Title'
+    add_punctuation: 
+      type: label
+      label: 'Punctuation Title'
+    same_as_username: 
+      type: label
+      label: 'If same as username'
+    label_weak: 
+      type: label
+      label: 'Weak'
+    label_fair: 
+      type: label
+      label: 'Fair'
+    label_good: 
+      type: label
+      label: 'Good'
+    label_strong: 
+      type: label
+      label: 'Strong'

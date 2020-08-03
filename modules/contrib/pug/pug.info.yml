@@ -1,0 +1,13 @@
+name: Pug
+type: module
+description: 'Provides dynamic control to over password recommendation.'
+package: Other
+core_version_requirement: ^8.8 || ^9
+configure: pug.settings
+dependencies:
+  - drupal:user
+
+# Information added by Drupal.org packaging script on 2020-08-03
+version: '8.0.x-dev'
+project: 'pug'
+datestamp: 1596448556

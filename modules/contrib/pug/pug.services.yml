@@ -1,0 +1,5 @@
+services:
+  pug.route_subscriber:
+    class: 'Drupal\pug\Routing\PugAccountSettingSubscriber'
+    tags:
+      - { name: event_subscriber }

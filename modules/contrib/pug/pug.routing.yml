@@ -1,0 +1,7 @@
+pug.settings:
+  path: '/admin/config/people/accounts'
+  defaults:
+    _form: '\Drupal\pug\PugAccountSettingsForm'
+    _title: 'Account settings'
+  requirements:
+    _permission: 'administer account settings'

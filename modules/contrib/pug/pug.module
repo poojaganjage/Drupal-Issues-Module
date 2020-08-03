@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * @file
+ * Contains pug.module.
+ */
+
+use Drupal\Core\Asset\AttachedAssetsInterface;
+use Drupal\Core\Cache\CacheBackendInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function pug_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.pug':
+      $output = '';
+      $output .= t('<h3>About</h3>');
+      $output .= t('<p><div><strong>The PUG (stands for Password Suggestions) module provides some cool commands over the core default password recommendations.</strong></div></p>');
+
+      $output .= t('<h3>Configuration</h3>');
+      $output .= t('
+      <ul>
+        <li> Visit /admin/config/people/accounts - (Administration > Configuration > People > Account settings)</li>
+        <li> Make sure the option "Enable password strength indicator" must be checked.</li>
+      </ul>
+
+      ');
+
+      return $output;
+  }
+}
+
+/**
+ * Prepares pug configurations.
+ */
+function pug_process_password_suggestion(array $settings) {
+  $config = \Drupal::config('pug.settings');
+  // Returns if no configuration found.
+  if (empty($config->get())) {
+    return $settings;
+  }
+  if (\Drupal::config('user.settings')->get('password_strength')) {
+    foreach ($config->get() as $key => $item) {
+      $password_settings[prepare_js_variables($key, TRUE)] = $item;
+    }
+    $password_settings['showStrengthIndicator'] = TRUE;
+    $password_settings['username'] = \Drupal::currentUser()->getAccountName();
+    $password_settings['pugOverridden'] = TRUE;
+  }
+  $settings['password'] = $password_settings;
+
+  return $settings;
+}
+
+/**
+ * Implements hook_js_settings_alter().
+ */
+function pug_js_settings_alter(array &$settings, AttachedAssetsInterface $assets) {
+  $libraries = $assets->getLibraries();
+  $libraries[] = 'pug/pug.user';
+  $assets->setLibraries($libraries);
+
+  $cid = 'pug:settings';
+  // Get cached data.
+  if ($data = \Drupal::cache()->get($cid)) {
+    return $settings['password'] = $data->data;
+  }
+
+  $settings = pug_process_password_suggestion($settings);
+
+  if (isset($settings['password']['pugOverridden'])) {
+    \Drupal::cache()->set($cid, $settings['password'],
+      CacheBackendInterface::CACHE_PERMANENT, ['pug']);
+  }
+}
+
+/**
+ * Prepares variables for Drupal Settings.
+ */
+function prepare_js_variables($string, $capitalize = FALSE) {
+  $str = lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $string))));
+
+  if (!$capitalize) {
+    $str[0] = strtolower($str[0]);
+  }
+
+  return $str;
+}

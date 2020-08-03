@@ -1,0 +1,16 @@
+confirm_title: 'Passwords match:'
+confirm_success: 'yes'
+confirm_failure: 'no'
+strength_title: 'Password strength:'
+has_weaknesses: 'Recommendations to make your password stronger:'
+password_length: 12
+too_short: 'Make it at least 12 characters'
+add_lowerCase: 'Add lowercase letters'
+add_upperCase: 'Add uppercase letters'
+add_numbers: 'Add numbers'
+add_punctuation: 'Add punctuation'
+same_as_username: 'Make it different from your username'
+label_weak: Weak
+label_fair: Fair
+label_good: Good
+label_strong: Strong
