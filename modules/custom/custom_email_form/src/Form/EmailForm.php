@@ -18,6 +18,12 @@ class EmailForm extends FormBase {
     }
 
     public function buildForm(array $form, FormStateInterface $form_state) {   
+        $form['from'] = array(
+        '#type' => 'email',
+        '#title' => $this->t('From'),
+        '#default_value' => \Drupal::config('system.site')->get('mail'),
+        '#required' => true,
+        );
         $form['to'] = array(
         '#type' => 'email',
         '#title' => $this->t('To'),
@@ -44,15 +50,15 @@ class EmailForm extends FormBase {
 
     public function validateForm(array &$form, FormStateInterface $form_state) {
         //Validate Message
-        if (strlen($form_state->getValue('message')) > 5) {
-            $form_state->setErrorByName('message', $this->t('Message is too long'));
-        }
+        // if (strlen($form_state->getValue('message')) > 5) {
+        //     $form_state->setErrorByName('message', $this->t('Message is too long'));
+        // }
     }
 
     public function submitForm(array &$form, FormStateInterface $form_state) {
         //Submit Form
-        foreach ($form_state->getValues() as $key => $value) {
-            drupal_set_message($key . ': ' . $value);
-        }
+        // foreach ($form_state->getValues() as $key => $value) {
+        //     drupal_set_message($key . ': ' . $value);
+        // }
     }
 }
