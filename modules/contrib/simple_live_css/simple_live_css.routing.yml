@@ -1,0 +1,15 @@
+live_css.save:
+  path: '/live_css/save'
+  methods: [POST]
+  defaults:
+    _title: 'Save live css'
+    _controller: '\Drupal\simple_live_css\Controller\LiveCssController::save'
+  requirements:
+    _permission: 'edit live css'
+live_css.get:
+  path: '/live_css/get'
+  defaults:
+    _title: 'Get live css'
+    _controller: '\Drupal\simple_live_css\Controller\LiveCssController::get'
+  requirements:
+    _permission: 'edit live css'

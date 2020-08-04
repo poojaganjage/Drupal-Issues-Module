@@ -1,0 +1,11 @@
+name: 'Simple live CSS'
+type: module
+description: 'Override CSS on a live site via the interface.'
+package: VDAB-root
+core: 8.x
+core_version_requirement: ^8 || ^9
+
+# Information added by Drupal.org packaging script on 2020-07-22
+version: '8.x-1.0-rc3'
+project: 'simple_live_css'
+datestamp: 1595399637

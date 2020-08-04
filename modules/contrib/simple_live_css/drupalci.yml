@@ -1,0 +1,49 @@
+build:
+  assessment:
+    validate_codebase:
+      phplint: {  }
+      container_composer: {  }
+      container_command:
+        commands:
+          - "cd ${SOURCE_DIR}"
+          - "sudo -u www-data mkdir libraries"
+          - "sudo -u www-data curl -L https://github.com/malsup/blockui/archive/2.70.tar.gz --output blockui.tar.gz --silent"
+          - "sudo -u www-data curl -L https://github.com/ajaxorg/ace-builds/archive/v1.4.7.tar.gz --output ace-builds.tar.gz --silent"
+          - "sudo -u www-data tar -xzf blockui.tar.gz"
+          - "sudo -u www-data tar -xzf ace-builds.tar.gz"
+          - "sudo -u www-data mv ace-builds-1.4.7 libraries/ace-builds"
+          - "sudo -u www-data mv blockui-2.70 libraries/blockui"
+      csslint:
+        halt-on-fail: false
+      eslint:
+        halt-on-fail: false
+      phpcs:
+        sniff-all-files: false
+        halt-on-fail: false
+        coder-version: ^8.2@stable
+    testing:
+      run_tests.standard:
+        types: 'Simpletest,PHPUnit-Unit,PHPUnit-Kernel,PHPUnit-Functional'
+        testgroups: '--all'
+        color: true
+        die-on-fail: false
+        keep-results: true
+        keep-results-table: false
+        verbose: false
+        concurrency: 0
+        halt-on-fail: false
+        repeat: 1
+        suppress-deprecations: true
+      run_tests.js:
+        concurrency: 1
+        types: PHPUnit-FunctionalJavascript
+        testgroups: '--all'
+        color: true
+        die-on-fail: false
+        keep-results: true
+        keep-results-table: false
+        verbose: false
+        halt-on-fail: false
+        repeat: 1
+        suppress-deprecations: true
+      nightwatchjs: {  }

@@ -1,0 +1,22 @@
+simple_live_css_editor:
+  version: 1.x
+  css:
+    theme:
+      css/simple_live_css.styles.css: {}
+  js:
+    /libraries/blockui/jquery.blockUI.js: {}
+    /libraries/ace-builds/src-min/ace.js: {}
+    /libraries/ace-builds/src-min/mode-css.js: {}
+    js/components/liveCssEditor.js: {}
+    js/services/liveCssService.js: {}
+    js/simple_live_css.behaviors.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.once
+
+# Empty library that will be dynamically
+# populated using simple_live_css_library_info_alter.
+simple_live_css:
+  version: 1.x
+  css: {}

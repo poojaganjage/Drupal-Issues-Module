@@ -1,0 +1,6 @@
+{
+    "name": "drupal/simple_live_css",
+    "type": "drupal-module",
+    "description": "Make instant css changes with live preview",
+    "license": "GPL-2.0+"
+}
