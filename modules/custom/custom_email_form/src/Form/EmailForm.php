@@ -50,15 +50,40 @@ class EmailForm extends FormBase {
 
     public function validateForm(array &$form, FormStateInterface $form_state) {
         //Validate Message
-        if (strlen($form_state->getValue('message')) > 5) {
-            $form_state->setErrorByName('message', $this->t('Message is too long'));
-        }
+        // if (strlen($form_state->getValue('message')) > 5) {
+        //     $form_state->setErrorByName('message', $this->t('Message is too long'));
+        // }
     }
 
     public function submitForm(array &$form, FormStateInterface $form_state) {
         //Submit Form
-        foreach ($form_state->getValues() as $key => $value) {
-            drupal_set_message($key . ': ' . $value);
+        // foreach ($form_state->getValues() as $key => $value) {
+        //     drupal_set_message($key . ': ' . $value);
+        // }
+        $mailManager = \Drupal::service('plugin.manager.mail');
+
+        $module = 'custom_email_form';
+        $key = 'create_form';
+        $to = \Drupal::currentUser()->getEmail();
+
+        $form = $form_state->getValue('subject');
+        // $form = $form_state->getValue('message');
+
+        $form = array(
+        '#theme' => 'mail-body',
+        '#form' => $form_state->getValue('message'),
+        );
+        // $mail_body = drupal_render($form);
+        // $form['message'] = $mail_body;
+
+        $langcode = \Drupal::currentUser()->getPreferredLangcode();
+        $send = true;
+
+        $result = $mailManager->mail($module, $key, $to, $langcode, $form, NULL, $send);
+        if ($result['result'] !== true) {
+        drupal_set_message(t('There was a problem sending your message and it was not sent.'), 'error');
+        } else {
+        drupal_set_message(t('Your message has been sent.'));
         }
-    }
+        }
 }
