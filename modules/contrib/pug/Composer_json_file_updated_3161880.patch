@@ -1,0 +1,25 @@
+diff --git a/modules/contrib/pug/composer.json b/modules/contrib/pug/composer.json
+index e69de29..25de184 100644
+--- a/modules/contrib/pug/composer.json
++++ b/modules/contrib/pug/composer.json
+@@ -0,0 +1,20 @@
++{
++    "name": "drupal/pug",
++    "description": "Provides dynamic control to over password recommendation.",
++    "type": "drupal-module",
++    "keywords": ["Drupal", "Password"],
++    "license": "GPL-2.0-or-later",
++    "homepage": "https://www.drupal.org/project/pug",
++    "authors": [
++        {
++            "name": "Shobhit Juyal",
++            "homepage": "https://www.drupal.org/u/shobhit_juyal",
++            "role": "Maintainer"
++        }
++    ],
++    "support": {
++        "issues": "https://www.drupal.org/project/issues/pug",
++        "source": "https://git.drupalcode.org/project/pug.git"
++    },
++    "require": {}
++}
