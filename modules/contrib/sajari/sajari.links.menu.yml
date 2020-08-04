@@ -1,0 +1,5 @@
+sajari.config:
+  title: 'Sajari'
+  description: 'Sitewide Sajari search settings.'
+  route_name: sajari.config
+  parent: 'system.admin_config_search'

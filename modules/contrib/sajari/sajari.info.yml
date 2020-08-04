@@ -1,0 +1,12 @@
+name: Sajari
+description: Provides a block implementing Sajari intelligent search.
+type: module
+package: search
+core_version_requirement: ^8.8 || ^9
+dependencies:
+  - json_template:json_template
+
+# Information added by Drupal.org packaging script on 2020-08-03
+version: '1.0.x-dev'
+project: 'sajari'
+datestamp: 1596441086

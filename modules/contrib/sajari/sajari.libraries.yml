@@ -1,0 +1,13 @@
+sajari.search:
+  js:
+    //cdn.jsdelivr.net/gh/morpht/sajari-configurator/dist/bundle.js: { type: external, minified: true }
+    js/sajari.js: {}
+  dependencies:
+    - sajari/react
+sajari.indexer:
+  js:
+    js/indexer.js: {}
+react:
+  js:
+    /libraries/react/umd/react.production.min.js: {}
+    /libraries/react-dom/umd/react-dom.production.min.js: {}

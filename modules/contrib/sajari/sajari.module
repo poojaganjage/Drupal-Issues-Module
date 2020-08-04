@@ -1,0 +1,121 @@
+<?php
+
+use Drupal\sajari\Plugin\Block\SajariBlock;
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\Render\Element;
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sajari_preprocess_field_multiple_value_form(&$variables) {
+  if (in_array($variables['element']['#field_name'], SajariBlock::getArrayConfigs())) {
+    unset($variables['table']['#header']);
+  }
+}
+
+/**
+ * @see template_preprocess_field_multiple_value_form()
+ */
+function template_preprocess_sajari_multiple_value_form(&$variables) {
+  $element = $variables['element'];
+  $variables['attributes'] = $element['#attributes'];
+  $table_id = Html::getUniqueId($element['#field_name'] . '_values');
+  $order_class = $element['#field_name'] . '-delta-order';
+  $header_attributes = new Attribute(['class' => ['label']]);
+
+  if (!empty($element['#required'])) {
+    $header_attributes['class'][] = 'js-form-required';
+    $header_attributes['class'][] = 'form-required';
+  }
+  $header = [
+    [
+      'data' => [
+        '#prefix' => '<h4' . $header_attributes . '>',
+        '#markup' => $element['#title'],
+        '#suffix' => '</h4>',
+      ],
+      'colspan' => 2,
+      'class' => ['field-label'],
+    ],
+    t('Default'),
+    t('Order', [], ['context' => 'Sort order']),
+  ];
+  $rows = [];
+
+  // Sort items according to '_weight' (needed when the form comes back after
+  // preview or failed validation).
+  $items = [];
+  $variables['button'] = [];
+  foreach (Element::children($element) as $key) {
+    if ($key === 'add_more') {
+      $variables['button'] = &$element[$key];
+    }
+    elseif ($key !== 'default') {
+      $element[$key]['_default'] = &$element['default'][$key];
+      $items[] = &$element[$key];
+    }
+  }
+  usort($items, '_field_multiple_value_form_sort_helper');
+
+  // Add the items as table rows.
+  foreach ($items as $key => $item) {
+    $item['_weight']['#attributes']['class'] = [$order_class];
+
+    // Remove weight form element from item render array so it can be rendered
+    // in a separate table column.
+    $delta_element = $item['_weight'];
+    unset($item['_weight']);
+    $default = $item['_default'];
+    unset($item['_default']);
+    $cells = [
+      ['data' => '', 'class' => ['field-multiple-drag']],
+      ['data' => $item],
+      ['data' => $default],
+      ['data' => $delta_element, 'class' => ['delta-order']],
+    ];
+    $rows[] = [
+      'data' => $cells,
+      'class' => ['draggable'],
+    ];
+  }
+
+  $variables['table'] = [
+    '#type' => 'table',
+    '#header' => $header,
+    '#rows' => $rows,
+    '#attributes' => [
+      'id' => $table_id,
+      'class' => ['field-multiple-table'],
+    ],
+    '#tabledrag' => [
+      [
+        'action' => 'order',
+        'relationship' => 'sibling',
+        'group' => $order_class,
+      ],
+    ],
+  ];
+
+  if (!empty($element['#description'])) {
+    $description_id = $element['#attributes']['aria-describedby'];
+    $description_attributes['id'] = $description_id;
+    $variables['description']['attributes'] = new Attribute($description_attributes);
+    $variables['description']['content'] = $element['#description'];
+
+    // Add the description's id to the table aria attributes.
+    $variables['table']['#attributes']['aria-describedby'] = $element['#attributes']['aria-describedby'];
+  }
+
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sajari_theme($existing, $type, $theme, $path) {
+  return [
+    'sajari_multiple_value_form' => [
+      'render element' => 'element',
+    ],
+  ];
+}

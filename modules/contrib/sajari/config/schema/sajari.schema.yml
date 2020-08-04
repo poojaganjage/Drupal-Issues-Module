@@ -1,0 +1,133 @@
+sajari.config:
+  type: config_object
+  label: 'Sajari configuration'
+  mapping:
+    project:
+      type: string
+      label: 'Project'
+    collection:
+      type: string
+      label: 'Collection'
+
+block.settings.sajari_search:
+  type: block_settings
+  label: 'Sajari search'
+  mapping:
+    pipeline:
+      type: string
+      label: 'Pipeline'
+    resultsPerPage:
+      type: integer
+      label: 'Results per Page'
+    fields:
+      type: sequence
+      label: 'Fields'
+      sequence:
+        type: string
+        label: 'Field'
+    pagerEnabled:
+      type: boolean
+      label: 'Enable pager'
+    trackingEnabled:
+      type: boolean
+      label: 'Enable tracking'
+    maxSuggestions:
+      type: integer
+      label: 'Max suggestions'
+    inputPlaceholder:
+      type: label
+      label: 'Input placeholder'
+    param:
+      type: string
+      label: 'Parameter'
+    filter:
+      type: string
+      label: 'Filter'
+    filterEnabled:
+      type: boolean
+      label: 'Enable filter'
+    summaryEnabled:
+      type: boolean
+      label: 'Enable summary'
+    template:
+      type: string
+      label: 'Template'
+    tabsEnabled:
+      type: boolean
+      label: 'Enable tabs'
+    tabsDefault:
+      type: label
+      label: 'Default tab'
+    tabs:
+      type: sequence
+      label: 'Tabs'
+      sequence:
+        type: mapping
+        label: 'Tab'
+        mapping:
+          title:
+            type: label
+            label: 'Title'
+          filter:
+            type: string
+            label: 'Filter'
+    facetsEnabled:
+      type: boolean
+      label: 'Enable facets'
+    facets:
+      type: sequence
+      label: 'Facets'
+      sequence:
+        type: mapping
+        label: 'Facet'
+        mapping:
+          name:
+            type: string
+            label: 'Name'
+          title:
+            type: label
+            label: 'Title'
+    sortsEnabled:
+      type: boolean
+      label: 'Enable sorts'
+    sortsDefault:
+      type: label
+      label: 'Default sort'
+    sorts:
+      type: sequence
+      label: 'Sorts'
+      sequence:
+        type: mapping
+        label: 'Sort'
+        mapping:
+          name:
+            type: string
+            label: 'Name'
+          title:
+            type: label
+            label: 'Title'
+    rangesEnabled:
+      type: boolean
+      label: 'Enable ranges'
+    ranges:
+      type: sequence
+      label: 'Ranges'
+      sequence:
+        type: mapping
+        label: 'Range'
+        mapping:
+          name:
+            type: string
+            label: 'Name'
+          title:
+            type: label
+            label: 'Title'
+          min:
+            type: integer
+            label: 'Minimal'
+          max:
+            type: integer
+            label: 'Maximal'
+          step:
+            type: integer
+            label: 'Step'

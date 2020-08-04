@@ -1,0 +1,7 @@
+sajari.config:
+  path: '/admin/config/search/sajari'
+  defaults:
+    _form: '\Drupal\sajari\Form\ConfigForm'
+    _title: 'Sajari search settings'
+  requirements:
+    _permission: 'administer site configuration'

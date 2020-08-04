@@ -1,0 +1,7 @@
+sajari_results:
+  title: 'Sajari results'
+  description: 'Title linked and description.'
+  file: templates/sajari_results.html.hbs
+  transformer: handlebars
+  available_for:
+    - sajari_search
