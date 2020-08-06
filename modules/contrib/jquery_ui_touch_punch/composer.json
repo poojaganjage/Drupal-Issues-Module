@@ -1,0 +1,44 @@
+{
+  "name": "drupal/jquery_ui_touch_punch",
+  "description": "Provides jQuery UI Touch Punch library.",
+  "type": "drupal-module",
+  "homepage": "https://www.drupal.org/project/jquery_ui_touch_punch",
+  "keywords": ["Drupal", "jquery_ui_touch_punch"],
+  "license": "GPL-2.0-or-later",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/jquery_ui_touch_punch",
+    "irc": "irc://irc.freenode.org/drupal-contribute",
+    "source": "https://www.drupal.org/project/jquery_ui_touch_punch"
+  },
+  "authors": [
+    {
+      "name": "Naveen Valecha",
+      "homepage": "https://drupal.org/u/naveenvalecha",
+      "role": "Maintainer"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "drupal/jquery_ui_touch_punch",
+        "version": "1.0.x-dev",
+        "type": "drupal-library",
+        "dist": {
+          "url": "https://github.com/furf/jquery-ui-touch-punch/archive/master.zip",
+          "type": "zip"
+        }
+      }
+    }
+  ],
+  "require": {
+    "drupal/core": "^8 || ^9",
+    "drupal/jquery_ui": "^1.0",
+    "drupal/jquery_ui_touch_punch": "1.0.x-dev"
+  },
+  "suggest": {
+    "furf/jquery-ui-touch-punch": "Required to use drupal/jquery_ui_touch_punch module."
+  }
+}
