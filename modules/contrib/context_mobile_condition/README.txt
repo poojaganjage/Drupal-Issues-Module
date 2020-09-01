@@ -1,5 +1,5 @@
 INTRODUCTION
---------
+------------
 
 This is a Context Mobile Condition module which integrates Context and PHP Mobile Detect library Mobile_Detect.
 
