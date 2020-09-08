@@ -3,8 +3,8 @@ type: theme
 description: 'Theme for sports bloggers'
 package: Other
 base theme: classy
- core_version_requirement: ^8 || ^9
- libraries:
+core_version_requirement: ^8 || ^9
+libraries:
   - zeus_theme/global-styling
 regions:
   secondary_menu: 'Secondary Menu'
@@ -19,7 +19,6 @@ regions:
   featured_bottom_second: 'Featured bottom Second'
   featured_bottom_third: 'Featured bottom Third'
   featured_bottom: 'Featured Bottom'
-  footer_top: 'Footer Top'
   footer_first: 'Footer First'
   footer_second: 'Footer Second'
   footer_third: 'Footer Third'

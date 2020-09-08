@@ -1,0 +1,142 @@
+diff --git a/themes/custom/zeus_theme/templates/page.html.twig b/themes/custom/zeus_theme/templates/page.html.twig
+index e69de29..040ab81 100644
+--- a/themes/custom/zeus_theme/templates/page.html.twig
++++ b/themes/custom/zeus_theme/templates/page.html.twig
+@@ -0,0 +1,137 @@
++{#
++/**
++ * @file
++ * Theme override to display a single page.
++ *
++ * The doctype, html, head and body tags are not in this template. Instead they
++ * can be found in the html.html.twig template in this directory.
++ *
++ * Available variables:
++ *
++ * General utility variables:
++ * - base_path: The base URL path of the Drupal installation. Will usually be
++ *   "/" unless you have installed Drupal in a sub-directory.
++ * - is_front: A flag indicating if the current page is the front page.
++ * - logged_in: A flag indicating if the user is registered and signed in.
++ * - is_admin: A flag indicating if the user has permission to access
++ *   administration pages.
++ *
++ * Site identity:
++ * - front_page: The URL of the front page. Use this instead of base_path when
++ *   linking to the front page. This includes the language domain or prefix.
++ *
++ * Page content (in order of occurrence in the default page.html.twig):
++ * - node: Fully loaded node, if there is an automatically-loaded node
++ *   associated with the page and the node ID is the second argument in the
++ *   page's path (e.g. node/12345 and node/12345/revisions, but not
++ *   comment/reply/12345).
++ *
++ * Regions:
++ * - page.secondary_menu: Items for the secondary menu region.
++ * - page.branding: Items for the branding region.
++ * - page.navigation: Items for the navigation region.
++ * - page.primary_menu: Items for the primary menu region.
++ * - page.featured_top: Items for the featured top region.
++ * - page.left_sidebar: Items for the left sidebar
++ * - page.content: The main content of the current page.
++ * - page.right_sidebar: Items for the right sidebar.
++ * - page.featured_bottom_first: Items for the featured bottom first region.
++ * - page.featured_bottom_second: Items for the featured bottom second region.
++ * - page.featured_bottom_third: Items for the featured bottom third region.
++ * - page.featured_bottom: Items for the featured bottom region.
++ * - page.footer_top: Items for the footer top region.
++ * - page.footer_first: Items for the footer first region.
++ * - page.footer_second: Items for the footer second region.
++ * - page.footer_third: Items for the footer third region.
++ * - page.footer_fourth: Items for the footer fourth region.
++ * - page.footer_bottom: Items for the footer bottom region.
++ * @see template_preprocess_page()
++ * @see html.html.twig
++ */
++#}
++<div class="layout-container">
++
++  {{ page.secondary_menu }}
++  {{ page.branding }}
++
++  {% if page.main_navigation %}
++    {{ page.main_navigation }}
++  {% endif %}
++
++  {{ page.primary_menu }}
++
++  {{ page.featured_top }}
++
++  <main role="main">
++    <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
++
++    {% if page.left_sidebar %}
++      <aside class="layout-left_sidebar" role="complementary">
++        {{ page.left_sidebar }}
++      </aside>
++    {% endif %}
++
++    <div class="layout-content">
++      {{ page.content }}
++    </div>{# /.layout-content #}
++
++    {% if page.right_sidebar %}
++      <aside class="layout-right_sidebar" role="complementary">
++        {{ page.right_sidebar }}
++      </aside>
++    {% endif %}
++
++    {% if page.featured_bottom_first %}
++        {{ page.featured_bottom_first }}
++    {% endif %}
++
++    {% if page.featured_bottom_second %}
++        {{ page.featured_bottom_second }}
++    {% endif %}
++
++    {% if page.featured_bottom_third %}
++        {{ page.featured_bottom_third }}
++    {% endif %}
++
++    {% if page.featured_bottom %}
++        {{ page.featured_bottom }}
++    {% endif %}
++  </main>
++
++  {% if page.footer_top %}
++    <footer role="contentinfo">
++      {{ page.footer_top }}
++    </footer>
++  {% endif %}
++
++  {% if page.footer_first %}
++    <footer role="contentinfo">
++      {{ page.footer_first }}
++    </footer>
++  {% endif %}
++
++  {% if page.footer_second %}
++    <footer role="contentinfo">
++      {{ page.footer_second }}
++    </footer>
++  {% endif %}
++
++  {% if page.footer_third %}
++    <footer role="contentinfo">
++      {{ page.footer_third }}
++    </footer>
++  {% endif %}
++
++  {% if page.footer_fourth %}
++    <footer role="contentinfo">
++      {{ page.footer_fourth }}
++    </footer>
++  {% endif %}
++
++  {% if page.footer_bottom %}
++    <footer role="contentinfo">
++      {{ page.footer_bottom }}
++    </footer>
++  {% endif %}
++
++</div>{# /.layout-container #}
