@@ -1,0 +1,27 @@
+name: zeus_theme
+type: theme
+description: 'Theme for sports bloggers'
+package: Other
+base theme: classy
+ core_version_requirement: ^8 || ^9
+ libraries:
+  - zeus_theme/global-styling
+regions:
+  secondary_menu: 'Secondary Menu'
+  branding: 'Branding'
+  navigation: 'Navigation'
+  primary_menu: 'Primary Menu'
+  featured_top: 'Featured Top'
+  left_sidebar: 'Left Sidebar'
+  content: 'Content'
+  right_sidebar: 'Right Sidebar'
+  featured_bottom_first: 'Featured bottom First'
+  featured_bottom_second: 'Featured bottom Second'
+  featured_bottom_third: 'Featured bottom Third'
+  featured_bottom: 'Featured Bottom'
+  footer_top: 'Footer Top'
+  footer_first: 'Footer First'
+  footer_second: 'Footer Second'
+  footer_third: 'Footer Third'
+  footer_fourth: 'Footer Fourth'
+  footer_bottom: 'Footer Bottom'
