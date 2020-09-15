@@ -28,6 +28,7 @@ use Drupal\Core\Session\SessionManager;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\user\UserData;
 use Drupal\Component\Utility\Xss;
+use Drupal\user\Entity\User;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
@@ -397,7 +398,7 @@ class AutologoutManager implements AutologoutManagerInterface
      *
      * @return bool
      */
-    public function logoutRole($user)
+    public function logoutRole(User $user)
     {
         if ($this->autoLogoutSettings->get('role_logout')) {
             foreach ($user->roles as $name => $role) {

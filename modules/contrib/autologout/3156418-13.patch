@@ -1,0 +1,21 @@
+diff --git a/modules/contrib/autologout/src/AutologoutManager.php b/modules/contrib/autologout/src/AutologoutManager.php
+index 2d978a4..8539e13 100644
+--- a/modules/contrib/autologout/src/AutologoutManager.php
++++ b/modules/contrib/autologout/src/AutologoutManager.php
+@@ -28,6 +28,7 @@
+ use Drupal\Core\Session\AnonymousUserSession;
+ use Drupal\user\UserData;
+ use Drupal\Component\Utility\Xss;
++use Drupal\user\Entity\User;
+ use Drupal\Core\StringTranslation\StringTranslationTrait;
+ use Drupal\Core\Entity\EntityTypeManagerInterface;
+ 
+@@ -397,7 +398,7 @@ public function getUserRedirectUrl($uid = null)
+      *
+      * @return bool
+      */
+-    public function logoutRole($user)
++    public function logoutRole(User $user)
+     {
+         if ($this->autoLogoutSettings->get('role_logout')) {
+             foreach ($user->roles as $name => $role) {
