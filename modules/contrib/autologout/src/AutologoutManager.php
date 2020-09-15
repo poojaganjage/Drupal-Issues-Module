@@ -25,7 +25,6 @@ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\SessionManager;
-use Drupal\user\Entity\User;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\user\UserData;
 use Drupal\Component\Utility\Xss;
@@ -398,7 +397,7 @@ class AutologoutManager implements AutologoutManagerInterface
      *
      * @return bool
      */
-    public function logoutRole(User $user)
+    public function logoutRole($user)
     {
         if ($this->autoLogoutSettings->get('role_logout')) {
             foreach ($user->roles as $name => $role) {
