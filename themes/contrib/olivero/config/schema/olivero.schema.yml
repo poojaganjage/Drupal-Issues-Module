@@ -1,5 +1,0 @@
-# Schema for the configuration files of the Olivero theme.
-
-olivero.settings:
-  type: theme_settings
-  label: 'olivero settings'
