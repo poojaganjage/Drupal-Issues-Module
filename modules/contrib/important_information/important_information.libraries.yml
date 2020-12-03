@@ -1,0 +1,75 @@
+importantInformationBottom:
+  version: 1.x
+  css:
+    theme:
+      css/important-information.css: {}
+      css/embedded-bottom.css: {}
+      css/print.css: { media: print }
+  dependencies:
+  - core/jquery
+  - core/drupal.ajax
+  - core/drupal
+  - core/drupalSettings
+  - core/jquery.once
+
+importantInformationSidebar:
+  version: 1.x
+  css:
+    theme:
+      css/important-information.css: {}
+      css/sidebar.css: {}
+  js:
+    js/important-information-sidebar.js: {}
+  dependencies:
+  - core/jquery
+  - core/drupal.ajax
+  - core/drupal
+  - core/drupalSettings
+  - core/jquery.once
+
+importantInformationFloatingContainer:
+  version: 1.x
+  css:
+    theme:
+      css/important-information.css: {}
+      css/floating-container.css: {}
+      css/print.css: { media: print }
+  js:
+    js/important_information_floating_container.js: {}
+  dependencies:
+  - core/jquery
+  - core/drupal.ajax
+  - core/drupal
+  - core/drupalSettings
+  - core/jquery.once
+
+importantInformationAcknowledge:
+  version: 1.x
+  js:
+    js/important_information_acknowledge.js: {}
+  css:
+    theme:
+      css/acknowledge-important.css: {}
+      css/print.css: { media: print }
+  dependencies:
+  - core/jquery
+  - core/drupal.ajax
+  - core/drupal
+  - core/drupalSettings
+  - core/jquery.once
+  - core/jquery.cookie
+
+importantInformationExit:
+  version: 1.x
+  js:
+    js/important_information_exit.js: {}
+  css:
+    theme:
+      css/exit-important.css: {}
+      css/print.css: { media: print }
+  dependencies:
+  - core/jquery
+  - core/drupal.ajax
+  - core/drupal
+  - core/drupalSettings
+  - core/jquery.once

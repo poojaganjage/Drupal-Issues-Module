@@ -1,0 +1,20 @@
+.display-none {
+  display: none !important;
+}
+button {
+  float: right;
+}
+
+.ui-widget-overlay {
+  opacity: .7 !important;
+}
+
+.sidebartop {
+  z-index: 9999 !important;
+}
+
+@media screen and (min-width: 48rem) {
+  .exit-dialog.ui-dialog {
+    left: 20% !important;
+  }
+}

@@ -1,0 +1,7 @@
+services:
+  plugin.manager.json_template.template:
+    class: Drupal\json_template\Plugin\JsonTemplateManager
+    arguments: ['@module_handler', '@theme_handler', '@cache.discovery']
+  plugin.manager.json_template.transformer:
+    class: Drupal\json_template\Plugin\JsonTransformerManager
+    arguments: ['@module_handler', '@theme_handler', '@cache.discovery']

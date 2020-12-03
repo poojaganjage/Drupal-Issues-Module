@@ -1,0 +1,90 @@
+diff --git a/composer.json b/composer.json
+index f372fbc..1e5b592 100644
+--- a/composer.json
++++ b/composer.json
+@@ -1,43 +1,44 @@
+-"name": "drupal/simple_live_css",
+-"type": "drupal-module",
+-"description": "Make instant css changes with live preview",
+-"license": "GPL-2.0-or-later",
+-"homepage": "https://drupal.org/project/simple_live_css",
+-"authors": [
+-        {
+-            "name": "Robin De Herdt (robindh)",
+-            "homepage": "https://www.drupal.org/u/robindh",
+-            "role": "Maintainer"
++{
++  "name": "drupal/simple_live_css",
++  "type": "drupal-module",
++  "description": "Make instant css changes with live preview",
++  "license": "GPL-2.0-or-later",
++  "homepage": "https://drupal.org/project/simple_live_css",
++  "authors": [
++    {
++      "name": "Robin De Herdt (robindh)",
++      "homepage": "https://www.drupal.org/u/robindh",
++      "role": "Maintainer"
++    }
++  ],
++  "repositories": [
++    {
++      "type": "package",
++      "package": {
++        "name": "library-blockui/blockui",
++        "version": "2.70",
++        "type": "drupal-library",
++        "dist": {
++          "url": "https://github.com/malsup/blockui/archive/2.70.zip",
++          "type": "zip"
+         }
+-    ],
+-    "repositories": [
+-        {
+-            "type": "package",
+-            "package": {
+-                "name": "library-blockui/blockui",
+-                "version": "2.70",
+-                "type": "drupal-library",
+-                "dist": {
+-                    "url": "https://github.com/malsup/blockui/archive/2.70.zip",
+-                    "type": "zip"
+-                }
+-            }
+-        },
+-        {
+-            "type": "package",
+-            "package": {
+-                "name": "ajaxorg/ace-builds",
+-                "version": "1.4",
+-                "type": "drupal-library",
+-                "dist": {
+-                    "url": "https://github.com/ajaxorg/ace-builds/archive/v1.4.7.zip",
+-                    "type": "zip"
+-                }
+-            }
++      }
++    },
++    {
++      "type": "package",
++      "package": {
++        "name": "ajaxorg/ace-builds",
++        "version": "^1.4",
++        "type": "drupal-library",
++        "dist": {
++          "url": "https://github.com/ajaxorg/ace-builds/archive/v1.4.12.zip",
++          "type": "zip"
+         }
+-    ],
+-    "require": {
+-        "library-blockui/blockui": "^2.70",
+-        "ajaxorg/ace-builds": "^1.4"
++      }
+     }
+- }
+\ No newline at end of file
++  ],
++  "require": {
++    "library-blockui/blockui": "2.70",
++    "ajaxorg/ace-builds": "^1.4"
++  }
++}

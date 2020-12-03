@@ -20,6 +20,35 @@ code, and instead to select a replacement solution as soon as possible.
 3.  Install module the [usual way](https://www.drupal.org/documentation/install/modules-themes/modules-8).
 4.  Change any references in your theme or module from
     `core/jquery.ui.touch-punch` to `jquery_ui_touch_punch/touch-punch`
+5.  Add asset packagist into main composer.json file as mentioned below:
+    ```
+    "repositories": {
+      "drupal": {
+        "type": "composer",
+        "url": "https://packages.drupal.org/8"
+      },
+      "assets": {
+        "type": "composer",
+        "url": "https://asset-packagist.org"
+      }
+    },
+    ```
+6. Set the installer location for the libraries, also in your composer.json:
+    ```
+    "extra": {
+      "installer-types": ["npm-asset", "bower-asset"],
+      "installer-paths": {
+        "web/libraries/{$name}": [
+            "type:drupal-library",
+            "vendor:npm-asset",
+            "vendor:bower-asset"
+        ],
+      },
+    }
+    ```
+7. run 'composer require oomphinc/composer-installers-extender'
+
+8. run 'composer require npm-asset/jquery-ui-touch-punch'
 
 ### Requirements
 

@@ -1,0 +1,17 @@
+diff --git a/modules/contrib/filter_script_tags/src/Plugin/Filter/FilterScriptTags.php b/modules/contrib/filter_script_tags/src/Plugin/Filter/FilterScriptTags.php
+index 2e41b87..10b94ae 100644
+--- a/modules/contrib/filter_script_tags/src/Plugin/Filter/FilterScriptTags.php
++++ b/modules/contrib/filter_script_tags/src/Plugin/Filter/FilterScriptTags.php
+@@ -122,8 +122,10 @@ private function scriptFilterScript(string $string, array $whitelist_regex = [])
+ 
+         // Set flag to indicate whether we have modified $html_input and therefore need to return it.
+         $send_new_html = false;
+-        
+-        $body = $html_input->getElementsByTagName('body');
++
++        $dom = new \DOMDocument();
++        $dom->loadHTML($html_input);
++        $body = $dom->getElementsByTagName('body');
+         $body = $body[0];
+ 
+         foreach ($body->childNodes as $element) {

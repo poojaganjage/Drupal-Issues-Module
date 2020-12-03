@@ -1,0 +1,20 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.ii_content.field_ii_content_bottom
+    - important_information.ii_content_type.bottom
+  module:
+    - text
+id: ii_content.bottom.field_ii_content_bottom
+field_name: field_ii_content_bottom
+entity_type: ii_content
+bundle: bottom
+label: 'Important Information Content'
+description: 'Set the Important Information markup.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,12 @@
+<div id="important-floating-container-block-wrap"{% if expandable == true %} class="important-floating-container-expandable"{% endif %}>
+    {% if expandable == true %}
+        <div class="expandable-bar">
+            <div class="expand-button not-expanded">{{ default_expand_markup }}</div>
+        </div>
+    {% endif %}
+    <div class="important-footer-content">
+        {{ content_title }}
+        {{ modal }}
+        {{ information }}
+    </div>
+</div>

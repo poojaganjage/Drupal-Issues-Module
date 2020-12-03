@@ -1,0 +1,5 @@
+name: Drupal 8 Display Suite Field Module
+description: 'Display Suite Field Module for Drupal 8'
+type: module
+core: 8.x
+package: Custom

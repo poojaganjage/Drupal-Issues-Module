@@ -1,0 +1,46 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.ii_content.bottom.field_collapsible_bottom
+    - field.field.ii_content.bottom.field_content_title
+    - field.field.ii_content.bottom.field_full_size_bottom
+    - field.field.ii_content.bottom.field_ii_content_bottom
+    - field.field.ii_content.bottom.field_per_modal
+    - important_information.ii_content_type.bottom
+  module:
+    - text
+    - user
+id: ii_content.bottom.default
+targetEntityType: ii_content
+bundle: bottom
+mode: default
+content:
+  field_ii_content_bottom:
+    type: text_default
+    weight: 1
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    label: above
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  user_id:
+    label: hidden
+    type: author
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_collapsible_bottom: true
+  field_content_title: true
+  field_full_size_bottom: true
+  field_per_modal: true
+  langcode: true

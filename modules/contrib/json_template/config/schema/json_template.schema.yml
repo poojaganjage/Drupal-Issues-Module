@@ -1,0 +1,14 @@
+field.storage_settings.list_template:
+  type: mapping
+  label: 'Template list settings'
+  mapping:
+    available_for:
+      type: string
+      label: 'Identfier of template availability'
+
+field.value.list_template:
+  type: mapping
+  label: default_value
+  mapping:
+    type: string
+    label: value

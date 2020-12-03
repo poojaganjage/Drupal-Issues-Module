@@ -1,0 +1,26 @@
+{
+  "name": "drupal-theme-gulp",
+  "version": "1.0.0",
+  "description": "Gulp dependencies for drupal 8 theme",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "Error No Test Specified"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ivandoric/olympos/git"
+  },
+  "author": "Pooja Ganjage",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-livereload": "^4.0.2",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglifyjs": "^0.6.2",
+    "imagemin-pngquant": "^8.0.0",
+    "lozad": "^1.15.0"
+  }
+}

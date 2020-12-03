@@ -1,0 +1,3 @@
+services:
+  captcha_module.captchaservice:
+    class: Drupal\captcha_module\Service\CaptchaService

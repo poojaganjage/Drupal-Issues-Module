@@ -1,0 +1,35 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.ii_content.acknowledge.field_ack_content
+    - field.field.ii_content.acknowledge.field_continue_button
+    - field.field.ii_content.acknowledge.field_per_modal
+    - important_information.ii_content_type.acknowledge
+  module:
+    - user
+id: ii_content.acknowledge.default
+targetEntityType: ii_content
+bundle: acknowledge
+mode: default
+content:
+  name:
+    label: above
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  user_id:
+    label: hidden
+    type: author
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_ack_content: true
+  field_continue_button: true
+  field_per_modal: true
+  langcode: true

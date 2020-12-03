@@ -1,0 +1,5 @@
+name: Caching Module
+type: module
+description: Shows caching related items.
+core: 8.x
+package: Custom

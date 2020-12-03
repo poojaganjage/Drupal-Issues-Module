@@ -1,0 +1,31 @@
+diff --git a/README.md b/README.md
+index e29294b..fbbff5f 100644
+--- a/README.md
++++ b/README.md
+@@ -20,6 +20,26 @@ code, and instead to select a replacement solution as soon as possible.
+ 3.  Install module the [usual way](https://www.drupal.org/documentation/install/modules-themes/modules-8).
+ 4.  Change any references in your theme or module from
+     `core/jquery.ui.touch-punch` to `jquery_ui_touch_punch/touch-punch`
++5.  Add repository into main composer.json file (Use drupal/recommended-project in composer.json)
++    as mentioned below:
++
++    "repositories": [
++      {
++        "type": "package",
++        "package": {
++          "name": "furf/jquery-ui-touch-punch",
++          "version": "dev-master",
++          "type": "drupal-library",
++          "dist": {
++            "url": "https://github.com/furf/jquery-ui-touch-punch/archive/master.zip",
++            "type": "zip"
++          }
++        }
++      }
++    ],
++
++    Run the following command:
++    composer require drupal/jquery_ui_touch_punch furf/jquery-ui-touch-punch
+ 
+ ### Requirements
+ 

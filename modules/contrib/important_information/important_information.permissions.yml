@@ -1,0 +1,33 @@
+add ii content entities:
+  title: 'Create new II Content entities'
+
+administer ii content entities:
+  title: 'Administer II Content entities'
+  description: 'Allow to access the administration form to configure II Content entities.'
+  restrict access: true
+
+delete ii content entities:
+  title: 'Delete II Content entities'
+
+edit ii content entities:
+  title: 'Edit II Content entities'
+
+view published ii content entities:
+  title: 'View published II Content entities'
+
+view unpublished ii content entities:
+  title: 'View unpublished II Content entities'
+
+view all ii content revisions:
+  title: 'View all II Content revisions'
+
+revert all ii content revisions:
+  title: 'Revert all II Content revisions'
+  description: 'Role requires permission <em>view II Content revisions</em> and <em>edit rights</em> for ii content entities in question or <em>administer ii content entities</em>.'
+
+delete all ii content revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view II Content revisions</em> and <em>delete rights</em> for ii content entities in question or <em>administer ii content entities</em>.'
+
+permission_callbacks:
+  - \Drupal\important_information\IIContentPermissions::generatePermissions

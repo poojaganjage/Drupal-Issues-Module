@@ -1,0 +1,8 @@
+never autoplay videos:
+   title: Never autoplay videos
+   description: Disables autoplay for every video viewed by users with the given role.
+
+administer video_embed_field:
+    title: 'Administer Video Embed Settings'
+    description: 'Access the Video Embed administration settings page.'
+    restrict access: true

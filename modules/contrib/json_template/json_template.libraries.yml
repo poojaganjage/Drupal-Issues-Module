@@ -1,0 +1,6 @@
+handlebars:
+  js:
+    /libraries/handlebars/dist/handlebars.js: {}
+json_template:
+  js:
+    js/json_template.js: {}

@@ -1,0 +1,44 @@
+important_information.bottom:
+  path: '/important-information/bottom'
+  defaults:
+    _title: 'Important Information'
+    _controller: '\Drupal\important_information\Controller\IIContentController::modal'
+    name: 'bottom'
+  requirements:
+    _permission: 'access content'
+
+important_information.sidebar:
+  path: '/important-information/sidebar'
+  defaults:
+    _title: 'Important Information'
+    _controller: '\Drupal\important_information\Controller\IIContentController::modal'
+    name: 'sidebar'
+  requirements:
+    _permission: 'access content'
+
+important_information.floating:
+  path: '/important-information/floating'
+  defaults:
+    _title: 'Important Information'
+    _controller: '\Drupal\important_information\Controller\IIContentController::modal'
+    name: 'floating'
+  requirements:
+    _permission: 'access content'
+
+important_information.intro:
+  path: '/important-information/intro'
+  defaults:
+    _title: 'Important Information'
+    _controller: '\Drupal\important_information\Controller\IIContentController::modal'
+    name: 'intro'
+  requirements:
+    _permission: 'access content'
+
+important_information.exit:
+  path: '/important-information/exit'
+  defaults:
+    _title: 'Important Information'
+    _controller: '\Drupal\important_information\Controller\IIContentController::modal'
+    name: 'exit'
+  requirements:
+    _permission: 'access content'

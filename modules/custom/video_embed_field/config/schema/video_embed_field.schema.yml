@@ -1,0 +1,14 @@
+field.value.video_embed_field:
+     value:
+       type: string
+       label: 'Video URL'
+video_embed_field.settings:
+  type: config_object
+  label: 'Video Embed Field Content Type Settings'
+  mapping:
+    allowed_types:
+      type: sequence
+      label: 'Content types Video Embed Form can display on'
+      sequence:
+        type: string
+        label: 'Content type'

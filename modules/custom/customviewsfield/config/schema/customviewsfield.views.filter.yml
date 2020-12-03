@@ -1,0 +1,7 @@
+views.filter.string:
+  type: views_filter
+  label: 'Enhanced node type filter'
+
+views.filter_value.customviewsfield_node_titles:
+  type: views.filter_value.in_operator
+  label: 'Node titles'

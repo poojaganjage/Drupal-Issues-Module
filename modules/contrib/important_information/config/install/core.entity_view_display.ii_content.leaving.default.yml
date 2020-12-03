@@ -1,0 +1,33 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.ii_content.leaving.field_exit_content
+    - field.field.ii_content.leaving.field_per_modal
+    - important_information.ii_content_type.leaving
+  module:
+    - user
+id: ii_content.leaving.default
+targetEntityType: ii_content
+bundle: leaving
+mode: default
+content:
+  name:
+    label: above
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  user_id:
+    label: hidden
+    type: author
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_exit_content: true
+  field_per_modal: true
+  langcode: true

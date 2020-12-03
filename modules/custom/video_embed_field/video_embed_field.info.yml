@@ -1,0 +1,8 @@
+name: Custom Video Embed Field 
+description: 'Provides a field type for displaying videos from 3rd party providers such as YouTube and Vimeo.'
+type: module
+package: Custom
+core_version_requirement: ^8.8 || ^9
+configure: video_embed_field.admin_settings
+dependencies:
+  - drupal:field

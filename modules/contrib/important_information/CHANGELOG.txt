@@ -1,0 +1,10 @@
+Important Information 8.x-1.2, 2020-01-30
+-------------------------------------
+- Fix bug Some mandatory parameters are missing ("ii_content_type")
+- Fix bug Error: Call to a member function get() on null en
+  Drupal\important_information\Controller\IIContentController->modal()
+
+Important Information 8.x-1.1, 2019-11-15
+-------------------------------------
+- Block content validation
+- Update README file

@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * @file
+ * Module file for scriptfilter.
+ *
+ * Based on:
+ * - https://www.drupal.org/project/iframeremove
+ *
+ * @see \Drupal\filter_script_tag\Plugin\Filter\FilterScriptTags.
+ */

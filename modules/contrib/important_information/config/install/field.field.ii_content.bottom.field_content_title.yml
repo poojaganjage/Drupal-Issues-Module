@@ -1,0 +1,23 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.ii_content.field_content_title
+    - important_information.ii_content_type.bottom
+  module:
+    - text
+id: ii_content.bottom.field_content_title
+field_name: field_content_title
+entity_type: ii_content
+bundle: bottom
+label: 'Content Title'
+description: 'Title shown first in the content'
+required: true
+translatable: false
+default_value:
+  -
+    value: 'Important Safety Information'
+    format: full_html
+default_value_callback: ''
+settings: {  }
+field_type: text

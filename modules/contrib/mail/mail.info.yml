@@ -1,0 +1,11 @@
+name: Mail
+description: Provides a config entity for emails sent by the site.
+type: module
+# core: 8.x
+package: Mail
+
+# Information added by Drupal.org packaging script on 2017-09-27
+version: '8.x-1.0+1-dev'
+core: '8.x'
+project: 'mail'
+datestamp: 1506517845

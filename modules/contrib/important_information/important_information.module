@@ -1,0 +1,231 @@
+<?php
+
+/**
+ * @file
+ * Contains important_information.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function important_information_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the important_information module.
+    case 'help.page.important_information':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The important information block is a module used to place an element
+      in your page for displaying information to the user.') . '</p>';
+      $output .= '<h3>' . t('Types') . '</h3>';
+      $output .= '<dl><dt>' . t('Embedded Bottom Container') . '</dt>';
+      $output .= '<dd>' . t('Principal container. Information should be added here.') . '</dd>';
+      $output .= '<dt>' . t('Floating Container') . '</dt>';
+      $output .= '<dd>' . t('An optional container. It floats at the bottom of the page') . '</dd>';
+      $output .= '<dt>' . t('Sidebar Container') . '</dt>';
+      $output .= '<dd>' . t('An optional container. It shows on sidebar with fixed position') . '</dd>';
+      $output .= '<dt>' . t('Acknowledge Container') . '</dt>';
+      $output .= '<dd>' . t('An optional container. It shows information before proceeding to the site') . '</dd>';
+      $output .= '<dt>' . t('Leaving Interstitial Container') . '</dt>';
+      $output .= '<dd>' . t('An optional container. It shows information to the user when leaving the site') . '</dd>';
+      $output .= '</dl>';
+      $output .= '<h3>' . t('Configuration') . '</h3>';
+      $output .= '<dl><dt>' . t('Embedded Bottom Container') . '</dt>';
+      $output .= '<dd>' . t('Name. The name of the II Content Type') . '</dd>';
+      $output .= '<dd>' . t('Important Information Content. The main content.') . '</dd>';
+      $output .= '<dd>' . t('Collapsible. Enable to collapsible the block on mobile view.') . '</dd>';
+      $output .= '<dd>' . t('Collapsible Title. Header of Embedded Bottom when collapses.') . '</dd>';
+      $output .= '<dd>' . t('Full-size Modal. Enable to provide a button to present the Important Information in a full screen modal') . '</dd>';
+      $output .= '<dd>' . t('Modal Title. Title shown in the modal box') . '</dd>';
+      $output .= '<dd>' . t('Modal Size. Percent of the screen modal will cover') . '</dd>';
+      $output .= '</dl>';
+      $output .= '<dl><dt>' . t('Floating Container') . '</dt>';
+      $output .= '<dd>' . t('Name. The name of the II Content Type') . '</dd>';
+      $output .= '<dd>' . t('Hide Floating Container. Floating container will disappear once the user scrolls to the Embedded Bottom container section') . '</dd>';
+      $output .= '<dd>' . t('Offset. Adjust the calibration of the Embedded Bottom detection. Lower than zero makes it happen slower') . '</dd>';
+      $output .= '<dd>' . t('Collapsed Height. Percentage of the screen the collapsed Floating Container occupies') . '</dd>';
+      $output .= '<dd>' . t('Expand Button. Allows the user to expand the footer to see more of the content') . '</dd>';
+      $output .= '<dd>' . t('Expanded Height. Percentage of the screen the expanded Floating Container will cover') . '</dd>';
+      $output .= '<dd>' . t('Expanded Button Text. Markup for the expanded button') . '</dd>';
+      $output .= '<dd>' . t('Un-expanded Button Text. Markup for the un-expanded button') . '</dd>';
+      $output .= '<dd>' . t('Full-size Modal. Enable to provide a button to present the Important Information in a full screen modal') . '</dd>';
+      $output .= '<dd>' . t('Modal Title. Title shown in the modal box') . '</dd>';
+      $output .= '<dd>' . t('Modal Size. Percent of the screen modal will cover') . '</dd>';
+      $output .= '</dl>';
+      $output .= '<dl><dt>' . t('Sidebar Container') . '</dt>';
+      $output .= '<dd>' . t('Name. The name of the II Content Type') . '</dd>';
+      $output .= '<dd>' . t('Container Width. Width of the container.') . '</dd>';
+      $output .= '<dd>' . t('Vertical Offset. Set the placement of the Sidebar Container. Also serves as the Y position at which absolute switches to fixed if that is the behavior option set') . '</dd>';
+      $output .= '<dd>' . t('Hide Sidebar Container. Sidebar container will disappear once the user scrolls to the Embedded Bottom container section') . '</dd>';
+      $output .= '<dd>' . t('Offset. Adjust the calibration of the Embedded Bottom detection. Lower than zero makes it happen slower') . '</dd>';
+      $output .= '<dd>' . t('Full-size Modal. Enable to provide a button to present the Important Information in a full screen modal') . '</dd>';
+      $output .= '<dd>' . t('Modal Title. Title shown in the modal box') . '</dd>';
+      $output .= '<dd>' . t('Modal Size. Percent of the screen modal will cover') . '</dd>';
+      $output .= '</dl>';
+      $output .= '<dl><dt>' . t('Acknowledge Container') . '</dt>';
+      $output .= '<dd>' . t('Name. The name of the II Content Type') . '</dd>';
+      $output .= '<dd>' . t('Modal Title. Title shown in the modal box') . '</dd>';
+      $output .= '<dd>' . t('Acknowledge Content. The main content.') . '</dd>';
+      $output .= '<dd>' . t('Modal Size. Percent of the screen modal will cover') . '</dd>';
+      $output .= '<dd>' . t('Continue Button. Enable to show a continue button') . '</dd>';
+      $output .= '</dl>';
+      $output .= '<dl><dt>' . t('Leaving Interstitial Container') . '</dt>';
+      $output .= '<dd>' . t('Name. The name of the II Content Type') . '</dd>';
+      $output .= '<dd>' . t('Modal Title. Title shown in the modal box') . '</dd>';
+      $output .= '<dd>' . t('Leaving Interstitial Content. The main content.') . '</dd>';
+      $output .= '<dd>' . t('Modal Size. Percent of the screen modal will cover') . '</dd>';
+      $output .= '</dl>';
+      $output .= '<dl><dt>' . t('Custom CSS Container') . '</dt>';
+      $output .= '<dd>' . t('Custom CSS Content. Type custom CSS code for this module.') . '</dd>';
+      $output .= '</dl>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function important_information_theme() {
+
+  $theme = [];
+  $theme['ii_content'] = [
+    'render element' => 'elements',
+    'file' => 'ii_content.page.inc',
+    'template' => 'ii_content',
+  ];
+  $theme['ii_content_content_add_list'] = [
+    'render element' => 'content',
+    'variables' => ['content' => NULL],
+    'file' => 'ii_content.page.inc',
+  ];
+  $theme['embedded_bottom'] = [
+    'variables' => [
+      'information' => NULL,
+      'modal' => NULL,
+      'content_title' => NULL,
+      'expandable' => NULL,
+      'default_expand_markup' => NULL,
+    ],
+  ];
+  $theme['sidebar'] = [
+    'variables' => [
+      'information' => NULL,
+      'modal' => NULL,
+      'content_title' => NULL,
+    ],
+  ];
+  $theme['floating'] = [
+    'variables' => [
+      'information' => NULL,
+      'modal' => NULL,
+      'content_title' => NULL,
+      'expandable' => NULL,
+      'default_expand_markup' => NULL,
+    ],
+  ];
+  return $theme;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function important_information_theme_suggestions_ii_content(array $variables) {
+  $suggestions = [];
+  $entity = $variables['elements']['#ii_content'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'ii_content__' . $sanitized_view_mode;
+  $suggestions[] = 'ii_content__' . $entity->bundle();
+  $suggestions[] = 'ii_content__' . $entity->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'ii_content__' . $entity->id();
+  $suggestions[] = 'ii_content__' . $entity->id() . '__' . $sanitized_view_mode;
+  return $suggestions;
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function important_information_preprocess_block(&$variables) {
+
+  // Pages using Layout Builder for placing blocks and content need to assign
+  // specific element ID.
+  if ($variables['elements']['#base_plugin_id'] == 'embedded_bottom') {
+    $variables['attributes']['id'] = 'block-importantinformationembeddedbottom';
+    $variables['#cache']['max-age'] = 0;
+  }
+  if ($variables['elements']['#base_plugin_id'] == 'acknowledge') {
+    $variables['attributes']['id'] = 'block-importantinformationacknowledgementmodal';
+  }
+  if ($variables['elements']['#base_plugin_id'] == 'floating') {
+    $variables['attributes']['id'] = 'block-importantinformationfloatingcontainer';
+  }
+  if ($variables['elements']['#base_plugin_id'] == 'sidebar') {
+    $variables['attributes']['id'] = 'block-importantinformationsidebar';
+
+    $entities = \Drupal::entityTypeManager()->getStorage('ii_content')->loadByProperties(['type' => 'sidebar']);
+
+    foreach ($entities as $entity) {
+      $offset = $entity->get('field_offset_sidebar')->getString();
+      $variables['attributes']['style'][] = 'top:' . $offset . 'px; ';
+      $variables['attributes']['style'][] = 'position:absolute; ';
+    }
+  }
+  if ($variables['elements']['#base_plugin_id'] == 'leaving') {
+    $variables['attributes']['id'] = 'block-importantinformationleavinginterstitialmodal';
+  }
+}
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function important_information_library_info_alter(&$libraries, $extension) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+
+  if ($extension == $theme) {
+    if ($file = _important_information_get_stylesheet($theme)) {
+      // Append custom style sheet to theme libraries.
+      $libraries['important_information']['css']['theme'][$file]['weight'] = 9999;
+    }
+  }
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function important_information_page_attachments(array &$page) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+
+  if (_important_information_get_stylesheet($theme)) {
+    $page['#attached']['library'][] = $theme . '/important_information';
+  }
+}
+
+/**
+ * Get the Custom CSS generated file for a theme.
+ *
+ * @param $theme
+ *   The machine name of the current theme.
+ *
+ * @return string|bool
+ *   Return the file path if exists or false
+ */
+function _important_information_get_stylesheet($theme) {
+
+  $entities = \Drupal::entityTypeManager()->getStorage('ii_content')->loadByProperties(['type' => 'css']);
+  if ($entities) {
+    foreach ($entities as $entity) {
+      $file = $entity->get('field_file_path')->value;
+    }
+
+    if (file_exists($file)) {
+      return $file;
+    }
+    else {
+      return FALSE;
+    }
+  }
+
+}

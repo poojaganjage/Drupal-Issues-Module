@@ -1,0 +1,62 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.ii_content.acknowledge.field_ack_content
+    - field.field.ii_content.acknowledge.field_continue_button
+    - field.field.ii_content.acknowledge.field_per_modal
+    - important_information.ii_content_type.acknowledge
+  module:
+    - text
+id: ii_content.acknowledge.default
+targetEntityType: ii_content
+bundle: acknowledge
+mode: default
+content:
+  field_ack_content:
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_continue_button:
+    weight: 4
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_per_modal:
+    type: number
+    weight: 3
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 5
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  user_id:
+    type: entity_reference_autocomplete
+    weight: 6
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden: {  }
