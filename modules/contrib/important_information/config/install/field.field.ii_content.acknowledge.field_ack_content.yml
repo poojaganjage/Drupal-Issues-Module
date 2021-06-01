@@ -1,0 +1,20 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.ii_content.field_ack_content
+    - important_information.ii_content_type.acknowledge
+  module:
+    - text
+id: ii_content.acknowledge.field_ack_content
+field_name: field_ack_content
+entity_type: ii_content
+bundle: acknowledge
+label: Acknowledge Content
+description: 'Content for intro modal.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

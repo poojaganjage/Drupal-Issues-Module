@@ -1,0 +1,5 @@
+langcode: es
+status: true
+dependencies: {  }
+id: sidebar
+label: 'II Sidebar Container'

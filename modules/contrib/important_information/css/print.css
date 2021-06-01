@@ -1,0 +1,13 @@
+#block-importantinformationfloatingcontainer,
+#block-importantinformationsidebar,
+.ui-dialog {
+  display: none;
+}
+
+#block-importantinformationembeddedbottom .collapsible-content {
+  max-height: 100%;;
+}
+
+#block-importantinformationembeddedbottom .lbl-toggle::before {
+  display: none;
+}

@@ -1,0 +1,12 @@
+{
+	"name": "drupal/block_content_permissions",
+	"description": "Block Content Permissions adds permissions for administering 'block content types' and 'block content'.",
+	"type": "drupal-module",
+	"license": "GPL-2.0-or-later",
+	"readme": "README.md",
+	"homepage": "https://www.drupal.org/project/block_content_permissions",
+	"support": {
+	    "issues": "https://www.drupal.org/project/issues/block_content_permissions",
+	    "source": "https://git.drupalcode.org/project/block_content_permissions"
+	}
+}

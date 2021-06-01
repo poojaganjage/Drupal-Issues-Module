@@ -1,0 +1,11 @@
+/** All **/
+#block-importantinformationsidebar .button,
+#block-importantinformationfooter .button,
+#important-bottom-block-wrap .button,
+#important-bottom-block-wrap {
+  margin-bottom: 1em;
+}
+
+.block-important-information h2.block__title {
+  display: none;
+}

@@ -1,0 +1,12 @@
+important_information.ii_content_type.*:
+  type: config_entity
+  label: 'II Content type config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string

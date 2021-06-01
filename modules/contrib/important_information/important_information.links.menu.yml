@@ -1,0 +1,17 @@
+
+# II Content menu items definition
+entity.ii_content.collection:
+  title: 'Important Information Content List'
+  route_name: entity.ii_content.collection
+  description: 'List II Content'
+  parent: system.admin_structure
+  weight: 100
+
+
+# II Content type menu items definition
+entity.ii_content_type.collection:
+  title: 'Important Information Types'
+  route_name: entity.ii_content_type.collection
+  description: 'List II Types (bundles)'
+  parent: system.admin_structure
+  weight: 99

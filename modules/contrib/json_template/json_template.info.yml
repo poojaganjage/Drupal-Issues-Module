@@ -1,0 +1,9 @@
+name: JSON Template
+description: Picks up various js templates (handlebars, mustache etc) for frontend rendering.
+type: module
+core_version_requirement: ^8.8 || ^9
+
+# Information added by Drupal.org packaging script on 2020-08-03
+version: '1.x-dev'
+project: 'json_template'
+datestamp: 1596447815

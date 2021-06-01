@@ -1,0 +1,45 @@
+diff --git a/README.md b/README.md
+index e29294b..0ce344d 100644
+--- a/README.md
++++ b/README.md
+@@ -20,6 +20,40 @@ code, and instead to select a replacement solution as soon as possible.
+ 3.  Install module the [usual way](https://www.drupal.org/documentation/install/modules-themes/modules-8).
+ 4.  Change any references in your theme or module from
+     `core/jquery.ui.touch-punch` to `jquery_ui_touch_punch/touch-punch`
++5.  Add repository into main composer.json file as mentioned below:
++
++    "repositories": [
++      {
++        "type": "composer",
++        "url": "https://asset-packagist.org"
++      },
++      {
++        "type": "package",
++        "package": {
++          "name": "furf/jquery-ui-touch-punch",
++          "version": "dev-master",
++          "type": "drupal-library",
++          "dist": {
++            "url": "https://github.com/furf/jquery-ui-touch-punch/archive/master.zip",
++            "type": "zip"
++          }
++        }
++      }
++    ],
++    "extra": {
++      "installer-types": ["npm-asset", "bower-asset"],
++      "installer-paths": {
++        "web/libraries/jquery_ui_touch_punch": ["npm-asset/jquery.ui.touch-punch"],
++        "web/libraries/{$name}": [
++        "type:drupal-library",
++        "vendor:npm-asset",
++        "vendor:bower-asset"
++        ],
++      },
++    }
++
++    If this module is already installed with composer, then only needs to run this command to add the library:
++    composer require furf/jquery-ui-touch-punch
+ 
+ ### Requirements
+ 

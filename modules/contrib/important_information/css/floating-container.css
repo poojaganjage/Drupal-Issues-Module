@@ -1,0 +1,58 @@
+/** Floating Container CSS **/
+#block-importantinformationfloatingcontainer {
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 33%;
+  z-index: 25;
+  background: white;
+  box-shadow: 0 0 5px 0 lightgrey;
+  overflow-y: scroll;
+}
+
+#block-importantinformationfloatingcontainer .content {
+  overflow-y: scroll;
+  position: inherit;
+}
+
+#block-importantinformationfloatingcontainer  h2.block__title {
+  display: none;
+}
+
+#block-importantinformationfloatingcontainer .use-ajax {
+  margin-bottom: 1.2em;
+}
+
+.expandable-bar {
+  text-align: right;
+  background: lightgray;
+  height: 2em;
+}
+.expandable-bar .expand-button {
+  color: white;
+  margin-top: .25em;
+}
+.expandable-bar .expand-button p {
+  color: white;
+  float: right;
+  margin-right: 2em;
+}
+
+#block-importantinformationfloatingcontainer > #important-floating-container-block-wrap {
+  height: 100%;
+}
+
+#block-importantinformationfloatingcontainer .important-footer-content {
+  padding: 1em;
+}
+
+.important-information-footer-opaque {
+  background: white;
+  box-shadow: 0 0 5px 0 lightgrey;
+}
+
+.important-information-footer-transparent {
+  background: transparent !important;
+  box-shadow: none;
+}

@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function json_template_library_info_alter(&$libraries, $extension) {
+  $definitions = \Drupal::service('plugin.manager.json_template.transformer')->getDefinitions();
+  foreach ($definitions as $id => $definition) {
+    if (!empty($definition['transformer'])) {
+      /* @var $plugin \Drupal\json_template\Plugin\JsonTransformerDefault */
+      $plugin = \Drupal::service('plugin.manager.json_template.transformer')->createInstance($id, $definition);
+      $library_provider = $plugin->getLibraryProvider();
+      if ($extension === $library_provider['name']) {
+        $plugin_library = $plugin->getLibrary();
+        foreach ($libraries as $library_name => &$library_array) {
+          if ($library_name === $plugin_library) {
+            $library_array['js'][$plugin->getTransformer()] = [];
+            $library_array['dependencies'][] = 'json_template/json_template';
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_field_widget_info_alter().
+ */
+function json_template_field_widget_info_alter(array &$info) {
+  $info['options_select']['field_types'][] = 'list_template';
+}
+
+/**
+ * Implements hook_field_formatter_info_alter().
+ */
+function json_template_field_formatter_info_alter(array &$info) {
+  $info['string']['field_types'][] = 'list_template';
+}

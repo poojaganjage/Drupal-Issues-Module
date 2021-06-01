@@ -1,0 +1,47 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.ii_content.floating.field_expand_button_floating
+    - field.field.ii_content.floating.field_expanded_floating
+    - field.field.ii_content.floating.field_full_size_floating
+    - field.field.ii_content.floating.field_hide_floating
+    - field.field.ii_content.floating.field_offset_floating
+    - field.field.ii_content.floating.field_per_collapsed_floating
+    - field.field.ii_content.floating.field_per_expanded_floating
+    - field.field.ii_content.floating.field_per_modal
+    - field.field.ii_content.floating.field_unexpand_button_floating
+    - important_information.ii_content_type.floating
+  module:
+    - user
+id: ii_content.floating.default
+targetEntityType: ii_content
+bundle: floating
+mode: default
+content:
+  name:
+    label: above
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  user_id:
+    label: hidden
+    type: author
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_expand_button_floating: true
+  field_expanded_floating: true
+  field_full_size_floating: true
+  field_hide_floating: true
+  field_offset_floating: true
+  field_per_collapsed_floating: true
+  field_per_expanded_floating: true
+  field_per_modal: true
+  field_unexpand_button_floating: true
+  langcode: true

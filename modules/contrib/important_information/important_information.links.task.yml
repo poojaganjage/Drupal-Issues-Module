@@ -1,0 +1,22 @@
+# II Content routing definition
+
+entity.ii_content.canonical:
+  route_name: entity.ii_content.canonical
+  base_route: entity.ii_content.canonical
+  title: 'View'
+
+entity.ii_content.edit_form:
+  route_name: entity.ii_content.edit_form
+  base_route: entity.ii_content.canonical
+  title: 'Edit'
+
+entity.ii_content.version_history:
+  route_name: entity.ii_content.version_history
+  base_route: entity.ii_content.canonical
+  title: 'Revisions'
+
+entity.ii_content.delete_form:
+  route_name:  entity.ii_content.delete_form
+  base_route:  entity.ii_content.canonical
+  title: Delete
+  weight: 10

@@ -1,0 +1,6 @@
+name: Filter Script Tag
+type: module
+description: 'Remove script tags from displaying according to hostnames also remove blank tags.'
+core_version_requirement: ^8 || ^9
+core: 8.x
+package: Filters

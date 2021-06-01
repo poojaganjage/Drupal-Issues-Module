@@ -1,0 +1,4 @@
+handlebars:
+  title: Handlebars
+  library: json_template/handlebars
+  transformer: js/handlebars_transform.js

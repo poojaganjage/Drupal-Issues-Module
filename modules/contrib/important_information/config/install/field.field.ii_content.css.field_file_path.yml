@@ -1,0 +1,18 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.ii_content.field_file_path
+    - important_information.ii_content_type.css
+id: ii_content.css.field_file_path
+field_name: field_file_path
+entity_type: ii_content
+bundle: css
+label: 'File Path'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

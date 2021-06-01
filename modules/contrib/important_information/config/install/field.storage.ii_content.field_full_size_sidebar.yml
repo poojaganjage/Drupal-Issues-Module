@@ -1,0 +1,17 @@
+langcode: es
+status: true
+dependencies:
+  module:
+    - important_information
+id: ii_content.field_full_size_sidebar
+field_name: field_full_size_sidebar
+entity_type: ii_content
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

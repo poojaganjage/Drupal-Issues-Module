@@ -1,0 +1,63 @@
+diff --git a/README.md b/README.md
+index 0ce344d..f1213f6 100644
+--- a/README.md
++++ b/README.md
+@@ -20,40 +20,35 @@ code, and instead to select a replacement solution as soon as possible.
+ 3.  Install module the [usual way](https://www.drupal.org/documentation/install/modules-themes/modules-8).
+ 4.  Change any references in your theme or module from
+     `core/jquery.ui.touch-punch` to `jquery_ui_touch_punch/touch-punch`
+-5.  Add repository into main composer.json file as mentioned below:
+-
+-    "repositories": [
+-      {
++5.  Add asset packagist into main composer.json file as mentioned below:
++    ```
++    "repositories": {
++      "drupal": {
+         "type": "composer",
+-        "url": "https://asset-packagist.org"
++        "url": "https://packages.drupal.org/8"
+       },
+-      {
+-        "type": "package",
+-        "package": {
+-          "name": "furf/jquery-ui-touch-punch",
+-          "version": "dev-master",
+-          "type": "drupal-library",
+-          "dist": {
+-            "url": "https://github.com/furf/jquery-ui-touch-punch/archive/master.zip",
+-            "type": "zip"
+-          }
+-        }
++      "assets": {
++        "type": "composer",
++        "url": "https://asset-packagist.org"
+       }
+-    ],
++    },
++    ```
++6. Set the installer location for the libraries, also in your composer.json:
++    ```
+     "extra": {
+       "installer-types": ["npm-asset", "bower-asset"],
+       "installer-paths": {
+-        "web/libraries/jquery_ui_touch_punch": ["npm-asset/jquery.ui.touch-punch"],
+         "web/libraries/{$name}": [
+-        "type:drupal-library",
+-        "vendor:npm-asset",
+-        "vendor:bower-asset"
++            "type:drupal-library",
++            "vendor:npm-asset",
++            "vendor:bower-asset"
+         ],
+       },
+     }
++    ```
++7. run 'composer require oomphinc/composer-installers-extender'
+ 
+-    If this module is already installed with composer, then only needs to run this command to add the library:
+-    composer require furf/jquery-ui-touch-punch
++8. run 'composer require npm-asset/jquery-ui-touch-punch'
+ 
+ ### Requirements
+ 

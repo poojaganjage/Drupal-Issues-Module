@@ -1,0 +1,19 @@
+langcode: es
+status: true
+dependencies:
+  module:
+    - important_information
+id: ii_content.field_offset_bottom
+field_name: field_offset_bottom
+entity_type: ii_content
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

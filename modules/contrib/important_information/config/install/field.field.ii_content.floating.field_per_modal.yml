@@ -1,0 +1,24 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.ii_content.field_per_modal
+    - important_information.ii_content_type.floating
+id: ii_content.floating.field_per_modal
+field_name: field_per_modal
+entity_type: ii_content
+bundle: floating
+label: 'Modal Size'
+description: 'Percent of the screen modal will cover.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 90
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: '%'
+field_type: integer

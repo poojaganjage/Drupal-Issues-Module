@@ -1,0 +1,14 @@
+name: 'Entity Reference View Mode'
+type: module
+description: 'A compound field of entity reference and view mode'
+package : Other
+# version: VERSION
+# core: 8.x
+dependencies:
+- drupal:field
+
+# Information added by Drupal.org packaging script on 2019-10-25
+# version: '8.x-2.x-dev'
+core_version_requirement: ^8 || ^9
+project: 'entityreference_view_mode'
+datestamp: 1572000192

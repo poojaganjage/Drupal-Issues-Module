@@ -1,0 +1,17 @@
+/** Sidebar CSS **/
+
+#block-importantinformationsidebar {
+  background-color: white;
+  padding: 1em;
+  z-index: 10;
+  border: solid 2px #d93760;
+  margin-bottom: 1em;
+}
+
+/** Scrollable **/
+.important-sidebar-scrollable {
+  max-height: 500px;
+  /* overflow: scroll; */
+  scroll-behavior: auto;
+  overflow-y: scroll;
+}

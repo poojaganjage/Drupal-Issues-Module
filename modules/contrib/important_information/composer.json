@@ -1,0 +1,13 @@
+{
+    "name": "important_information",
+    "type": "drupal-module",
+    "description": "Provides floating blocks to keep important information visible",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/important_information",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/important_information",
+        "source": "http://cgit.drupalcode.org/important_information"
+    }
+}

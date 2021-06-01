@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Related module provides features to display related content on a page.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function caching_module_theme() {
+  return [
+    'caching_module_items_block' => [
+      'template' => 'caching-module',
+      'variables' => ['items' => []]
+    ],
+  ];
+}

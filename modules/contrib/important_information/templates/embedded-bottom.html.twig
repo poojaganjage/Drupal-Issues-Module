@@ -1,0 +1,31 @@
+{% if expandable == true %}
+    <div id="important-bottom-block-wrap" class="hidden-mobile hidden-tablet">
+        <div class="container">
+            <div class="wrap-collabsible">
+                <input id="collapsible" class="toggle" type="checkbox">
+                <label for="collapsible" class="lbl-toggle">{{ content_title }}</label>
+                <div class="collapsible-content">
+                    <div class="content-inner">
+                      {{ modal }}
+                      {{ information }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="important-bottom-block-wrap" class="hidden-desktop">
+        <div class="container">
+          {{ content_title }}
+          {{ modal }}
+          {{ information }}
+        </div>
+    </div>
+{% else %}
+    <div id="important-bottom-block-wrap">
+        <div class="container">
+          {{ content_title }}
+          {{ modal }}
+          {{ information }}
+        </div>
+    </div>
+{% endif %}

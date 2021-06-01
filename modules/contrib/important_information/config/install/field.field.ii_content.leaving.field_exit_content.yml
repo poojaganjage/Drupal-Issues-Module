@@ -1,0 +1,20 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.ii_content.field_exit_content
+    - important_information.ii_content_type.leaving
+  module:
+    - text
+id: ii_content.leaving.field_exit_content
+field_name: field_exit_content
+entity_type: ii_content
+bundle: leaving
+label: 'Leaving Interstitial Content'
+description: 'Content for modal box.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

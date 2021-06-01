@@ -1,0 +1,7 @@
+video_embed_field.admin_settings:
+  path: '/admin/config/content/video_embed_field'
+  defaults:
+    _form: '\Drupal\video_embed_field\Form\VideoEmbedForm'
+    _title: 'Video Embed Settings'
+  requirements:
+    _permission: 'administer video_embed_field'

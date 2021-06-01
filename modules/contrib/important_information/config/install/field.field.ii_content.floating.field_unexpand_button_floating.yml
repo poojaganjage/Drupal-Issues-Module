@@ -1,0 +1,23 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.ii_content.field_unexpand_button_floating
+    - important_information.ii_content_type.floating
+  module:
+    - text
+id: ii_content.floating.field_unexpand_button_floating
+field_name: field_unexpand_button_floating
+entity_type: ii_content
+bundle: floating
+label: 'Un-expanded Button Text'
+description: 'Markup for the un-expanded button.'
+required: false
+translatable: false
+default_value:
+  -
+    value: Close
+    format: full_html
+default_value_callback: ''
+settings: {  }
+field_type: text

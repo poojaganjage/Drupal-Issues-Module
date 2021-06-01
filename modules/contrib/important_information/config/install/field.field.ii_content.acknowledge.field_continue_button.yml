@@ -1,0 +1,22 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.ii_content.field_continue_button
+    - important_information.ii_content_type.acknowledge
+id: ii_content.acknowledge.field_continue_button
+field_name: field_continue_button
+entity_type: ii_content
+bundle: acknowledge
+label: 'Continue Button'
+description: 'Enable to show a continue button.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

@@ -1,0 +1,56 @@
+/** Sidebar Container CSS **/
+#block-importantinformationsidebar {
+  width: 33%;
+  height: auto;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 40px;
+  background: #eee;
+}
+#block-importantinformationsidebar  h2.block__title {
+  display: none;
+}
+#block-importantinformationsidebar .important-sidebar-content {
+  padding: 1em;
+  overflow-y: auto !important;
+}
+
+#block-importantinformationsidebar > #important-sidebar-block-wrap {
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+#block-importantinformationsidebar .use-ajax {
+  margin-top: 1.2em;
+}
+
+#block-importantinformationsidebar.fixed-position {
+  top: 0 !important;
+  position: fixed !important;
+  height: 100%;
+}
+
+#block-importantinformationsidebar.fixed-position #important-sidebar-block-wrap {
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.sidebar-dialog-left {
+  top: 0 !important;
+  left: 0 !important;
+  right: inherit !important;
+  height: 100% !important;
+}
+
+.sidebar-dialog-left div#drupal-modal,
+.sidebar-dialog-right div#drupal-modal {
+  min-height: 100% !important;
+}
+
+.sidebar-dialog-right {
+  top: 0 !important;
+  left: inherit !important;
+  right: 0 !important;
+  height: 100% !important;
+}

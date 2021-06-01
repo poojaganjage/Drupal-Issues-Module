@@ -1,0 +1,22 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.ii_content.field_modal_open
+    - important_information.ii_content_type.sidebar
+  module:
+    - options
+id: ii_content.sidebar.field_modal_open
+field_name: field_modal_open
+entity_type: ii_content
+bundle: sidebar
+label: 'Modal Open'
+description: 'On click opens modal window'
+required: false
+translatable: false
+default_value:
+  -
+    value: '0'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

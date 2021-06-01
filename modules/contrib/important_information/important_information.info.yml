@@ -1,0 +1,16 @@
+name: 'Important Information'
+type: module
+description: 'Provide containers to keep important information visible'
+core: 8.x
+package: 'PoC'
+
+# version: 8.x-1.2
+
+dependencies:
+  - drupal:block
+
+# Information added by Drupal.org packaging script on 2020-03-20
+version: '8.x-1.3'
+core_version_requirement: ^8 || ^9
+project: 'important_information'
+datestamp: 1584744476
